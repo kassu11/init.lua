@@ -82,6 +82,7 @@ vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper win
 
 
 
+
 -- vim.keymap.set("x", "<S-j>", "j", { desc = "Move focus to the left window" })
 -- vim.keymap.set("x", "<C-i>", "<S-j>", { desc = "Move focus to the left window" })
 
@@ -98,14 +99,74 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 
 
-
 vim.g.VM_leader = " "
 vim.g.VM_maps = {
-  ['Find Under'] = '<C-n>',
-  ['Find Subword Under'] = '<C-n>'
+  ["Undo"] = 'u',
+  ["Redo"] = '<C-r>',
+
+  ['Find Under']                  = '<C-n>',
+  ['Find Subword Under']          = '<C-n>',
+  ["Select All"]                  = '<leader>A' ,
+  ["Start Regex Search"]          = '<leader>/',
+  ["Add Cursor Down"]             = '<C-Down>',
+  ["Add Cursor Up"]               = '<C-Up>',
+  ["Add Cursor At Pos"]           = '<leader>\\',
+
+  ["Visual Regex"]                = '<leader>/',
+  ["Visual All"]                  = '<leader>A' ,
+  ["Visual Add"]                  = '<leader>a',
+  ["Visual Find"]                 = '<leader>f',
+  ["Visual Cursors"]              = '<leader>c',
+  ["Switch Mode"]                 = '<Tab>',
+
+  ["Find Next"]                   = ']',
+  ["Find Prev"]                   = '[',
+  ["Goto Next"]                   = '}',
+  ["Goto Prev"]                   = '{',
+  ["Seek Next"]                   = '<C-f>',
+  ["Seek Prev"]                   = '<C-b>',
+  ["Skip Region"]                 = 'q',
+  ["Remove Region"]               = 'Q',
+  ["Invert Direction"]            = 'o',
+  ["Find Operator"]               = "m",
+  ["Surround"]                    = 'S',
+  ["Replace Pattern"]             = 'R',
+
+  ["Tools Menu"]                  = '<leader>`',
+  ["Show Registers"]              = '<leader>"',
+  ["Case Setting"]                = '<leader>c',
+  ["Toggle Whole Word"]           = '<leader>w',
+  ["Transpose"]                   = '<leader>t',
+  ["Align"]                       = '<leader>a',
+  ["Duplicate"]                   = '<leader>d',
+  ["Rewrite Last Search"]         = '<leader>r',
+  ["Merge Regions"]               = '<leader>m',
+  ["Split Regions"]               = '<leader>s',
+  ["Remove Last Region"]          = '<leader>q',
+  ["Visual Subtract"]             = '<leader>s',
+  ["Case Conversion Menu"]        = '<leader>C',
+  ["Search Menu"]                 = '<leader>S',
+
+  ["Run Normal"]                  = '<leader>z',
+  ["Run Last Normal"]             = '<leader>Z',
+  ["Run Visual"]                  = '<leader>v',
+  ["Run Last Visual"]             = '<leader>V',
+  ["Run Ex"]                      = '<leader>x',
+  ["Run Last Ex"]                 = '<leader>X',
+  ["Run Macro"]                   = '<leader>@',
+  ["Align Char"]                  = '<leader><',
+  ["Align Regex"]                 = '<leader>>',
+  ["Numbers"]                     = '<leader>n',
+  ["Numbers Append"]              = '<leader>N',
+  ["Zero Numbers"]                = '<leader>0n',
+  ["Zero Numbers Append"]         = '<leader>0N',
+  ["Shrink"]                      = "<leader>-",
+  ["Enlarge"]                     = "<leader>+",
+
+  ["Toggle Block"]                = '<leader><BS>',
+  ["Toggle Single Region"]        = '<leader><CR>',
+  ["Toggle Multiline"]            = '<leader>M',
 }
-
-
 
 -- Setup lazy.vim
 local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
@@ -121,7 +182,6 @@ require("lazy").setup({
 
   -- Multi-cursor
   "mg979/vim-visual-multi",
-  
 
   -- Automatic indentation
   "tpope/vim-sleuth",
@@ -524,7 +584,7 @@ require("lazy").setup({
     end,
   },
 
-  { 
+  {
     "rose-pine/neovim",
     name = "rose-pine",
     priority = 1000,
@@ -538,4 +598,6 @@ require("lazy").setup({
 
 
 
-
+-- Remove bg
+vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
