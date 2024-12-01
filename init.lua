@@ -186,6 +186,31 @@ require("lazy").setup({
   -- Automatic indentation
   "tpope/vim-sleuth",
 
+  {
+    "ThePrimeagen/harpoon",
+    branch = "harpoon2",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = function()
+      local harpoon = require("harpoon")
+
+      -- REQUIRED
+      harpoon:setup()
+      -- REQUIRED
+
+      vim.keymap.set("n", "<leader>a", function() harpoon:list():add() end)
+      vim.keymap.set("n", "<C-e>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
+
+      vim.keymap.set("n", "<C-h>", function() harpoon:list():select(1) end)
+      vim.keymap.set("n", "<C-t>", function() harpoon:list():select(2) end)
+      vim.keymap.set("n", "<C-n>", function() harpoon:list():select(3) end)
+      vim.keymap.set("n", "<C-s>", function() harpoon:list():select(4) end)
+
+      -- Toggle previous & next buffers stored within Harpoon list
+      vim.keymap.set("n", "<C-S-P>", function() harpoon:list():prev() end)
+      vim.keymap.set("n", "<C-S-N>", function() harpoon:list():next() end)
+    end,
+  },
+
   { -- Collection of various small independent plugins/modules
     'echasnovski/mini.nvim',
     config = function()
@@ -196,6 +221,28 @@ require("lazy").setup({
       --  - yinq - [Y]ank [I]nside [N]ext [']quote
       --  - ci'  - [C]hange [I]nside [']quote
       require('mini.ai').setup { n_lines = 500 }
+      require('mini.move').setup {
+        -- Module mappings. Use `''` (empty string) to disable one.
+        mappings = {
+          -- Move visual selection in Visual mode. Defaults are Alt (Meta) + hjkl.
+          left = '<M-h>',
+          right = '<M-l>',
+          down = '<M-j>',
+          up = '<M-k>',
+
+          -- Move current line in Normal mode
+          line_left = '<M-h>',
+          line_right = '<M-l>',
+          line_down = '<M-j>',
+          line_up = '<M-k>',
+        },
+
+        -- Options which control moving behavior
+        options = {
+          -- Automatically reindent selection during linewise vertical move
+          reindent_linewise = true,
+        },
+      }
 
       -- Add/delete/replace surroundings (brackets, quotes, etc.)
       --
