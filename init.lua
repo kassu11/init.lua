@@ -78,7 +78,14 @@ vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower win
 vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 
 
-
+-- function RenameInFloatingWindow()
+--   local input = vim.fn.input('Rename to: ')
+--   if input ~= '' then
+--     vim.lsp.buf.rename(input)
+--   end
+-- end
+--
+-- vim.keymap.set('n', '<leader>rr', ':lua RenameInFloatingWindow()<CR>', { noremap = true, silent = true })
 
 
 
@@ -185,6 +192,7 @@ require("lazy").setup({
 
   -- Automatic indentation
   "tpope/vim-sleuth",
+  'stevearc/dressing.nvim',
 
   {
     "ThePrimeagen/harpoon",
@@ -672,17 +680,56 @@ require("lazy").setup({
       }
     end,
   },
-
   {
-    "rose-pine/neovim",
-    name = "rose-pine",
-    priority = 1000,
-    init = function()
-      vim.cmd.colorscheme 'rose-pine'
+    "navarasu/onedark.nvim",
+    config = function ()
+      require('onedark').setup  {
+        -- Main options --
+        style = 'cool', -- Default theme style. Choose between 'dark', 'darker', 'cool', 'deep', 'warm', 'warmer' and 'light'
+        transparent = false,  -- Show/hide background
+        term_colors = true, -- Change terminal color as per the selected theme style
+        ending_tildes = false, -- Show the end-of-buffer tildes. By default they are hidden
+        cmp_itemkind_reverse = false, -- reverse item kind highlights in cmp menu
+
+        -- You can configure multiple style with comma separated, For e.g., keywords = 'italic,bold'
+        code_style = {
+          comments = 'italic',
+          keywords = 'none',
+          functions = 'none',
+          strings = 'none',
+          variables = 'none'
+        },
+
+        -- Lualine options --
+        lualine = {
+          transparent = true, -- lualine center bar transparency
+        },
+
+        -- Custom Highlights --
+        colors = {}, -- Override default colors
+        highlights = {}, -- Override highlight groups
+
+        -- Plugins Config --
+        diagnostics = {
+          darker = false, -- darker colors for diagnostic
+          undercurl = true,   -- use undercurl instead of underline for diagnostics
+          background = true,    -- use background color for virtual text
+        },
+
+      }
+      require('onedark').load()
     end
   }
-})
 
+  -- {
+  --   "rose-pine/neovim",
+  --   name = "rose-pine",
+  --   priority = 1000,
+  --   init = function()
+  --     vim.cmd.colorscheme 'rose-pine'
+  --   end
+  -- }
+})
 
 
 
@@ -690,3 +737,35 @@ require("lazy").setup({
 -- Remove bg
 vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
 vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+vim.api.nvim_set_hl(0, "Visual", { bg = "#0398fc", fg = "#000000", })
+vim.api.nvim_set_hl(0, "cursorline", { bg = "#15191d" })
+print(
+  vim.api.nvim_get_hl(0, {name = "cursorline"}).sp,
+  vim.api.nvim_get_hl(0, {name = "cursorline"}).bg,
+  vim.api.nvim_get_hl(0, {name = "cursorline"}).fg,
+  vim.api.nvim_get_hl(0, {name = "cursorline"}).reverse,
+  vim.api.nvim_get_hl(0, {name = "cursorline"}).reverse,
+  vim.api.nvim_get_hl(0, {name = "cursorline"}).reverse,
+  vim.api.nvim_get_hl(0, {name = "cursorline"}).reverse,
+  vim.api.nvim_get_hl(0, {name = "cursorline"}).reverse,
+  vim.api.nvim_get_hl(0, {name = "cursorline"}).reverse,
+  vim.api.nvim_get_hl(0, {name = "cursorline"}).reverse,
+  vim.api.nvim_get_hl(0, {name = "cursorline"}).reverse,
+  vim.api.nvim_get_hl(0, {name = "cursorline"}).reverse,
+  vim.api.nvim_get_hl(0, {name = "cursorline"}).reverse,
+  vim.api.nvim_get_hl(0, {name = "cursorline"}).reverse,
+  vim.api.nvim_get_hl(0, {name = "cursorline"}).reverse,
+  vim.api.nvim_get_hl(0, {name = "cursorline"}).reverse,
+  vim.api.nvim_get_hl(0, {name = "cursorline"}).reverse,
+  vim.api.nvim_get_hl(0, {name = "cursorline"}).reverse
+)
+
+-- vim.api.nvim_create_autocmd({"ColorScheme", "VimEnter"}, {
+--     group = vim.api.nvim_create_augroup('Color', {}),
+--     pattern = "*",
+--     callback = function ()
+--         vim.api.nvim_set_hl(0, "LspReferenceRead", {bg = "#1d2022"})
+--         vim.api.nvim_set_hl(0, "LspReferenceWrite", {bg = "#1d2022"})
+--         vim.api.nvim_set_hl(0, "LspReferenceText", {bg = "#1d2022"})
+--     end
+-- })
