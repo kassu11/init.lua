@@ -58,6 +58,11 @@ vim.opt.scrolloff = 10
 vim.opt.hlsearch = true
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 vim.keymap.set("n", "<leader>w", "\"+", { desc = "Clipboard registry" })
+vim.keymap.set("v", "<leader>w", "\"+", { desc = "Clipboard registry" })
+
+vim.keymap.set("n", "<leader><leader>x", "<cmd>source %<CR>");
+vim.keymap.set("n", "<leader>x", ":.lua<CR>");
+vim.keymap.set("v", "<leader>x", ":lua<CR>");
 
 -- Diagnostic keymaps
 vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous [D]iagnostic message" })
@@ -71,31 +76,6 @@ vim.keymap.set("n", "<left>", "<cmd>echo \"Use h to move!!\"<CR>")
 vim.keymap.set("n", "<right>", "<cmd>echo \"Use l to move!!\"<CR>")
 vim.keymap.set("n", "<up>", "<cmd>echo \"Use k to move!!\"<CR>")
 vim.keymap.set("n", "<down>", "<cmd>echo \"Use j to move!!\"<CR>")
-
-vim.keymap.set("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left window" })
-vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right window" })
-vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
-vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
-
-
--- function RenameInFloatingWindow()
---   local input = vim.fn.input('Rename to: ')
---   if input ~= '' then
---     vim.lsp.buf.rename(input)
---   end
--- end
---
--- vim.keymap.set('n', '<leader>rr', ':lua RenameInFloatingWindow()<CR>', { noremap = true, silent = true })
-
-
-
-
--- vim.keymap.set("x", "<S-j>", "j", { desc = "Move focus to the left window" })
--- vim.keymap.set("x", "<C-i>", "<S-j>", { desc = "Move focus to the left window" })
-
-
-
-
 
 vim.api.nvim_create_autocmd("TextYankPost", {
   desc = "Highlight when yanking text",
@@ -193,6 +173,46 @@ require("lazy").setup({
   -- Automatic indentation
   "tpope/vim-sleuth",
   'stevearc/dressing.nvim',
+  {
+    'stevearc/oil.nvim',
+    ---@module 'oil'
+    ---@type oil.SetupOpts
+    opts = {},
+    -- Optional dependencies
+    -- dependencies = { { "echasnovski/mini.icons", opts = {} } },
+    dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if prefer nvim-web-devicons
+    config = function()
+      require("oil").setup {
+        keymaps = {
+          ["<C-y>"] = "actions.select",
+          ["<C-s>"] = false,
+          ["<C-h>"] = false,
+          ["<C-t>"] = false,
+          ["<C-l>"] = false,
+          ["`"] = false,
+          ["~"] = false,
+          ["<leader>s"] = { "actions.select", opts = { vertical = true }, desc = "Open the entry in a vertical split" },
+          ["<leader>h"] = { "actions.select", opts = { horizontal = true }, desc = "Open the entry in a horizontal split" },
+          ["<leader>t"] = { "actions.select", opts = { tab = true }, desc = "Open the entry in new tab" },
+          ["<C-p>"] = "actions.preview",
+          ["<C-c>"] = "actions.close",
+          -- ["<C-l>"] = "actions.refresh",
+          ["-"] = "actions.parent",
+          ["_"] = "actions.open_cwd",
+          ["<leader>c"] = "actions.cd",
+          -- ["~"] = { "actions.cd", opts = { scope = "tab" }, desc = ":tcd to the current oil directory", mode = "n" },
+          ["gs"] = "actions.change_sort",
+          ["gx"] = "actions.open_external",
+          ["g."] = "actions.toggle_hidden",
+          ["g\\"] = "actions.toggle_trash",
+        },
+        view_options = {
+          show_hidden = true
+        }
+      }
+      vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+    end
+  },
 
   {
     "ThePrimeagen/harpoon",
@@ -509,10 +529,6 @@ require("lazy").setup({
         --
         -- But for many setups, the LSP (`tsserver`) will work just fine
         -- tsserver = {},
-        --
-        -- zls = {
-        --   cmd = { "A:\\software\\zls\\zig-out\\bin\\zls.exe" },
-        -- },
 
         lua_ls = {
           -- cmd = {...},
@@ -686,7 +702,7 @@ require("lazy").setup({
       require('onedark').setup  {
         -- Main options --
         style = 'cool', -- Default theme style. Choose between 'dark', 'darker', 'cool', 'deep', 'warm', 'warmer' and 'light'
-        transparent = false,  -- Show/hide background
+        transparent = true,  -- Show/hide background
         term_colors = true, -- Change terminal color as per the selected theme style
         ending_tildes = false, -- Show the end-of-buffer tildes. By default they are hidden
         cmp_itemkind_reverse = false, -- reverse item kind highlights in cmp menu
@@ -735,30 +751,31 @@ require("lazy").setup({
 
 
 -- Remove bg
-vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+-- vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+-- vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 vim.api.nvim_set_hl(0, "Visual", { bg = "#0398fc", fg = "#000000", })
 vim.api.nvim_set_hl(0, "cursorline", { bg = "#15191d" })
-print(
-  vim.api.nvim_get_hl(0, {name = "cursorline"}).sp,
-  vim.api.nvim_get_hl(0, {name = "cursorline"}).bg,
-  vim.api.nvim_get_hl(0, {name = "cursorline"}).fg,
-  vim.api.nvim_get_hl(0, {name = "cursorline"}).reverse,
-  vim.api.nvim_get_hl(0, {name = "cursorline"}).reverse,
-  vim.api.nvim_get_hl(0, {name = "cursorline"}).reverse,
-  vim.api.nvim_get_hl(0, {name = "cursorline"}).reverse,
-  vim.api.nvim_get_hl(0, {name = "cursorline"}).reverse,
-  vim.api.nvim_get_hl(0, {name = "cursorline"}).reverse,
-  vim.api.nvim_get_hl(0, {name = "cursorline"}).reverse,
-  vim.api.nvim_get_hl(0, {name = "cursorline"}).reverse,
-  vim.api.nvim_get_hl(0, {name = "cursorline"}).reverse,
-  vim.api.nvim_get_hl(0, {name = "cursorline"}).reverse,
-  vim.api.nvim_get_hl(0, {name = "cursorline"}).reverse,
-  vim.api.nvim_get_hl(0, {name = "cursorline"}).reverse,
-  vim.api.nvim_get_hl(0, {name = "cursorline"}).reverse,
-  vim.api.nvim_get_hl(0, {name = "cursorline"}).reverse,
-  vim.api.nvim_get_hl(0, {name = "cursorline"}).reverse
-)
+vim.api.nvim_set_hl(0, "cursorlinenr", { bg = "#15191d", fg = "#e5ff00" })
+-- print(
+--   vim.api.nvim_get_hl(0, {name = "cursorline"}).sp,
+--   vim.api.nvim_get_hl(0, {name = "cursorline"}).bg,
+--   vim.api.nvim_get_hl(0, {name = "cursorline"}).fg,
+--   vim.api.nvim_get_hl(0, {name = "cursorline"}).reverse,
+--   vim.api.nvim_get_hl(0, {name = "cursorline"}).reverse,
+--   vim.api.nvim_get_hl(0, {name = "cursorline"}).reverse,
+--   vim.api.nvim_get_hl(0, {name = "cursorline"}).reverse,
+--   vim.api.nvim_get_hl(0, {name = "cursorline"}).reverse,
+--   vim.api.nvim_get_hl(0, {name = "cursorline"}).reverse,
+--   vim.api.nvim_get_hl(0, {name = "cursorline"}).reverse,
+--   vim.api.nvim_get_hl(0, {name = "cursorline"}).reverse,
+--   vim.api.nvim_get_hl(0, {name = "cursorline"}).reverse,
+--   vim.api.nvim_get_hl(0, {name = "cursorline"}).reverse,
+--   vim.api.nvim_get_hl(0, {name = "cursorline"}).reverse,
+--   vim.api.nvim_get_hl(0, {name = "cursorline"}).reverse,
+--   vim.api.nvim_get_hl(0, {name = "cursorline"}).reverse,
+--   vim.api.nvim_get_hl(0, {name = "cursorline"}).reverse,
+--   vim.api.nvim_get_hl(0, {name = "cursorline"}).reverse
+-- )
 
 -- vim.api.nvim_create_autocmd({"ColorScheme", "VimEnter"}, {
 --     group = vim.api.nvim_create_augroup('Color', {}),
@@ -769,3 +786,9 @@ print(
 --         vim.api.nvim_set_hl(0, "LspReferenceText", {bg = "#1d2022"})
 --     end
 -- })
+vim.keymap.set("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left window" })
+vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right window" })
+vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
+vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
+
+
