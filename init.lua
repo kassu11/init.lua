@@ -760,20 +760,6 @@ vim.api.nvim_set_hl(0, "cursorlinenr", { bg = "#15191d", fg = "#e5ff00" })
 --   vim.api.nvim_get_hl(0, {name = "cursorline"}).sp,
 --   vim.api.nvim_get_hl(0, {name = "cursorline"}).bg,
 --   vim.api.nvim_get_hl(0, {name = "cursorline"}).fg,
---   vim.api.nvim_get_hl(0, {name = "cursorline"}).reverse,
---   vim.api.nvim_get_hl(0, {name = "cursorline"}).reverse,
---   vim.api.nvim_get_hl(0, {name = "cursorline"}).reverse,
---   vim.api.nvim_get_hl(0, {name = "cursorline"}).reverse,
---   vim.api.nvim_get_hl(0, {name = "cursorline"}).reverse,
---   vim.api.nvim_get_hl(0, {name = "cursorline"}).reverse,
---   vim.api.nvim_get_hl(0, {name = "cursorline"}).reverse,
---   vim.api.nvim_get_hl(0, {name = "cursorline"}).reverse,
---   vim.api.nvim_get_hl(0, {name = "cursorline"}).reverse,
---   vim.api.nvim_get_hl(0, {name = "cursorline"}).reverse,
---   vim.api.nvim_get_hl(0, {name = "cursorline"}).reverse,
---   vim.api.nvim_get_hl(0, {name = "cursorline"}).reverse,
---   vim.api.nvim_get_hl(0, {name = "cursorline"}).reverse,
---   vim.api.nvim_get_hl(0, {name = "cursorline"}).reverse,
 --   vim.api.nvim_get_hl(0, {name = "cursorline"}).reverse
 -- )
 
@@ -791,4 +777,22 @@ vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right win
 vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
 vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 
+vim.keymap.set("n", "<leader>o", "<cmd>:!start . <CR>")
+vim.keymap.set("x", "<leader>p", "\"_dP");
+vim.keymap.set("n", "<C-S-L>", "_v$h");
+vim.keymap.set("n", "<C-d>", "<C-d>zz");
+vim.keymap.set("n", "<C-u>", "<C-u>zz");
+
+if vim.g.neovide then
+  vim.g.neovide_hide_mouse_when_typing = true;
+  vim.g.neovide_scroll_animation_length = 0
+  vim.g.neovide_position_animation_length = 0
+
+  vim.g.neovide_touch_drag_timeout = 0
+  vim.g.neovide_cursor_animation_length = 0.05
+  vim.g.neovide_cursor_trail_size = 0.2
+  vim.g.neovide_background_image = "C:\\Users\\kaspe\\Desktop\\kuvat\\test\\cat\\cat.1501.jpg"
+  vim.o.guifont = "FiraCode Nerd Font Mono"
+  vim.keymap.set({"n", "x", "i"}, "<F11>", function() vim.g.neovide_fullscreen = not vim.g.neovide_fullscreen end)
+end
 
