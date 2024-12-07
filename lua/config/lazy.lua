@@ -76,6 +76,61 @@ vim.g.VM_maps = {
 }
 
 require("lazy").setup({
+  {
+    "nvim-treesitter/nvim-treesitter",
+    build = ":TSUpdate",
+    config = function ()
+      local install = require("nvim-treesitter.install");
+      install.prefer_git = false
+      install.compilers = { "zig", vim.fn.getenv('CC'), "cc", "gcc", "clang", "cl" }
+      local configs = require("nvim-treesitter.configs")
+
+      configs.setup({
+        ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "elixir", "heex", "javascript", "html" },
+        sync_install = false,
+        highlight = { enable = true },
+        indent = { enable = true },
+        matchup = {
+          enable = true, -- Enable Treesitter integration
+        },
+        textobjects = {
+          select = {
+            enable = true,
+            lookahead = true, -- Jump to the next text object, similar to targets.vim
+          },
+          move = {
+            enable = true,
+            set_jumps = true, -- Whether to set jumps in the jumplist
+            goto_next_start = {
+              ["]m"] = "@function.outer",
+              ["]c"] = "@class.outer",
+            },
+            goto_next_end = {
+              ["]M"] = "@function.outer",
+              ["]C"] = "@class.outer",
+            },
+            goto_previous_start = {
+              ["[m"] = "@function.outer",
+              ["[c"] = "@class.outer",
+            },
+            goto_previous_end = {
+              ["[M"] = "@function.outer",
+              ["[C"] = "@class.outer",
+            },
+          },
+          swap = {
+            enable = true,
+            swap_next = {
+              ["<leader>a"] = "@parameter.inner",
+            },
+            swap_previous = {
+              ["<leader>A"] = "@parameter.inner",
+            },
+          },
+        },
+      })
+    end
+  },
   -- Learn vim
   "ThePrimeagen/vim-be-good",
 
