@@ -43,16 +43,16 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   end,
 })
 
-vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
+vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "Clean search" })
 vim.keymap.set("n", "<leader>w", "\"+", { desc = "Clipboard registry" })
 vim.keymap.set("v", "<leader>w", "\"+", { desc = "Clipboard registry" })
 
-vim.keymap.set("n", "<leader><leader>x", "<cmd>source %<CR>");
-vim.keymap.set("n", "<leader>x", ":.lua<CR>");
-vim.keymap.set("v", "<leader>x", ":lua<CR>");
+vim.keymap.set("n", "<leader><leader>x", "<cmd>source %<CR>", { desc = "Source full file" });
+vim.keymap.set("n", "<leader>x", ":.lua<CR>", { desc = "Source current line" });
+vim.keymap.set("v", "<leader>x", ":lua<CR>", { desc = "Source visual selection" });
 
-vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show diagnostic [E]rror messages" })
-vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
+vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show diagnostic Error messages" })
+vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic Quickfix list" })
 
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
@@ -60,17 +60,24 @@ vim.keymap.set("n", "<left>", "<cmd>echo \"Use h to move!!\"<CR>")
 vim.keymap.set("n", "<right>", "<cmd>echo \"Use l to move!!\"<CR>")
 vim.keymap.set("n", "<up>", "<cmd>echo \"Use k to move!!\"<CR>")
 vim.keymap.set("n", "<down>", "<cmd>echo \"Use j to move!!\"<CR>")
-vim.keymap.set("i", "<C-v>", "<cmd>:normal \"+p <CR>")
-
+vim.keymap.set("i", "<C-v>", "<C-o>\"+P", { desc = "Windows clipboard paste" })
 
 vim.keymap.set("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left window" })
 vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right window" })
 vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
 vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 
-vim.keymap.set("n", "<leader>o", "<cmd>:!start . <CR>")
-vim.keymap.set("x", "<leader>p", "\"_dP");
-vim.keymap.set("n", "<C-S-L>", "_v$h");
+vim.keymap.set("n", "<leader>o", "<cmd>:!start . <CR>", { desc = "Open working directory" })
+vim.keymap.set("x", "<leader>p", "\"_dP", { desc = "Paste and delete to void registry" });
+vim.keymap.set("x", "<leader>d", "\"_d", { desc = "Delete to void registry" });
+vim.keymap.set("n", "<C-L>", "_v$h", { desc = "Select line" });
+vim.keymap.set("v", "<C-L>", "o_oj$h", { desc = "Expand line selection" });
+
+vim.keymap.set("i", "<C-k>", "<CR><C-c>kddpkI<cmd>:let @\" = @0<CR>", { desc = "Line break above" });
+vim.keymap.set("i", "<C-S-J>", "<C-o>o", { desc = "New line below" });
+vim.keymap.set("i", "<C-S-K>", "<C-o>O", { desc = "New line above" });
+
+
 
 if vim.g.neovide then
   vim.g.neovide_hide_mouse_when_typing = true;
@@ -81,12 +88,16 @@ if vim.g.neovide then
   vim.g.neovide_cursor_animation_length = 0.05
   vim.g.neovide_cursor_trail_size = 0.2
   vim.g.neovide_background_image = "C:\\Users\\kaspe\\Desktop\\kuvat\\test\\cat\\cat.1501.jpg"
+  vim.g.neovide_font_features = {
+    ["FiraCode Nerd Font Mono"] = {
+      '-calt',
+    }
+  }
   vim.o.guifont = "FiraCode Nerd Font Mono"
-  vim.keymap.set({"n", "x", "i"}, "<F11>", function() vim.g.neovide_fullscreen = not vim.g.neovide_fullscreen end)
+  vim.keymap.set({ "n", "x", "i" }, "<F11>", function() vim.g.neovide_fullscreen = not vim.g.neovide_fullscreen end,
+    { desc = "Enter fullscreen" })
 end
 
-
--- Remove bg
 vim.api.nvim_set_hl(0, "Visual", { bg = "#0398fc", fg = "#000000", })
 vim.api.nvim_set_hl(0, "cursorline", { bg = "#15191d" })
 vim.api.nvim_set_hl(0, "cursorlinenr", { bg = "#15191d", fg = "#e5ff00" })
@@ -114,4 +125,3 @@ vim.api.nvim_set_hl(0, "cursorlinenr", { bg = "#15191d", fg = "#e5ff00" })
 --         vim.api.nvim_set_hl(0, "LspReferenceText", {bg = "#1d2022"})
 --     end
 -- })
-
