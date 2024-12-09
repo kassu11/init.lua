@@ -79,6 +79,10 @@ vim.keymap.set("i", "<C-S-K>", "<C-o>O", { desc = "New line above" });
 
 
 
+vim.api.nvim_set_hl(0, "Visual", { bg = "#0398fc", fg = "#000000", })
+vim.api.nvim_set_hl(0, "cursorline", { bg = "#15191d" })
+vim.api.nvim_set_hl(0, "cursorlinenr", { bg = "#15191d", fg = "#e5ff00" })
+
 if vim.g.neovide then
   vim.g.neovide_hide_mouse_when_typing = true;
   vim.g.neovide_scroll_animation_length = 0
@@ -96,11 +100,14 @@ if vim.g.neovide then
   vim.o.guifont = "FiraCode Nerd Font Mono"
   vim.keymap.set({ "n", "x", "i" }, "<F11>", function() vim.g.neovide_fullscreen = not vim.g.neovide_fullscreen end,
     { desc = "Enter fullscreen" })
+    vim.keymap.set("n", "<C-0>",
+      ":lua vim.g.neovide_scale_factor = 1<CR>", { silent = true })
+    vim.keymap.set("n", "<C-->",
+      ":lua vim.g.neovide_scale_factor = math.max(vim.g.neovide_scale_factor - 0.1,  0.1)<CR>", { silent = true })
+    vim.keymap.set("n", "<C-+>",
+      ":lua vim.g.neovide_scale_factor = math.min(vim.g.neovide_scale_factor + 0.1,  5)<CR>", { silent = true })
 end
 
-vim.api.nvim_set_hl(0, "Visual", { bg = "#0398fc", fg = "#000000", })
-vim.api.nvim_set_hl(0, "cursorline", { bg = "#15191d" })
-vim.api.nvim_set_hl(0, "cursorlinenr", { bg = "#15191d", fg = "#e5ff00" })
 
 -- Diagnostic keymaps
 -- vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous [D]iagnostic message" })
