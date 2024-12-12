@@ -15,15 +15,14 @@ return {
         end,
       },
       { "nvim-telescope/telescope-ui-select.nvim" },
-      { "nvim-tree/nvim-web-devicons", enabled = vim.g.have_nerd_font },
+      { "nvim-tree/nvim-web-devicons",            enabled = vim.g.have_nerd_font },
     },
     config = function()
-
       require("telescope").setup({
         defaults = {
           file_ignore_patterns = {
-            "node_modules",
-            ".git"
+            "node_modules/",
+            ".git/"
           }
         },
         extensions = {

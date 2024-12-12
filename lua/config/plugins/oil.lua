@@ -10,6 +10,9 @@ return {
         columns = {
           "icon",
         },
+        win_options = {
+          signcolumn = "yes:2",
+        },
         keymaps = {
           ["g?"] = { "actions.show_help", mode = "n" },
           ["<CR>"] = "actions.select",

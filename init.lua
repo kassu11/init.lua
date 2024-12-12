@@ -50,6 +50,7 @@ vim.keymap.set("v", "<leader>w", "\"+", { desc = "Clipboard registry" })
 vim.keymap.set("n", "<leader><leader>x", "<cmd>source %<CR>", { desc = "Source full file" });
 vim.keymap.set("n", "<leader>x", ":.lua<CR>", { desc = "Source current line" });
 vim.keymap.set("v", "<leader>x", ":lua<CR>", { desc = "Source visual selection" });
+vim.keymap.set("n", "<leader><leader>q", ":set nowrap!<CR>", { desc = "Toggle wrap" });
 
 vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show diagnostic Error messages" })
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic Quickfix list" })
@@ -60,7 +61,20 @@ vim.keymap.set("n", "<left>", "<cmd>echo \"Use h to move!!\"<CR>")
 vim.keymap.set("n", "<right>", "<cmd>echo \"Use l to move!!\"<CR>")
 vim.keymap.set("n", "<up>", "<cmd>echo \"Use k to move!!\"<CR>")
 vim.keymap.set("n", "<down>", "<cmd>echo \"Use j to move!!\"<CR>")
-vim.keymap.set("i", "<C-v>", "<C-o>\"+P", { desc = "Windows clipboard paste" })
+
+vim.keymap.set("i", "<C-v>", "<C-o>:set paste<CR><C-r>+<C-o>:set nopaste<CR>", { desc = "Windows clipboard paste" })
+vim.keymap.set("i", "<C-g>", "<C-o>:set paste<CR><C-r>\"<C-o>:set nopaste<CR>", { desc = "Paste yank" })
+vim.keymap.set("i", "<C-b>", "<C-o>\"_de", { desc = "Delete word forward" })
+vim.keymap.set("i", "<C-l>", "<Del>", { desc = "Delete forward" })
+vim.keymap.set("i", "<M-l>", "<right>", { desc = "Move caret right" })
+vim.keymap.set("i", "<M-h>", "<left>", { desc = "Move caret left" })
+vim.keymap.set("i", "<M-f>", "<C-right>", { desc = "Move caret one word right" })
+vim.keymap.set("i", "<M-d>", "<C-left>", { desc = "Move caret one word left" })
+vim.keymap.set("i", "<C-k>", "<CR><C-c>kddpkI<cmd>:let @\" = @0<CR>", { desc = "Line break above" });
+vim.keymap.set("i", "<M-k>", "<C-o>O", { desc = "New line above" });
+vim.keymap.set("i", "<M-j>", "<C-o>o", { desc = "New line below" });
+
+
 
 vim.keymap.set("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left window" })
 vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right window" })
@@ -73,9 +87,6 @@ vim.keymap.set("x", "<leader>d", "\"_d", { desc = "Delete to void registry" });
 vim.keymap.set("n", "<C-L>", "_v$h", { desc = "Select line" });
 vim.keymap.set("v", "<C-L>", "o_oj$h", { desc = "Expand line selection" });
 
-vim.keymap.set("i", "<C-k>", "<CR><C-c>kddpkI<cmd>:let @\" = @0<CR>", { desc = "Line break above" });
-vim.keymap.set("i", "<C-S-J>", "<C-o>o", { desc = "New line below" });
-vim.keymap.set("i", "<C-S-K>", "<C-o>O", { desc = "New line above" });
 
 
 
@@ -100,12 +111,12 @@ if vim.g.neovide then
   vim.o.guifont = "FiraCode Nerd Font Mono"
   vim.keymap.set({ "n", "x", "i" }, "<F11>", function() vim.g.neovide_fullscreen = not vim.g.neovide_fullscreen end,
     { desc = "Enter fullscreen" })
-    vim.keymap.set("n", "<C-0>",
-      ":lua vim.g.neovide_scale_factor = 1<CR>", { silent = true })
-    vim.keymap.set("n", "<C-->",
-      ":lua vim.g.neovide_scale_factor = math.max(vim.g.neovide_scale_factor - 0.1,  0.1)<CR>", { silent = true })
-    vim.keymap.set("n", "<C-+>",
-      ":lua vim.g.neovide_scale_factor = math.min(vim.g.neovide_scale_factor + 0.1,  5)<CR>", { silent = true })
+  vim.keymap.set("n", "<C-0>",
+    ":lua vim.g.neovide_scale_factor = 1<CR>", { silent = true })
+  vim.keymap.set("n", "<C-->",
+    ":lua vim.g.neovide_scale_factor = math.max(vim.g.neovide_scale_factor - 0.1,  0.1)<CR>", { silent = true })
+  vim.keymap.set("n", "<C-+>",
+    ":lua vim.g.neovide_scale_factor = math.min(vim.g.neovide_scale_factor + 0.1,  5)<CR>", { silent = true })
 end
 
 
