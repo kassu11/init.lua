@@ -1,15 +1,15 @@
 return {
   {
     "brenton-leighton/multiple-cursors.nvim",
-    version = "*", -- Use the latest tagged version
+    version = "*",
     opts = {
-      opts = {
-        custom_key_maps = {
-          { { "n", "i" }, "<C-/>", function() vim.cmd("normal gcc") end },
-          { "v",        "<C-/>", function() vim.cmd("normal gc") end },
-        },
+      custom_key_maps = {
+        { "n", "<C-L>", function() vim.cmd("normal _v$h") end },
+        { "v", "<C-L>", function() vim.cmd("normal o_oj$h") end },
+        -- vim.keymap.set("n", "<C-L>", "_v$h", { desc = "Select line" });
+        -- vim.keymap.set("v", "<C-L>", "o_oj$h", { desc = "Expand line selection" });
       },
-    }, -- This causes the plugin setup function to be called
+    },
     keys = {
       { "<C-j>",         "<Cmd>MultipleCursorsAddDown<CR>",          mode = { "n", "x" },      desc = "Add cursor and move down" },
       { "<C-k>",         "<Cmd>MultipleCursorsAddUp<CR>",            mode = { "n", "x" },      desc = "Add cursor and move up" },
@@ -17,7 +17,7 @@ return {
       { "<C-Up>",        "<Cmd>MultipleCursorsAddUp<CR>",            mode = { "n", "i", "x" }, desc = "Add cursor and move up" },
       { "<C-Down>",      "<Cmd>MultipleCursorsAddDown<CR>",          mode = { "n", "i", "x" }, desc = "Add cursor and move down" },
 
-      { "<C-LeftMouse>", "<Cmd>MultipleCursorsMouseAddDelete<CR>",   mode = { "n", "i" },      desc = "Add or remove cursor" },
+      { "<M-LeftMouse>", "<Cmd>MultipleCursorsMouseAddDelete<CR>",   mode = { "n", "i" },      desc = "Add or remove cursor" },
 
       { "<Leader>a",     "<Cmd>MultipleCursorsAddMatches<CR>",       mode = { "n", "x" },      desc = "Add cursors to cword" },
       { "<Leader>A",     "<Cmd>MultipleCursorsAddMatchesV<CR>",      mode = { "n", "x" },      desc = "Add cursors to cword in previous area" },
@@ -27,5 +27,11 @@ return {
 
       { "<Leader>l",     "<Cmd>MultipleCursorsLock<CR>",             mode = { "n", "x" },      desc = "Lock virtual cursors" },
     },
+    config = function(opts)
+      vim.api.nvim_set_hl(0, "MultipleCursorsCursor", { bg = "#97ca72", fg = "#000000" })
+      vim.api.nvim_set_hl(0, "MultipleCursorsVisual", { bg = "#0398fc", fg = "#000000", })
+
+      require("multiple-cursors").setup(opts)
+    end,
   },
 }

@@ -7,7 +7,7 @@ return {
       install.prefer_git = false
       install.compilers = { "zig", vim.fn.getenv('CC'), "cc", "gcc", "clang", "cl" }
 
-      require'nvim-treesitter.configs'.setup {
+      require 'nvim-treesitter.configs'.setup {
         ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline", "zig" },
         auto_install = false,
         highlight = {

@@ -15,6 +15,10 @@ return {
     config = function()
       require "lspconfig".lua_ls.setup {}
       require "lspconfig".zls.setup {}
+      require "lspconfig".denols.setup {}
+      require 'lspconfig'.html.setup {}
+      require 'lspconfig'.jsonls.setup {}
+      require 'lspconfig'.cssls.setup {}
 
       vim.api.nvim_create_autocmd('LspAttach', {
         callback = function(args)

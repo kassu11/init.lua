@@ -74,19 +74,13 @@ vim.keymap.set("i", "<C-k>", "<CR><C-c>kddpkI<cmd>:let @\" = @0<CR>", { desc = "
 vim.keymap.set("i", "<M-k>", "<C-o>O", { desc = "New line above" });
 vim.keymap.set("i", "<M-j>", "<C-o>o", { desc = "New line below" });
 
-
-
-vim.keymap.set("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left window" })
-vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right window" })
-vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
-vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
-
 vim.keymap.set("n", "<leader>o", "<cmd>:!start . <CR>", { desc = "Open working directory" })
 vim.keymap.set("x", "<leader>p", "\"_dP", { desc = "Paste and delete to void registry" });
 vim.keymap.set("x", "<leader>d", "\"_d", { desc = "Delete to void registry" });
 vim.keymap.set("n", "<C-L>", "_v$h", { desc = "Select line" });
 vim.keymap.set("v", "<C-L>", "o_oj$h", { desc = "Expand line selection" });
-
+vim.keymap.set("n", "<leader>r", ":%s/\\<<C-r><C-w>\\>//g<Left><Left>")
+vim.keymap.set("x", "<leader>r", "y:%s/\\V<C-r>\"//g<Left><Left>")
 
 
 
