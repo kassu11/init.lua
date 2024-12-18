@@ -8,6 +8,10 @@ return {
         lualine = {
           transparent = true,
         },
+        diagnostics = {
+          darker = false,
+          background = false,
+        },
       }
       require('onedark').load()
     end,

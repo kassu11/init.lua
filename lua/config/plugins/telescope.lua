@@ -35,18 +35,11 @@ return {
       vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "Search Files" })
       vim.keymap.set("n", "<leader>ss", builtin.builtin, { desc = "Search Select Telescope" })
       vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "Search current Word" })
-      -- vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "Search by Grep" })
+      vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "Search by Grep" })
       vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "Search Diagnostics" })
       vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "Search Resume" })
       vim.keymap.set("n", "<leader>s.", builtin.oldfiles, { desc = "Search Recent Files (\".\" for repeat)" })
       vim.keymap.set("n", "<leader>sb", builtin.buffers, { desc = "Find existing buffers" })
-
-      vim.keymap.set("n", "<leader>sg", function()
-        builtin.live_grep {
-          grep_open_files = true,
-          prompt_title = "Live Grep in Open Files",
-        }
-      end, { desc = "Search in Open Files" })
 
       vim.keymap.set("n", "<leader>sn", function()
         builtin.find_files { cwd = vim.fn.stdpath "config" }
