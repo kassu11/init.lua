@@ -7,8 +7,9 @@ return {
       install.prefer_git = false
       install.compilers = { "zig", vim.fn.getenv('CC'), "cc", "gcc", "clang", "cl" }
 
+      ---@diagnostic disable-next-line: missing-fields
       require 'nvim-treesitter.configs'.setup {
-        ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline", "zig" },
+        ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline", "zig", "jsdoc", "html" },
         auto_install = false,
         highlight = {
           enable = true,
