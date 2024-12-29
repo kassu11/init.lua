@@ -82,6 +82,14 @@ vim.keymap.set("v", "<C-L>", "o_oj$h", { desc = "Expand line selection" });
 vim.keymap.set("n", "<leader>r", ":%s/\\<<C-r><C-w>\\>//g<Left><Left>")
 vim.keymap.set("x", "<leader>r", "y:%s/\\V<C-r>\"//g<Left><Left>")
 
+vim.keymap.set("n", "<", function() vim.cmd("normal! <<") end, { silent = true, desc = "Indent line" })
+vim.keymap.set("x", "<", function() vim.cmd("normal! <gv") end, { silent = true, desc = "Indent line" })
+vim.keymap.set("n", ">", function() vim.cmd("normal! >>") end, { silent = true, desc = "Indent selection" })
+vim.keymap.set("x", ">", function() vim.cmd("normal! >gv") end, { silent = true, desc = "Indent selection" })
+
+vim.keymap.set("n", "gp", function() vim.cmd("normal! `[v`]") end, { silent = true, desc = "Select pasted" })
+
+
 
 
 vim.api.nvim_set_hl(0, "Visual", { bg = "#0398fc", fg = "#000000", })
