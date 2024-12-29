@@ -96,6 +96,8 @@ vim.api.nvim_set_hl(0, "Visual", { bg = "#0398fc", fg = "#000000", })
 vim.api.nvim_set_hl(0, "cursorline", { bg = "#15191d" })
 vim.api.nvim_set_hl(0, "cursorlinenr", { bg = "#15191d", fg = "#e5ff00" })
 
+vim.cmd [[hi @lsp.typemod.variable.readonly.javascript guifg=#abbeff]]
+
 if vim.g.neovide then
   vim.g.neovide_hide_mouse_when_typing = true;
   vim.g.neovide_scroll_animation_length = 0
