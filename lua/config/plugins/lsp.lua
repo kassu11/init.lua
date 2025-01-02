@@ -33,13 +33,15 @@ return {
           end
 
           map('gd', require('telescope.builtin').lsp_definitions, 'Goto Definition')
-          map('gr', require('telescope.builtin').lsp_references, 'Goto References')
+          map('grr', require('telescope.builtin').lsp_references, 'Goto References')
           map('gI', require('telescope.builtin').lsp_implementations, 'Goto Implementation')
           map('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type Definition')
           map('<leader>sds', require('telescope.builtin').lsp_document_symbols, 'Document Symbols')
           map('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, 'Workspace Symbols')
           map('<leader>ca', vim.lsp.buf.code_action, 'Code Action', { 'n', 'x' })
           map('gD', vim.lsp.buf.declaration, 'Goto Declaration')
+          map('ge', function() vim.diagnostic.jump { count = 1, float = true } end, 'Goto next error message')
+          map('gE', function() vim.diagnostic.jump { count = -1, float = true } end, 'Goto previous error message')
 
           local client = vim.lsp.get_client_by_id(args.data.client_id)
           if not client then return end
