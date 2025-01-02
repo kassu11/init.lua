@@ -13,6 +13,16 @@ return {
     config = function()
       require("telescope").setup({
         defaults = {
+          -- prompt_prefix = " ",
+          -- selection_caret = " ",
+          path_display = { "smart" },
+          dynamic_preview_title = true,
+          sorting_strategy = "ascending",
+          layout_strategy = "vertical",
+          layout_config = {
+            prompt_position = "top",
+            height = 0.95,
+          },
           file_ignore_patterns = {
             "node_modules/",
             ".git/"
