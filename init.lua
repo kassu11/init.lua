@@ -62,6 +62,10 @@ vim.keymap.set("n", "<right>", "<cmd>echo \"Use l to move!!\"<CR>")
 vim.keymap.set("n", "<up>", "<cmd>echo \"Use k to move!!\"<CR>")
 vim.keymap.set("n", "<down>", "<cmd>echo \"Use j to move!!\"<CR>")
 
+vim.keymap.set("n", "<C-e>", "7<C-e>")
+vim.keymap.set("n", "<C-y>", "7<C-y>")
+vim.keymap.set("n", "<leader>.", "`.")
+
 vim.keymap.set("i", "<C-v>", "<C-o>:set paste<CR><C-r>+<C-o>:set nopaste<CR>", { desc = "Windows clipboard paste" })
 vim.keymap.set("i", "<C-g>", "<C-o>:set paste<CR><C-r>\"<C-o>:set nopaste<CR>", { desc = "Paste yank" })
 vim.keymap.set("i", "<C-b>", "<C-o>\"_de", { desc = "Delete word forward" })
