@@ -11,6 +11,12 @@ return {
       require 'nvim-treesitter.configs'.setup {
         ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline", "zig", "jsdoc", "html" },
         auto_install = false,
+        indent = {
+          enable = true,
+          disable = function(lang, buf)
+            return lang == "jsdoc"
+          end,
+        },
         highlight = {
           enable = true,
           disable = function(lang, buf)
