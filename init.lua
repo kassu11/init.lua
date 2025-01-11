@@ -71,7 +71,7 @@ vim.keymap.set("n", "<leader>.", "`.")
 vim.keymap.set("i", "<C-v>", "<C-o>:set paste<CR><C-r>+<C-o>:set nopaste<CR>", { desc = "Windows clipboard paste" })
 vim.keymap.set("c", "<C-v>", "<C-r>+", { desc = "Windows clipboard paste" })
 vim.keymap.set("i", "<C-g>", "<C-o>:set paste<CR><C-r>\"<C-o>:set nopaste<CR>", { desc = "Paste yank" })
-vim.keymap.set("i", "<C-b>", "<C-o>\"_de", { desc = "Delete word forward" })
+-- vim.keymap.set("i", "<C-b>", "<C-o>\"_de", { desc = "Delete word forward" })
 vim.keymap.set("i", "<C-l>", "<Del>", { desc = "Delete forward" })
 vim.keymap.set("i", "<M-l>", "<right>", { desc = "Move caret right" })
 vim.keymap.set("i", "<M-h>", "<left>", { desc = "Move caret left" })
@@ -95,7 +95,11 @@ vim.keymap.set("n", "<", function() vim.cmd("normal! >>") end, { silent = true, 
 vim.keymap.set("x", "<", function() vim.cmd("normal! >gv") end, { silent = true, desc = "Indent selection" })
 
 
+vim.keymap.set("n", "gp", function() vim.cmd("normal! `[v`]") end, { silent = true, desc = "Select pasted" })
 
+vim.keymap.set("n", "<leader>m", function()
+  vim.cmd [[autocmd CursorHold * normal! m']]
+end, { silent = true, desc = "Add position to jump history" })
 
 vim.api.nvim_set_hl(0, "Visual", { bg = "#0398fc", fg = "#000000", })
 vim.api.nvim_set_hl(0, "cursorline", { bg = "#15191d" })
@@ -118,12 +122,15 @@ if vim.g.neovide then
   vim.g.neovide_title_background_color = "#0b0b0b"
   vim.g.neovide_title_text_color = "#FFFFFF"
 
+  vim.o.guifont = "FiraCode Nerd Font Mono"
+  -- vim.o.guifont = "Consolas,FiraCode Nerd Font Mono:h14.8"
   vim.g.neovide_font_features = {
     ["FiraCode Nerd Font Mono"] = {
-      '-calt',
+      "-calt",
+      "-liga",
     }
   }
-  vim.o.guifont = "FiraCode Nerd Font Mono"
+
   vim.keymap.set({ "n", "x", "i" }, "<F11>", function() vim.g.neovide_fullscreen = not vim.g.neovide_fullscreen end,
     { desc = "Enter fullscreen" })
   vim.keymap.set("n", "<C-0>",
