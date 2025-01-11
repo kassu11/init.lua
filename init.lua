@@ -46,6 +46,8 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "Clean search" })
 vim.keymap.set("n", "<leader>w", "\"+", { desc = "Clipboard registry" })
 vim.keymap.set("v", "<leader>w", "\"+", { desc = "Clipboard registry" })
+vim.keymap.set("n", "<leader>d", "\"_d", { desc = "Delete to black hole reqistry" })
+vim.keymap.set("v", "<leader>d", "\"_d", { desc = "Delete to black hole reqistry" })
 
 vim.keymap.set("n", "<leader><leader>x", "<cmd>source %<CR>", { desc = "Source full file" });
 vim.keymap.set("n", "<leader>x", ":.lua<CR>", { desc = "Source current line" });
@@ -67,6 +69,7 @@ vim.keymap.set("n", "<C-y>", "7<C-y>")
 vim.keymap.set("n", "<leader>.", "`.")
 
 vim.keymap.set("i", "<C-v>", "<C-o>:set paste<CR><C-r>+<C-o>:set nopaste<CR>", { desc = "Windows clipboard paste" })
+vim.keymap.set("c", "<C-v>", "<C-r>+", { desc = "Windows clipboard paste" })
 vim.keymap.set("i", "<C-g>", "<C-o>:set paste<CR><C-r>\"<C-o>:set nopaste<CR>", { desc = "Paste yank" })
 vim.keymap.set("i", "<C-b>", "<C-o>\"_de", { desc = "Delete word forward" })
 vim.keymap.set("i", "<C-l>", "<Del>", { desc = "Delete forward" })
