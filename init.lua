@@ -100,8 +100,11 @@ vim.keymap.set("x", "<", function() vim.cmd("normal! >gv") end, { silent = true,
 vim.api.nvim_set_hl(0, "Visual", { bg = "#0398fc", fg = "#000000", })
 vim.api.nvim_set_hl(0, "cursorline", { bg = "#15191d" })
 vim.api.nvim_set_hl(0, "cursorlinenr", { bg = "#15191d", fg = "#e5ff00" })
+vim.api.nvim_set_hl(0, "MatchParen", { bg = "#474747", fg = "#FFFFFF" })
+vim.api.nvim_set_hl(0, "MatchParenCur", {}) -- This keeps the cursor color same
 
 vim.cmd [[hi @lsp.typemod.variable.readonly.javascript guifg=#abbeff]]
+vim.cmd [[hi @lsp.type.namespace.zig guifg=#ef5f6b]]
 
 if vim.g.neovide then
   vim.g.neovide_hide_mouse_when_typing = true;
@@ -112,6 +115,9 @@ if vim.g.neovide then
   vim.g.neovide_cursor_animation_length = 0.05
   vim.g.neovide_cursor_trail_size = 0.2
   vim.g.neovide_background_image = "C:\\Users\\kaspe\\Desktop\\kuvat\\test\\cat\\cat.1501.jpg"
+  vim.g.neovide_title_background_color = "#0b0b0b"
+  vim.g.neovide_title_text_color = "#FFFFFF"
+
   vim.g.neovide_font_features = {
     ["FiraCode Nerd Font Mono"] = {
       '-calt',
