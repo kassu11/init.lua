@@ -9,6 +9,9 @@ return {
 
       ---@diagnostic disable-next-line: missing-fields
       require 'nvim-treesitter.configs'.setup {
+        matchup = {
+          enable = true, -- Enable Treesitter-based % functionality
+        },
         ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline", "zig", "jsdoc", "html" },
         auto_install = false,
         indent = {
