@@ -2,7 +2,7 @@ return {
   {
     'saghen/blink.cmp',
     dependencies = 'rafamadriz/friendly-snippets',
-    version = 'v0.*',
+    version = '*',
     opts = {
       keymap = { preset = 'default' },
 
@@ -13,5 +13,9 @@ return {
 
       signature = { enabled = true }
     },
+    config = function()
+      local signature_trigger = require("blink.cmp.signature.trigger")
+      vim.keymap.set("i", "<C-k>", signature_trigger.show, { desc = "Show function signature" })
+    end,
   },
 }
