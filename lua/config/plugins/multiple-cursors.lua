@@ -1,6 +1,7 @@
 return {
   {
     "brenton-leighton/multiple-cursors.nvim",
+    enabled = false,
     version = "*",
     opts = {
       custom_key_maps = {

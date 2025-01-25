@@ -101,11 +101,19 @@ vim.keymap.set("n", "<leader>m", function()
   vim.cmd [[autocmd CursorHold * normal! m']]
 end, { silent = true, desc = "Add position to jump history" })
 
-vim.api.nvim_set_hl(0, "Visual", { bg = "#0398fc", fg = "#000000", })
-vim.api.nvim_set_hl(0, "cursorline", { bg = "#15191d" })
-vim.api.nvim_set_hl(0, "cursorlinenr", { bg = "#15191d", fg = "#e5ff00" })
-vim.api.nvim_set_hl(0, "MatchParen", { bg = "#474747", fg = "#FFFFFF" })
-vim.api.nvim_set_hl(0, "MatchParenCur", {}) -- This keeps the cursor color same
+local hl = vim.api.nvim_set_hl
+hl(0, "Visual", { bg = "#0398fc", fg = "#000000", })
+hl(0, "cursorline", { bg = "#15191d" })
+hl(0, "cursorlinenr", { bg = "#15191d", fg = "#e5ff00" })
+hl(0, "MatchParen", { bg = "#474747", fg = "#FFFFFF" })
+hl(0, "MatchParenCur", {}) -- This keeps the cursor color same
+
+hl(0, "MultiCursorCursor", { bg = "#97ca72", fg = "#000000" })
+hl(0, "MultiCursorVisual", { bg = "#0398fc", fg = "#000000" })
+hl(0, "MultiCursorDisabledCursor", { bg = "#97ca72", fg = "#000000" })
+hl(0, "MultiCursorDisabledVisual", { bg = "#0398fc", fg = "#000000" })
+hl(0, "MultiCursorSign", { link = "SignColumn" })
+hl(0, "MultiCursorDisabledSign", { link = "SignColumn" })
 
 vim.cmd [[hi @lsp.typemod.variable.readonly.javascript guifg=#abbeff]]
 vim.cmd [[hi @lsp.type.namespace.zig guifg=#ef5f6b]]
