@@ -31,6 +31,8 @@ vim.opt.inccommand = "split"
 
 vim.opt.cursorline = true
 vim.opt.scrolloff = 10
+vim.opt.sidescroll = 1
+vim.opt.sidescrolloff = 10
 vim.opt.hlsearch = true
 
 require("config.lazy")
@@ -43,11 +45,11 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   end,
 })
 
-vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "Clean search" })
-vim.keymap.set("n", "<leader>w", "\"+", { desc = "Clipboard registry" })
-vim.keymap.set("v", "<leader>w", "\"+", { desc = "Clipboard registry" })
-vim.keymap.set("n", "<leader>d", "\"_d", { desc = "Delete to black hole reqistry" })
-vim.keymap.set("v", "<leader>d", "\"_d", { desc = "Delete to black hole reqistry" })
+-- vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "Clean search" })
+vim.keymap.set({ "n", "v" }, "<leader>w", "\"+", { desc = "Clipboard registry" })
+vim.keymap.set({ "n", "v" }, "<leader>d", "\"_d", { desc = "Delete to black hole reqistry" })
+vim.keymap.set({ "n", "v" }, "y", "\"yy", { desc = "Add yank to y registry" })
+vim.keymap.set({ "n", "v" }, "d", "\"dd", { desc = "Add delete to d registry" })
 
 vim.keymap.set("n", "<leader><leader>x", "<cmd>source %<CR>", { desc = "Source full file" });
 vim.keymap.set("n", "<leader>x", ":.lua<CR>", { desc = "Source current line" });
