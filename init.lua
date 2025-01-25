@@ -56,6 +56,12 @@ vim.keymap.set("n", "<leader><leader>q", ":set nowrap!<CR>", { desc = "Toggle wr
 
 -- vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show diagnostic Error messages" })
 -- vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic Quickfix list" })
+vim.keymap.set("v", "(", "c()<Esc>Pgvlolo", { desc = "Surround selection (text)" });
+vim.keymap.set("v", ")", "c(  )<Esc>hPgvllollo", { desc = "Surround selection ( text )" });
+vim.keymap.set("v", "[", "c[]<Esc>Pgvlolo", { desc = "Surround selection [text]" });
+vim.keymap.set("v", "]", "c[  ]<Esc>hPgvllollo", { desc = "Surround selection [ text ]" });
+vim.keymap.set("v", "{", "c{}<Esc>Pgvlolo", { desc = "Surround selection {text}" });
+vim.keymap.set("v", "}", "c{  }<Esc>hPgvllollo", { desc = "Surround selection { text }" });
 
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
@@ -77,7 +83,7 @@ vim.keymap.set("i", "<M-l>", "<right>", { desc = "Move caret right" })
 vim.keymap.set("i", "<M-h>", "<left>", { desc = "Move caret left" })
 vim.keymap.set("i", "<M-f>", "<C-right>", { desc = "Move caret one word right" })
 vim.keymap.set("i", "<M-d>", "<C-left>", { desc = "Move caret one word left" })
-vim.keymap.set("i", "<C-k>", "<CR><C-c>kddpkI<cmd>:let @\" = @0<CR>", { desc = "Line break above" });
+-- vim.keymap.set("i", "<C-k>", "<CR><C-c>kddpkI<cmd>:let @\" = @0<CR>", { desc = "Line break above" });
 vim.keymap.set("i", "<M-k>", "<C-o>O", { desc = "New line above" });
 vim.keymap.set("i", "<M-j>", "<C-o>o", { desc = "New line below" });
 

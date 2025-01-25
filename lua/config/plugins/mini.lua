@@ -1,7 +1,7 @@
 return {
   {
     'echasnovski/mini.nvim',
-    enabled = true,
+    enabled = false,
     config = function()
       local surround = require 'mini.surround'
       surround.setup {
