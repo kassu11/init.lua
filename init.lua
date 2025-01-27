@@ -58,12 +58,12 @@ vim.keymap.set("n", "<leader><leader>q", ":set nowrap!<CR>", { desc = "Toggle wr
 
 -- vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show diagnostic Error messages" })
 -- vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic Quickfix list" })
-vim.keymap.set("v", "(", "c()<Esc>Pgvlolo", { desc = "Surround selection (text)" });
-vim.keymap.set("v", ")", "c(  )<Esc>hPgvllollo", { desc = "Surround selection ( text )" });
-vim.keymap.set("v", "[", "c[]<Esc>Pgvlolo", { desc = "Surround selection [text]" });
-vim.keymap.set("v", "]", "c[  ]<Esc>hPgvllollo", { desc = "Surround selection [ text ]" });
-vim.keymap.set("v", "{", "c{}<Esc>Pgvlolo", { desc = "Surround selection {text}" });
-vim.keymap.set("v", "}", "c{  }<Esc>hPgvllollo", { desc = "Surround selection { text }" });
+vim.keymap.set("v", "(", "S(", { remap = true, desc = "Surround selection ( text )" });
+vim.keymap.set("v", ")", "S)", { remap = true, desc = "Surround selection (text)" });
+vim.keymap.set("v", "[", "S[", { remap = true, desc = "Surround selection [ text ]" });
+vim.keymap.set("v", "]", "S]", { remap = true, desc = "Surround selection [text]" });
+vim.keymap.set("v", "{", "S{", { remap = true, desc = "Surround selection { text }" });
+vim.keymap.set("v", "}", "S}", { remap = true, desc = "Surround selection {text}" });
 
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
