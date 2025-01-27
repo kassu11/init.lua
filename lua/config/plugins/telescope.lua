@@ -43,11 +43,24 @@ return {
 
       vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "Search Help" })
       vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "Search Keymaps" })
+
       vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "Search Files" })
       vim.keymap.set("n", "<leader>sF", function()
-        builtin.find_files { cwd = vim.fn.expand('%') }
-      end, { desc = "Search Files" })
-      vim.keymap.set("n", "<leader>sA", function() builtin.find_files { no_ignore = true } end, { desc = "Search Files" })
+        builtin.find_files { cwd = vim.fn.expand('%:p:h') }
+      end, { desc = "Search Files (current buff path)" })
+
+      vim.keymap.set("n", "<leader>sA", function()
+        builtin.find_files { cwd = vim.fn.expand('%:p:h'), no_ignore = true }
+      end, { desc = "Search All Files (current buff path)" })
+      vim.keymap.set("n", "<leader>sa", function()
+        builtin.find_files { no_ignore = true }
+      end, { desc = "Search All Files" })
+
+      vim.keymap.set("n", "<leader>sE", function()
+        builtin.oldfiles { only_cwd = true }
+      end, { desc = "Search old files (current cwd)" })
+      vim.keymap.set("n", "<leader>se", builtin.oldfiles, { desc = "Search old files" })
+
       vim.keymap.set("n", "<leader>ss", builtin.builtin, { desc = "Search Select Telescope" })
       vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "Search current Word" })
       vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "Search by Grep" })
@@ -95,7 +108,9 @@ return {
       --   })
       -- end
 
-      vim.keymap.set("n", "<leader>gb", builtin.git_branches, { desc = "Search git branches" })
+      vim.keymap.set("n", "<leader>gb", function()
+        builtin.git_branches { cwd = vim.fn.expand("%:p:h") }
+      end, { desc = "Search git branches" })
     end,
   },
 }
