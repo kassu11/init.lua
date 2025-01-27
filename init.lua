@@ -17,11 +17,11 @@ vim.opt.undofile = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.signcolumn = "yes"
+vim.opt.splitright = true
+vim.opt.splitbelow = false
 
 -- vim.opt.updatetime = 250
 -- vim.opt.timeoutlen = 400
--- vim.opt.splitright = true
--- vim.opt.splitbelow = true
 
 -- vim.opt.list = false
 -- vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
