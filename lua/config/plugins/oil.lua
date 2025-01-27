@@ -3,9 +3,10 @@ return {
     "stevearc/oil.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
+      local oil = require "oil"
       vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent with oil directory" })
 
-      require "oil".setup {
+      oil.setup {
         default_file_explorer = true,
         columns = {
           "icon",
@@ -26,6 +27,10 @@ return {
           ["-"] = { "actions.parent", mode = "n" },
           ["_"] = { "actions.open_cwd", mode = "n" },
           ["<leader>c"] = { "actions.cd", mode = "n" },
+          ["<leader>O"] = function()
+            local path = oil.get_current_dir()
+            vim.cmd("silent !start /I cmd /K \"cd /d " .. path .. "\"")
+          end,
           ["~"] = { "actions.cd", opts = { scope = "tab" }, mode = "n" },
           ["gs"] = { "actions.change_sort", mode = "n" },
           ["gx"] = "actions.open_external",

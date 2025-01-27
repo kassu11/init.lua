@@ -89,7 +89,15 @@ vim.keymap.set("i", "<M-d>", "<C-left>", { desc = "Move caret one word left" })
 vim.keymap.set("i", "<M-k>", "<C-o>O", { desc = "New line above" });
 vim.keymap.set("i", "<M-j>", "<C-o>o", { desc = "New line below" });
 
-vim.keymap.set("n", "<leader>o", "<cmd>:!start . <CR>", { desc = "Open working directory" })
+vim.keymap.set("n", "<leader>o", function()
+  local path = vim.fn.getcwd();
+  vim.cmd("silent !start /I cmd /K \"cd /d " .. path .. "\"")
+end, { desc = "Open working directory" })
+vim.keymap.set("n", "<leader>O", function()
+  local path = vim.fn.expand('%:p:h')
+  vim.cmd("silent !start /I cmd /K \"cd /d " .. path .. "\"")
+end, { desc = "Open working directory" })
+
 vim.keymap.set("x", "<leader>p", "\"_dP", { desc = "Paste and delete to void registry" });
 vim.keymap.set("x", "<leader>d", "\"_d", { desc = "Delete to void registry" });
 vim.keymap.set("n", "<C-L>", "_v$h", { desc = "Select line" });
