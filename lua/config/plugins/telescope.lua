@@ -40,8 +40,7 @@ return {
       pcall(require("telescope").load_extension, "ui-select")
 
       local builtin = require "telescope.builtin"
-      local actions = require("telescope.actions")
-      local actions_state = require("telescope.actions.state")
+
       vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "Search Help" })
       vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "Search Keymaps" })
       vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "Search Files" })
@@ -58,39 +57,41 @@ return {
       end, { desc = "Search Neovim files" })
 
 
-      local function git_branches(initial_mode)
-        builtin.git_branches({
-          initial_mode = initial_mode,
-          attach_mappings = function(prompt_bufnr, map)
-            local function delete_branch()
-              local selection = actions_state.get_selected_entry()
-              if not selection or not selection.value then
-                vim.notify("No branch selected", vim.log.levels.WARN)
-                return
-              end
+      -- local actions = require("telescope.actions")
+      -- local actions_state = require("telescope.actions.state")
+      -- local function git_branches(initial_mode)
+      --   builtin.git_branches({
+      --     initial_mode = initial_mode,
+      --     attach_mappings = function(prompt_bufnr, map)
+      --       local function delete_branch()
+      --         local selection = actions_state.get_selected_entry()
+      --         if not selection or not selection.value then
+      --           vim.notify("No branch selected", vim.log.levels.WARN)
+      --           return
+      --         end
+      --
+      --
+      --         local branch_name = selection.value
+      --         if branch_name == "main" or branch_name == "master" then
+      --           vim.notify("Cannot delete the main/master branch", vim.log.levels.ERROR)
+      --           return
+      --         end
+      --
+      --         vim.cmd("Git branch " .. branch_name .. " -d")
+      --
+      --         actions.close(prompt_bufnr)
+      --
+      --         git_branches("normal")
+      --       end
+      --
+      --       map('n', 'd', delete_branch)
+      --
+      --       return true
+      --     end
+      --   })
+      -- end
 
-
-              local branch_name = selection.value
-              if branch_name == "main" or branch_name == "master" then
-                vim.notify("Cannot delete the main/master branch", vim.log.levels.ERROR)
-                return
-              end
-
-              vim.cmd("Git branch " .. branch_name .. " -d")
-
-              actions.close(prompt_bufnr)
-
-              git_branches("normal")
-            end
-
-            map('n', 'd', delete_branch)
-
-            return true
-          end
-        })
-      end
-
-      vim.keymap.set("n", "<leader>gb", function() git_branches("insert") end, { desc = "Search git branches" })
+      vim.keymap.set("n", "<leader>gb", builtin.git_branches, { desc = "Search git branches" })
     end,
   },
 }
