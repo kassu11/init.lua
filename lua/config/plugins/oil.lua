@@ -1,7 +1,7 @@
 return {
   {
     "stevearc/oil.nvim",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
+    dependencies = { "nvim-tree/nvim-web-devicons", "nvim-telescope/telescope.nvim" },
     config = function()
       local oil = require "oil"
       vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent with oil directory" })
@@ -36,6 +36,16 @@ return {
           ["gx"] = "actions.open_external",
           ["g."] = { "actions.toggle_hidden", mode = "n" },
           ["g\\"] = { "actions.toggle_trash", mode = "n" },
+          ["<leader>sf"] = {
+            function()
+              require("telescope.builtin").find_files({
+                cwd = oil.get_current_dir()
+              })
+            end,
+            mode = "n",
+            nowait = true,
+            desc = "Find files in the current directory"
+          },
         },
         view_options = {
           case_insensitive = true,
