@@ -12,6 +12,7 @@ vim.opt.shiftwidth = 2
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.showmode = false
+vim.opt.showmode = true
 -- vim.opt.breakindent = true
 vim.opt.undofile = true
 vim.opt.ignorecase = true
