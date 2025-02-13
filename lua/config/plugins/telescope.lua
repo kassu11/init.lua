@@ -15,8 +15,8 @@ return {
         defaults = {
           mappings = {
             i = {
-              ["<C-Down>"] = require('telescope.actions').cycle_history_next,
-              ["<C-Up>"] = require('telescope.actions').cycle_history_prev,
+              ["<C-j>"] = require('telescope.actions').cycle_history_next,
+              ["<C-k>"] = require('telescope.actions').cycle_history_prev,
             },
           },
           -- prompt_prefix = " ",
@@ -80,43 +80,17 @@ return {
       end, { desc = "Search Neovim files" })
 
 
-      -- local actions = require("telescope.actions")
-      -- local actions_state = require("telescope.actions.state")
-      -- local function git_branches(initial_mode)
-      --   builtin.git_branches({
-      --     initial_mode = initial_mode,
-      --     attach_mappings = function(prompt_bufnr, map)
-      --       local function delete_branch()
-      --         local selection = actions_state.get_selected_entry()
-      --         if not selection or not selection.value then
-      --           vim.notify("No branch selected", vim.log.levels.WARN)
-      --           return
-      --         end
-      --
-      --
-      --         local branch_name = selection.value
-      --         if branch_name == "main" or branch_name == "master" then
-      --           vim.notify("Cannot delete the main/master branch", vim.log.levels.ERROR)
-      --           return
-      --         end
-      --
-      --         vim.cmd("Git branch " .. branch_name .. " -d")
-      --
-      --         actions.close(prompt_bufnr)
-      --
-      --         git_branches("normal")
-      --       end
-      --
-      --       map('n', 'd', delete_branch)
-      --
-      --       return true
-      --     end
-      --   })
-      -- end
-
       vim.keymap.set("n", "<leader>gb", function()
         builtin.git_branches { cwd = vim.fn.expand("%:p:h") }
       end, { desc = "Search git branches" })
+
+      vim.keymap.set("n", "<leader>gs", function()
+        builtin.git_stash { cwd = vim.fn.expand("%:p:h") }
+      end, { desc = "Search git stash" })
+
+      vim.keymap.set("n", "<leader>gc", function()
+        builtin.git_stash { cwd = vim.fn.expand("%:p:h") }
+      end, { desc = "Search git stash" })
     end,
   },
 }
