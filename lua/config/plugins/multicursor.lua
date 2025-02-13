@@ -49,7 +49,7 @@ return {
 
       set("n", "<M-S-a>", mc.alignCursors, { desc = "Align multicursor" })
 
-      set("v", "<S-s>", mc.splitCursors, { desc = "Split multicursor" })
+      set("v", "<leader>s", mc.splitCursors, { desc = "Split multicursor" })
       set("v", "<S-m>", mc.matchCursors, { desc = "Match multicursor" })
 
       set("v", "<leader>t", count(function() mc.transposeCursors(1) end),

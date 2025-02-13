@@ -1,11 +1,17 @@
 return {
   {
     "nvim-telescope/telescope-project.nvim",
-    dependencies = { "nvim-telescope/telescope.nvim" },
+    dependencies = { "nvim-telescope/telescope.nvim", {
+      "ThePrimeagen/harpoon",
+      branch = "harpoon2",
+    } },
     config = function()
       local telescope = require "telescope"
+      local harpoon = require "harpoon"
 
-      vim.keymap.set("n", "<leader>sp", function() vim.cmd("Telescope project") end)
+      vim.keymap.set("n", "<leader>sp", function()
+        telescope.extensions.project.project { display_type = "full", hide_workspace = true }
+      end)
 
       local project_actions = require("telescope._extensions.project.actions")
       local builtin = require "telescope.builtin"
@@ -14,8 +20,13 @@ return {
           project = {
             on_project_selected = function(prompt_bufnr)
               project_actions.change_working_directory(prompt_bufnr, false)
-              builtin.oldfiles { only_cwd = true }
+              if harpoon:list():length() > 0 then
+                harpoon:list():select(1)
+              else
+                builtin.find_files()
+              end
             end,
+            search_by = { "path", "title" }
           }
         }
       }
