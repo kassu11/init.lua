@@ -58,7 +58,8 @@ vim.keymap.set("n", "<leader>x", ":.lua<CR>", { desc = "Source current line" });
 vim.keymap.set("v", "<leader>x", ":lua<CR>", { desc = "Source visual selection" });
 vim.keymap.set("n", "<leader><leader>q", ":set nowrap!<CR>", { desc = "Toggle wrap" });
 
--- vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show diagnostic Error messages" })
+vim.keymap.set("n", "<M-e>", vim.diagnostic.open_float, { desc = "Show diagnostic Error messages" })
+vim.keymap.set("n", "€", vim.diagnostic.open_float, { desc = "Show diagnostic Error messages" })
 -- vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic Quickfix list" })
 vim.keymap.set("v", "(", "S(", { remap = true, desc = "Surround selection ( text )" });
 vim.keymap.set("v", ")", "S)", { remap = true, desc = "Surround selection (text)" });
