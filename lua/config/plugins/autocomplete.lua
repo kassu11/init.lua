@@ -1,3 +1,7 @@
+local show_popup = true
+
+vim.keymap.set("n", "<leader>å", function() show_popup = not show_popup end, { desc = "Disable auto autocomplete pupup" })
+
 return {
   {
     'saghen/blink.cmp',
@@ -16,7 +20,7 @@ return {
       completion = {
         menu = {
           -- Hide autocomplete on file
-          auto_show = function(ctx) return ctx.mode ~= 'default' end
+          auto_show = function(ctx) return ctx.mode ~= 'default' or show_popup end
         }
       },
 
