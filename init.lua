@@ -8,6 +8,7 @@ vim.g.have_nerd_font = true
 vim.opt.mouse = "a"
 vim.opt.expandtab = true
 vim.opt.shiftwidth = 2
+vim.opt.shadafile = "NONE"
 
 vim.opt.number = true
 vim.opt.relativenumber = true
@@ -20,6 +21,8 @@ vim.opt.smartcase = true
 vim.opt.signcolumn = "yes"
 vim.opt.splitright = true
 vim.opt.splitbelow = false
+
+
 
 -- vim.opt.updatetime = 250
 -- vim.opt.timeoutlen = 400
@@ -75,18 +78,21 @@ vim.keymap.set("n", "<C-e>", "7<C-e>")
 vim.keymap.set("n", "<C-y>", "7<C-y>")
 vim.keymap.set("n", "<leader>.", "`.")
 
+vim.keymap.set("n", "ö", ":cprev<CR>zz")
+vim.keymap.set("n", "ä", ":cnext<CR>zz")
+
 vim.keymap.set("i", "<C-v>", "<C-o>:set paste<CR><C-r>+<C-o>:set nopaste<CR>", { desc = "Windows clipboard paste" })
 vim.keymap.set("c", "<C-v>", "<C-r>+", { desc = "Windows clipboard paste" })
 vim.keymap.set("i", "<C-g>", "<C-o>:set paste<CR><C-r>\"<C-o>:set nopaste<CR>", { desc = "Paste yank" })
 -- vim.keymap.set("i", "<C-b>", "<C-o>\"_de", { desc = "Delete word forward" })
-vim.keymap.set("i", "<C-l>", "<Del>", { desc = "Delete forward" })
-vim.keymap.set("i", "<M-l>", "<right>", { desc = "Move caret right" })
-vim.keymap.set("i", "<M-h>", "<left>", { desc = "Move caret left" })
-vim.keymap.set("i", "<M-f>", "<C-right>", { desc = "Move caret one word right" })
-vim.keymap.set("i", "<M-d>", "<C-left>", { desc = "Move caret one word left" })
+-- vim.keymap.set("i", "<C-l>", "<Del>", { desc = "Delete forward" })
+-- vim.keymap.set("i", "<M-l>", "<right>", { desc = "Move caret right" })
+-- vim.keymap.set("i", "<M-h>", "<left>", { desc = "Move caret left" })
+-- vim.keymap.set("i", "<M-f>", "<C-right>", { desc = "Move caret one word right" })
+-- vim.keymap.set("i", "<M-d>", "<C-left>", { desc = "Move caret one word left" })
 -- vim.keymap.set("i", "<C-k>", "<CR><C-c>kddpkI<cmd>:let @\" = @0<CR>", { desc = "Line break above" });
-vim.keymap.set("i", "<M-k>", "<C-o>O", { desc = "New line above" });
-vim.keymap.set("i", "<M-j>", "<C-o>o", { desc = "New line below" });
+-- vim.keymap.set("i", "<M-k>", "<C-o>O", { desc = "New line above" });
+-- vim.keymap.set("i", "<M-j>", "<C-o>o", { desc = "New line below" });
 
 vim.keymap.set("n", "<leader>o", function()
   local path = vim.fn.getcwd();
@@ -129,7 +135,9 @@ local hl = vim.api.nvim_set_hl
 hl(0, "Visual", { bg = "#0398fc", fg = "#000000", })
 hl(0, "cursorline", { bg = "#15191d" })
 hl(0, "cursorlinenr", { bg = "#15191d", fg = "#e5ff00" })
-hl(0, "MatchParen", { bg = "#474747", fg = "#FFFFFF" })
+
+-- hl(0, "MatchParen", { bg = "#474747", fg = "#FFFFFF", bold=true })
+hl(0, "MatchParen", { bold = true, underdouble = true })
 hl(0, "MatchParenCur", {}) -- This keeps the cursor color same
 
 hl(0, "MultiCursorCursor", { bg = "#97ca72", fg = "#000000" })
@@ -141,6 +149,7 @@ hl(0, "MultiCursorDisabledSign", { link = "SignColumn" })
 
 vim.cmd [[hi @lsp.typemod.variable.readonly.javascript guifg=#abbeff]]
 vim.cmd [[hi @lsp.type.namespace.zig guifg=#ef5f6b]]
+vim.cmd [[hi @constructor gui=None]]
 
 if vim.g.neovide then
   vim.g.neovide_hide_mouse_when_typing = true;
