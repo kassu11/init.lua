@@ -21,6 +21,8 @@ return {
 
       vim.keymap.set("n", "<C-S-P>", function() harpoon:list():prev() end, { desc = "Harpoon previous file" })
       vim.keymap.set("n", "<C-S-N>", function() harpoon:list():next() end, { desc = "Harpoon next file" })
+      vim.keymap.set("n", "<M-å>p", function() harpoon:list():prev() end, { desc = "Harpoon previous file (cmd remap)" })
+      vim.keymap.set("n", "<M-å>n", function() harpoon:list():next() end, { desc = "Harpoon next file (cmd remap)" })
     end,
   }
 }

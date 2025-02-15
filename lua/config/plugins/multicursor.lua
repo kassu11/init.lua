@@ -21,17 +21,14 @@ return {
       end
 
       local set = vim.keymap.set
-      set({ "n", "v" }, "<C-k>", count(function() mc.lineAddCursor(-1) end),
-        { desc = "Add multicursor up" })
-      set({ "n", "v" }, "<C-j>", count(function() mc.lineAddCursor(1) end),
-        { desc = "Add multicursor down" })
-      set({ "n", "v" }, "<C-S-k>", count(function() mc.lineSkipCursor(-1) end),
-        { desc = "Skip multicursor up" })
-      set({ "n", "v" }, "<C-S-j>", count(function() mc.lineSkipCursor(1) end),
-        { desc = "Skip multicursor down" })
+      set({ "n", "v" }, "<C-k>", count(function() mc.lineAddCursor(-1) end), { desc = "Add multicursor up" })
+      set({ "n", "v" }, "<C-j>", count(function() mc.lineAddCursor(1) end), { desc = "Add multicursor down" })
+      set({ "n", "v" }, "<C-S-k>", count(function() mc.lineSkipCursor(-1) end), { desc = "Skip multicursor up" })
+      set({ "n", "v" }, "<C-S-j>", count(function() mc.lineSkipCursor(1) end), { desc = "Skip multicursor down" })
+      set({ "n", "v" }, "<M-å>k", "<C-S-k>", { remap = true, desc = "Skip multicursor up (cmd remap)" })
+      set({ "n", "v" }, "<M-å>j", "<C-S-j>", { remap = true, desc = "Skip multicursor down (cmd remap)" })
 
-      set({ "n", "v" }, "<M-n>", count(function() mc.matchAddCursor(1) end),
-        { desc = "Add forward match multicursor" })
+      set({ "n", "v" }, "<M-n>", count(function() mc.matchAddCursor(1) end), { desc = "Add forward match multicursor" })
       set({ "n", "v" }, "<M-S-n>", count(function() mc.matchAddCursor(-1) end),
         { desc = "Add backward match multicursor" })
       set({ "n", "v" }, "<leader>n", count(function() mc.matchSkipCursor(1) end),
@@ -52,10 +49,8 @@ return {
       set("v", "<leader>s", mc.splitCursors, { desc = "Split multicursor" })
       set("v", "<S-m>", mc.matchCursors, { desc = "Match multicursor" })
 
-      set("v", "<leader>t", count(function() mc.transposeCursors(1) end),
-        { desc = "Transpose multicursor forward" })
-      set("v", "<leader>T", count(function() mc.transposeCursors(-1) end),
-        { desc = "Transpose multicursor backward" })
+      set("v", "<leader>t", count(function() mc.transposeCursors(1) end), { desc = "Transpose multicursor forward" })
+      set("v", "<leader>T", count(function() mc.transposeCursors(-1) end), { desc = "Transpose multicursor backward" })
 
       set("n", "<esc>", function()
         if not mc.cursorsEnabled() then
