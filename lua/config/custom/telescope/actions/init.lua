@@ -4,6 +4,48 @@ local action_state = require "telescope.actions.state"
 
 local custom_actions = {}
 
+local drop_stash = function()
+  local selection = action_state.get_selected_entry()
+  if selection == nil then
+    utils.__warn_no_selection "custom_actions.drop_stash"
+    return
+  end
+
+  local _, ret, stderr = utils.get_os_command_output { "git", "stash", "drop", selection.value }
+  if ret == 0 then
+    utils.notify("custom_actions.drop_stash", {
+      msg = string.format("applied: '%s' ", selection.value),
+      level = "INFO",
+    })
+  else
+    utils.notify("custom_actions.drop_stash", {
+      msg = string.format("Error when applying: %s. Git returned: '%s'", selection.value, table.concat(stderr, " ")),
+      level = "ERROR",
+    })
+  end
+end
+
+local create_stash = function(stash_name, cwd)
+  local _, ret, stderr = utils.get_os_command_output({ "git", "stash", "-u", "-m", stash_name }, cwd)
+  if ret == 0 then
+    vim.cmd [[:Gedit]]
+    vim.cmd [[:Gedit]]
+    utils.notify("custom.actions.create_stash", {
+      msg = string.format("Created a new stash: %s", stash_name),
+      level = "INFO",
+    })
+  else
+    utils.notify("custom.actions.create_stash", {
+      msg = string.format(
+        "Error when creating new stash: '%s' Git returned '%s'",
+        new_stash,
+        table.concat(stderr, " ")
+      ),
+      level = "INFO",
+    })
+  end
+end
+
 custom_actions.git_apply_stash = function(prompt_bufnr)
   local selection = action_state.get_selected_entry()
   if selection == nil then
@@ -28,7 +70,6 @@ custom_actions.git_apply_stash = function(prompt_bufnr)
   end
 end
 
-
 custom_actions.git_create_stash = function(prompt_bufnr)
   local cwd = action_state.get_current_picker(prompt_bufnr).cwd
   local new_stash = action_state.get_current_line()
@@ -49,49 +90,11 @@ custom_actions.git_create_stash = function(prompt_bufnr)
     end
 
     actions.close(prompt_bufnr)
-
-    local _, ret, stderr = utils.get_os_command_output({ "git", "stash", "-u", "-m", new_stash }, cwd)
-    if ret == 0 then
-      vim.cmd [[:Gedit]]
-      vim.cmd [[:Gedit]]
-      utils.notify("custom.actions.git_create_stash", {
-        msg = string.format("Created a new stash: %s", new_stash),
-        level = "INFO",
-      })
-    else
-      utils.notify("custom.actions.git_create_stash", {
-        msg = string.format(
-          "Error when creating new stash: '%s' Git returned '%s'",
-          new_stash,
-          table.concat(stderr, " ")
-        ),
-        level = "INFO",
-      })
-    end
+    create_stash(new_stash, cwd)
   end
 end
 
 
-local drop_stash = function()
-  local selection = action_state.get_selected_entry()
-  if selection == nil then
-    utils.__warn_no_selection "custom_actions.drop_stash"
-    return
-  end
-
-  local _, ret, stderr = utils.get_os_command_output { "git", "stash", "drop", selection.value }
-  if ret == 0 then
-    utils.notify("custom_actions.drop_stash", {
-      msg = string.format("applied: '%s' ", selection.value),
-      level = "INFO",
-    })
-  else
-    utils.notify("custom_actions.drop_stash", {
-      msg = string.format("Error when applying: %s. Git returned: '%s'", selection.value, table.concat(stderr, " ")),
-      level = "ERROR",
-    })
-  end
-end
 
 custom_actions.git_drop_stash = function(prompt_bufnr)
   local selection = action_state.get_selected_entry()
@@ -116,7 +119,9 @@ custom_actions.git_drop_stash = function(prompt_bufnr)
 end
 
 custom_actions.git_replace_stash = function(prompt_bufnr)
+  local cwd = action_state.get_current_picker(prompt_bufnr).cwd
   local selection = action_state.get_selected_entry()
+
   if selection == nil then
     utils.__warn_no_selection "custom_actions.git_replace_stash"
     return
@@ -141,21 +146,7 @@ custom_actions.git_replace_stash = function(prompt_bufnr)
 
   drop_stash()
   actions.close(prompt_bufnr)
-
-  local _, ret, stderr = utils.get_os_command_output { "git", "stash", "-u", "-m", selection.commit_info }
-  if ret == 0 then
-    vim.cmd [[:Gedit]]
-    vim.cmd [[:Gedit]]
-    utils.notify("custom_actions.git_replace_stash", {
-      msg = string.format("applied: '%s' ", selection.commit_info),
-      level = "INFO",
-    })
-  else
-    utils.notify("custom_actions.git_replace_stash", {
-      msg = string.format("Error when applying: %s. Git returned: '%s'", selection.commit_info, table.concat(stderr, " ")),
-      level = "ERROR",
-    })
-  end
+  create_stash(selection.commit_info, cwd)
 end
 
 return custom_actions
