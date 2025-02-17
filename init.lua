@@ -50,8 +50,10 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 
 -- vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "Clean search" })
-vim.keymap.set({ "n", "v" }, "<leader>w", "\"+", { desc = "Clipboard registry" })
-vim.keymap.set({ "n", "v" }, "<leader>d", "\"_d", { desc = "Delete to black hole reqistry" })
+vim.keymap.set({ "n", "x" }, "<leader>w", "\"+", { desc = "Clipboard registry" })
+vim.keymap.set({ "n", "x" }, "<leader>d", "\"_d", { desc = "Delete to void registry" })
+vim.keymap.set("n", "<leader>D", "\"_D", { desc = "Delete to void registry" })
+vim.keymap.set("x", "<leader>p", "\"_dP", { desc = "Paste and delete to void registry" });
 
 vim.keymap.set("n", "<leader><leader>x", "<cmd>source %<CR>", { desc = "Source full file" });
 vim.keymap.set("n", "<leader>x", ":.lua<CR>", { desc = "Source current line" });
@@ -113,8 +115,6 @@ vim.keymap.set("n", "<leader>E", function()
   vim.cmd("silent !start explorer /select," .. path)
 end, { desc = "Open current buff directory" })
 
-vim.keymap.set("x", "<leader>p", "\"_dP", { desc = "Paste and delete to void registry" });
-vim.keymap.set("x", "<leader>d", "\"_d", { desc = "Delete to void registry" });
 vim.keymap.set("n", "<C-L>", "_v$h", { desc = "Select line" });
 vim.keymap.set("v", "<C-L>", "o_oj$h", { desc = "Expand line selection" });
 vim.keymap.set("n", "<leader>r", ":%s/\\<<C-r><C-w>\\>//g<Left><Left>")
@@ -127,10 +127,6 @@ vim.keymap.set("x", "<", function() vim.cmd("normal! >gv") end, { silent = true,
 
 
 vim.keymap.set("n", "gp", function() vim.cmd("normal! `[v`]") end, { silent = true, desc = "Select pasted" })
-
-vim.keymap.set("n", "<leader>m", function()
-  vim.cmd [[autocmd CursorHold * normal! m']]
-end, { silent = true, desc = "Add position to jump history" })
 
 local hl = vim.api.nvim_set_hl
 hl(0, "Visual", { bg = "#0398fc", fg = "#000000", })

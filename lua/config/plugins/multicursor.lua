@@ -36,21 +36,21 @@ return {
       set({ "n", "v" }, "<leader>N", count(function() mc.matchSkipCursor(-1) end),
         { desc = "Skip backward match multicursor" })
 
-      set({ "n", "v" }, "<M-a>", mc.matchAllAddCursors, { desc = "Match add all multicursor" })
+      set({ "n", "v" }, "<leader>ml", mc.matchAllAddCursors, { desc = "Match add all multicursor" })
 
       set({ "n", "v" }, "<M-x>", mc.deleteCursor, { desc = "Delete multicursor" })
       set("n", "<c-leftmouse>", mc.handleMouse)
-      set({ "n", "v" }, "<c-q>", mc.toggleCursor, { desc = "Toggle multicursor" })
+      set({ "n", "v" }, "<leader>q", mc.toggleCursor, { desc = "Toggle multicursor" })
 
-      set("n", "<leader>gv", mc.restoreCursors, { desc = "Restore multicursors" })
+      set("n", "<leader>mgv", mc.restoreCursors, { desc = "Restore multicursors" })
 
-      set("n", "<M-S-a>", mc.alignCursors, { desc = "Align multicursor" })
+      set("n", "<leader>ma", mc.alignCursors, { desc = "Align multicursor" })
 
-      set("v", "<leader>s", mc.splitCursors, { desc = "Split multicursor" })
-      set("v", "<S-m>", mc.matchCursors, { desc = "Match multicursor" })
+      set("v", "<leader>ms", mc.splitCursors, { desc = "Split multicursor" })
+      set("v", "<leader>mm", mc.matchCursors, { desc = "Match multicursor" })
 
-      set("v", "<leader>t", count(function() mc.transposeCursors(1) end), { desc = "Transpose multicursor forward" })
-      set("v", "<leader>T", count(function() mc.transposeCursors(-1) end), { desc = "Transpose multicursor backward" })
+      set("v", "<leader>mt", count(function() mc.transposeCursors(1) end), { desc = "Transpose multicursor forward" })
+      set("v", "<leader>mT", count(function() mc.transposeCursors(-1) end), { desc = "Transpose multicursor backward" })
 
       set("n", "<esc>", function()
         if not mc.cursorsEnabled() then
