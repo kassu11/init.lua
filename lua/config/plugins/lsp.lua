@@ -48,12 +48,39 @@ return {
 
           ---@diagnostic disable-next-line: param-type-mismatch
           if client.supports_method('textDocument/formatting') then
-            vim.api.nvim_create_autocmd('BufWritePre', {
-              buffer = args.buf,
-              callback = function()
-                vim.lsp.buf.format({ bufnr = args.buf, id = client.id })
-              end,
-            })
+            vim.keymap.set("v", "<leader>f", function()
+              local start_pos = vim.fn.getpos("'<")
+              local end_pos = vim.fn.getpos("'>")
+
+              if not start_pos or not end_pos then
+                print("Error: Could not get selection range.")
+                return
+              end
+
+              -- Convert to 0-based indexing for LSP
+              local start_line = start_pos[2] - 1
+              local start_col = start_pos[3] - 1
+              local end_line = end_pos[2] - 1
+              local end_col = end_pos[3]
+
+              -- Ensure valid range (swap if reversed)
+              if start_line > end_line or (start_line == end_line and start_col > end_col) then
+                start_line, end_line = end_line, start_line
+                start_col, end_col = end_col, start_col
+              end
+
+              vim.lsp.buf.format({
+                id = client.id,
+                range = {
+                  ["start"] = { start_line, start_col },
+                  ["end"] = { end_line, end_col }
+                }
+              })
+            end, { desc = "Format selection" })
+
+            vim.keymap.set("n", "<leader>ff", function()
+              vim.lsp.buf.format { bufnr = args.buf, id = client.id, }
+            end, { desc = "Format current buffer" })
           end
         end,
       })
