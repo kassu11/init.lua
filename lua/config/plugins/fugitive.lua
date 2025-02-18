@@ -9,7 +9,7 @@ return {
       vim.keymap.set("n", "<leader>go", function()
         local url = vim.api.nvim_exec2("Git remote get-url origin", { output = true })
         if url.output ~= nil and url.output:sub(1, 8) == "https://" then
-          vim.cmd("!start " .. url.output)
+          vim.cmd("silent !start " .. url.output)
         else
           print("No remote origin found")
         end

@@ -90,7 +90,7 @@ return {
       end, { desc = "Search git stash" })
 
       vim.keymap.set("n", "<leader>gc", function()
-        builtin.git_commit { cwd = vim.fn.expand("%:p:h") }
+        builtin.git_commits { cwd = vim.fn.expand("%:p:h") }
       end, { desc = "Search git commits" })
 
 

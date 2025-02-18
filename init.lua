@@ -12,7 +12,6 @@ vim.opt.shadafile = "NONE"
 
 vim.opt.number = true
 vim.opt.relativenumber = true
-vim.opt.showmode = false
 vim.opt.showmode = true
 -- vim.opt.breakindent = true
 vim.opt.undofile = true
@@ -77,6 +76,8 @@ vim.keymap.set("n", "<right>", "<cmd>echo \"Use l to move!!\"<CR>")
 vim.keymap.set("n", "<up>", "<cmd>echo \"Use k to move!!\"<CR>")
 vim.keymap.set("n", "<down>", "<cmd>echo \"Use j to move!!\"<CR>")
 
+vim.keymap.set("n", "n", "nzz")
+vim.keymap.set("n", "<S-n>", "Nzz")
 vim.keymap.set("n", "<C-e>", "7<C-e>")
 vim.keymap.set("n", "<C-y>", "7<C-y>")
 vim.keymap.set("n", "<leader>.", "`.")
@@ -136,6 +137,10 @@ hl(0, "cursorlinenr", { bg = "#15191d", fg = "#e5ff00" })
 -- hl(0, "MatchParen", { bg = "#474747", fg = "#FFFFFF", bold=true })
 hl(0, "MatchParen", { bold = true, underdouble = true })
 hl(0, "MatchParenCur", {}) -- This keeps the cursor color same
+
+hl(0, "Search", { bg = "#a3c6ff", fg = "#000000" })
+hl(0, "CurSearch", { bg = "#ffb62e", fg = "#000000" })
+hl(0, "IncSearch", { bg = "#ffb62e", fg = "#000000" })
 
 hl(0, "MultiCursorCursor", { bg = "#97ca72", fg = "#000000" })
 hl(0, "MultiCursorVisual", { bg = "#0398fc", fg = "#000000" })
