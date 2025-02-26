@@ -76,10 +76,13 @@ return {
                   ["end"] = { end_line, end_col }
                 }
               })
+
+              vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "v", false)
             end, { desc = "Format selection" })
 
-            vim.keymap.set("n", "<leader>ff", function()
+            vim.keymap.set("n", "<leader><leader>f", function()
               vim.lsp.buf.format { bufnr = args.buf, id = client.id, }
+              print("File formated")
             end, { desc = "Format current buffer" })
           end
         end,
