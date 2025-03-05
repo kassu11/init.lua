@@ -30,8 +30,10 @@ return {
             height = 0.95,
           },
           file_ignore_patterns = {
-            "node_modules/",
-            ".git/"
+            "^node_modules/",
+            "^node_modules\\",
+            ".git/",
+            ".git\\"
           }
         },
         extensions = {
