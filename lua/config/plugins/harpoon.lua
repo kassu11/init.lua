@@ -23,6 +23,11 @@ return {
       vim.keymap.set("n", "<C-S-N>", function() harpoon:list():next() end, { desc = "Harpoon next file" })
       vim.keymap.set("n", "<M-å>p", function() harpoon:list():prev() end, { desc = "Harpoon previous file (cmd remap)" })
       vim.keymap.set("n", "<M-å>n", function() harpoon:list():next() end, { desc = "Harpoon next file (cmd remap)" })
+
+      -- Load first file on NeoVim opening
+      if harpoon:list():length() > 0 then
+        harpoon:list():select(1)
+      end
     end,
   }
 }
