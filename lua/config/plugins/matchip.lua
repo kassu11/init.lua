@@ -1,7 +1,7 @@
 return {
   {
     "andymass/vim-matchup",
-    enabled = true,
+    enabled = false,
     dependencies = { "nvim-telescope/telescope.nvim", },
     config = function()
       vim.g.matchup_matchparen_offscreen = { method = "popup" }
