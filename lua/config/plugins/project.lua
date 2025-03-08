@@ -21,7 +21,7 @@ return {
             on_project_selected = function(prompt_bufnr)
               project_actions.change_working_directory(prompt_bufnr, false)
               if harpoon:list():length() > 0 then
-                harpoon:list():select(1)
+                pcall(function() harpoon:list():select(1) end)
               else
                 builtin.find_files()
               end

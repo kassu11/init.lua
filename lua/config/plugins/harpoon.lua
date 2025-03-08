@@ -19,6 +19,11 @@ return {
       vim.keymap.set("n", "<M-d>", function() harpoon:list():select(2) end, { desc = "Harpoon select file 2" })
       vim.keymap.set("n", "<M-f>", function() harpoon:list():select(1) end, { desc = "Harpoon select file 1" })
 
+      vim.keymap.set("n", "<M-A>", function() harpoon:list():replace_at(4) end, { desc = "Harpoon replace file 4" })
+      vim.keymap.set("n", "<M-S>", function() harpoon:list():replace_at(3) end, { desc = "Harpoon replace file 3" })
+      vim.keymap.set("n", "<M-D>", function() harpoon:list():replace_at(2) end, { desc = "Harpoon replace file 2" })
+      vim.keymap.set("n", "<M-F>", function() harpoon:list():replace_at(1) end, { desc = "Harpoon replace file 1" })
+
       vim.keymap.set("n", "<C-S-P>", function() harpoon:list():prev() end, { desc = "Harpoon previous file" })
       vim.keymap.set("n", "<C-S-N>", function() harpoon:list():next() end, { desc = "Harpoon next file" })
       vim.keymap.set("n", "<M-å>p", function() harpoon:list():prev() end, { desc = "Harpoon previous file (cmd remap)" })
