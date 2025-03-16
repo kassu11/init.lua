@@ -49,6 +49,15 @@ return {
             nowait = true,
             desc = "Find files in the current directory"
           },
+          ["<leader>sg"] = {
+            function()
+              require("telescope.builtin").live_grep({
+                cwd = oil.get_current_dir()
+              })
+            end,
+            nowait = true,
+            desc = "Search by Grep in the current directory"
+          },
         },
         view_options = {
           case_insensitive = true,
