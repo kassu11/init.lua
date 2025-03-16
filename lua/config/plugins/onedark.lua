@@ -8,6 +8,9 @@ return {
         lualine = {
           transparent = true,
         },
+        code_style = {
+          comments = 'none',
+        },
         diagnostics = {
           darker = false,
           background = false,

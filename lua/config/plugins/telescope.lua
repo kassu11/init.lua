@@ -30,8 +30,10 @@ return {
             height = 0.95,
           },
           file_ignore_patterns = {
-            "node_modules/",
-            ".git/"
+            "^node_modules/",
+            "^node_modules\\",
+            ".git/",
+            ".git\\"
           }
         },
         extensions = {
@@ -68,7 +70,8 @@ return {
       vim.keymap.set("n", "<leader>se", builtin.oldfiles, { desc = "Search old files" })
 
       vim.keymap.set("n", "<leader>ss", builtin.builtin, { desc = "Search Select Telescope" })
-      vim.keymap.set("n", "<leader>sy", builtin.symbols, { desc = "Search symbols" })
+      vim.keymap.set("n", "<leader>sy", builtin.lsp_document_symbols, { desc = "Search document symbols" })
+      vim.keymap.set("n", "<leader>sY", builtin.lsp_workspace_symbols, { desc = "Search workspace symbols" })
       vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "Search current Word" })
       vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "Search by Grep" })
       vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "Search Diagnostics" })

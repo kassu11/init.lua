@@ -23,6 +23,7 @@ return {
       require 'lspconfig'.html.setup { capabilities = capabilities }
       require 'lspconfig'.jsonls.setup { capabilities = capabilities }
       require 'lspconfig'.cssls.setup { capabilities = capabilities }
+      require 'lspconfig'.emmet_ls.setup { capabilities = capabilities }
       require 'lspconfig'.emmet_language_server.setup { capabilities = capabilities }
 
       vim.api.nvim_create_autocmd('LspAttach', {
@@ -76,10 +77,14 @@ return {
                   ["end"] = { end_line, end_col }
                 }
               })
-            end, { desc = "Format selection" })
 
-            vim.keymap.set("n", "<leader>ff", function()
+              vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "v", false)
+            end, { desc = "Format selection" })
+            vim.keymap.set("n", "<leader>f", "V<leader>f", { remap = true, desc = "Format selection" })
+
+            vim.keymap.set("n", "<leader><leader>f", function()
               vim.lsp.buf.format { bufnr = args.buf, id = client.id, }
+              print("File formated")
             end, { desc = "Format current buffer" })
           end
         end,

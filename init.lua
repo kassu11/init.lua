@@ -81,6 +81,7 @@ vim.keymap.set("n", "<S-n>", "Nzz")
 vim.keymap.set("n", "<C-e>", "7<C-e>")
 vim.keymap.set("n", "<C-y>", "7<C-y>")
 vim.keymap.set("n", "<leader>.", "`.")
+vim.keymap.set("n", "<leader>bo", ":%bd|e#<CR>")
 
 vim.keymap.set("n", "ö", ":cprev<CR>zz")
 vim.keymap.set("n", "ä", ":cnext<CR>zz")
@@ -129,25 +130,23 @@ vim.keymap.set("x", "<", function() vim.cmd("normal! >gv") end, { silent = true,
 
 vim.keymap.set("n", "gp", function() vim.cmd("normal! `[v`]") end, { silent = true, desc = "Select pasted" })
 
-local hl = vim.api.nvim_set_hl
-hl(0, "Visual", { bg = "#0398fc", fg = "#000000", })
-hl(0, "cursorline", { bg = "#15191d" })
-hl(0, "cursorlinenr", { bg = "#15191d", fg = "#e5ff00" })
+vim.api.nvim_set_hl(0, "Visual", { bg = "#0398fc", fg = "#000000", })
+vim.api.nvim_set_hl(0, "cursorline", { bg = "#15191d" })
+vim.api.nvim_set_hl(0, "cursorlinenr", { bg = "#15191d", fg = "#e5ff00" })
 
--- hl(0, "MatchParen", { bg = "#474747", fg = "#FFFFFF", bold=true })
-hl(0, "MatchParen", { bold = true, underdouble = true })
-hl(0, "MatchParenCur", {}) -- This keeps the cursor color same
+vim.api.nvim_set_hl(0, "MatchParen", { fg = "#FF0000", bg = "NONE", undercurl = true })
+vim.api.nvim_set_hl(0, "MatchParenCur", {}) -- This keeps the cursor color same
 
-hl(0, "Search", { bg = "#a3c6ff", fg = "#000000" })
-hl(0, "CurSearch", { bg = "#ffb62e", fg = "#000000" })
-hl(0, "IncSearch", { bg = "#ffb62e", fg = "#000000" })
+vim.api.nvim_set_hl(0, "Search", { bg = "#86af61", fg = "#000000" })
+vim.api.nvim_set_hl(0, "CurSearch", { bg = "#fe5f60", fg = "#000000" })
+vim.api.nvim_set_hl(0, "IncSearch", { bg = "#fe5f60", fg = "#000000" })
 
-hl(0, "MultiCursorCursor", { bg = "#97ca72", fg = "#000000" })
-hl(0, "MultiCursorVisual", { bg = "#0398fc", fg = "#000000" })
-hl(0, "MultiCursorDisabledCursor", { bg = "#97ca72", fg = "#000000" })
-hl(0, "MultiCursorDisabledVisual", { bg = "#0398fc", fg = "#000000" })
-hl(0, "MultiCursorSign", { link = "SignColumn" })
-hl(0, "MultiCursorDisabledSign", { link = "SignColumn" })
+vim.api.nvim_set_hl(0, "MultiCursorCursor", { bg = "#97ca72", fg = "#000000" })
+vim.api.nvim_set_hl(0, "MultiCursorVisual", { bg = "#0398fc", fg = "#000000" })
+vim.api.nvim_set_hl(0, "MultiCursorDisabledCursor", { bg = "#97ca72", fg = "#000000" })
+vim.api.nvim_set_hl(0, "MultiCursorDisabledVisual", { bg = "#0398fc", fg = "#000000" })
+vim.api.nvim_set_hl(0, "MultiCursorSign", { link = "SignColumn" })
+vim.api.nvim_set_hl(0, "MultiCursorDisabledSign", { link = "SignColumn" })
 
 vim.cmd [[hi @lsp.typemod.variable.readonly.javascript guifg=#abbeff]]
 vim.cmd [[hi @lsp.type.namespace.zig guifg=#ef5f6b]]
