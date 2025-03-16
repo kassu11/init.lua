@@ -8,6 +8,7 @@ return {
     dependencies = "rafamadriz/friendly-snippets",
     version = "*",
     opts = {
+      cmdline = { completion = { menu = { auto_show = true } } },
       keymap = {
         preset = "default",
         ["<C-k>"] = { function() require("blink.cmp.signature.trigger").show() end, },
