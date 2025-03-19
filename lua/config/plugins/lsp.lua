@@ -23,6 +23,7 @@ return {
       require 'lspconfig'.html.setup { capabilities = capabilities }
       require 'lspconfig'.jsonls.setup { capabilities = capabilities }
       require 'lspconfig'.cssls.setup { capabilities = capabilities }
+      require 'lspconfig'.cssmodules_ls.setup { capabilities = capabilities }
       require 'lspconfig'.emmet_ls.setup { capabilities = capabilities }
       require 'lspconfig'.emmet_language_server.setup { capabilities = capabilities }
 

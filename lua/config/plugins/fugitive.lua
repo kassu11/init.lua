@@ -30,6 +30,16 @@ return {
           print("No remote origin found")
         end
       end, { desc = "Git open pull request" })
+
+      vim.keymap.set("n", "<leader>grr", function()
+        local branches = vim.api.nvim_exec2("!git -C \"%:h\" branch -r | grep -v 'HEAD' | grep -v 'main'", { output = true })
+        if branches.output == nil then
+          return print("No remote branch detected")
+        else
+          local branch_text, _ = branches.output:gsub(":!git[^\n]+", ""):gsub("%s+", " ")
+          vim.cmd("silent !git -C \"%:h\" branch -d" .. branch_text .. " --remote")
+        end
+      end, { desc = "Git remove all remote branch tracking" })
     end,
   }
 }
