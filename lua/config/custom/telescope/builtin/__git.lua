@@ -31,8 +31,8 @@ git.stash = function(opts)
         sorter = conf.file_sorter(opts),
         attach_mappings = function(_, map)
           actions.select_default:replace(custom_actions.git_apply_stash)
-          map({ "i", "n" }, "<c-c>", custom_actions.git_create_stash)
-          map({ "i", "n" }, "<c-s>", custom_actions.git_replace_stash)
+          map({ "i", "n" }, "<c-a>", custom_actions.git_create_stash)
+          map({ "i", "n" }, "<c-r>", custom_actions.git_replace_stash)
           map({ "i", "n" }, "<c-x>", custom_actions.git_drop_stash)
           return true
         end,
