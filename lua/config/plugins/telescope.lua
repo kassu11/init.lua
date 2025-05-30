@@ -8,6 +8,7 @@ return {
       "nvim-lua/plenary.nvim",
       { "nvim-telescope/telescope-fzf-native.nvim", build = "make", },
       { "nvim-telescope/telescope-ui-select.nvim" },
+      { "BurntSushi/ripgrep" },
       { "nvim-tree/nvim-web-devicons",              enabled = vim.g.have_nerd_font },
     },
     config = function()
