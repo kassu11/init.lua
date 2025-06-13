@@ -39,6 +39,7 @@ vim.opt.sidescrolloff = 10
 vim.opt.hlsearch = true
 
 require("config.lazy")
+require("config.custom.zig-errors")
 
 vim.api.nvim_create_autocmd("TextYankPost", {
   desc = "Highlight when yanking text",
