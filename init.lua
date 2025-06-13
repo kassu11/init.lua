@@ -164,15 +164,6 @@ if vim.g.neovide then
   vim.g.neovide_title_background_color = "#0b0b0b"
   vim.g.neovide_title_text_color = "#FFFFFF"
 
-  vim.o.guifont = "FiraCode Nerd Font Mono"
-  -- vim.o.guifont = "Consolas,FiraCode Nerd Font Mono:h14.8"
-  vim.g.neovide_font_features = {
-    ["FiraCode Nerd Font Mono"] = {
-      "-calt",
-      "-liga",
-    }
-  }
-
   vim.keymap.set({ "n", "x", "i" }, "<F11>", function() vim.g.neovide_fullscreen = not vim.g.neovide_fullscreen end,
     { desc = "Enter fullscreen" })
   vim.keymap.set("n", "<C-0>",
