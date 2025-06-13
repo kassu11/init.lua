@@ -12,7 +12,19 @@ return {
         columns = {
           "icon",
         },
+        view_options = {
+          case_insensitive = true,
+          show_hidden = true,
+          is_always_hidden = function(name, _)
+            return name == "..";
+          end,
+          sort = {
+            { "type", "asc" },
+            { "name", "asc" },
+          },
+        },
         win_options = {
+          wrap = true,
           signcolumn = "yes:2",
         },
         keymaps = {
@@ -27,7 +39,7 @@ return {
           ["<C-l>"] = "actions.refresh",
           ["-"] = { "actions.parent", mode = "n" },
           ["_"] = { "actions.open_cwd", mode = "n" },
-          ["<leader>c"] = { "actions.cd", mode = "n" },
+          ["<leader>cc"] = { "actions.cd", mode = "n" },
           ["<leader>O"] = function()
             local path = oil.get_current_dir()
             vim.cmd("silent !start /I cmd /K \"cd /d " .. path .. "\"")
@@ -59,13 +71,6 @@ return {
             desc = "Search by Grep in the current directory"
           },
         },
-        view_options = {
-          case_insensitive = true,
-          sort = {
-            { "type", "asc" },
-            { "name", "asc" },
-          },
-        }
       }
     end,
   }
