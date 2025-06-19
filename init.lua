@@ -159,8 +159,8 @@ if vim.g.neovide then
   vim.g.neovide_position_animation_length = 0
 
   vim.g.neovide_touch_drag_timeout = 0
-  vim.g.neovide_cursor_animation_length = 0.05
-  vim.g.neovide_cursor_trail_size = 0.2
+  vim.g.neovide_cursor_animation_length = 0
+  vim.g.neovide_cursor_trail_size = 0
   vim.g.neovide_background_image = "C:\\Users\\kaspe\\Desktop\\kuvat\\test\\cat\\cat.1501.jpg"
   vim.g.neovide_title_background_color = "#0b0b0b"
   vim.g.neovide_title_text_color = "#FFFFFF"
