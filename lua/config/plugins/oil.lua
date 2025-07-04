@@ -40,6 +40,20 @@ return {
           ["-"] = { "actions.parent", mode = "n" },
           ["_"] = { "actions.open_cwd", mode = "n" },
           ["<leader>cc"] = { "actions.cd", mode = "n" },
+          ["<leader>E"] = {
+            function()
+              local path = oil.get_current_dir()
+              local entry = oil.get_cursor_entry();
+
+              if entry ~= nil and entry.name ~= nil then
+                vim.cmd("silent !start explorer /select," .. path .. "\"" .. entry.name)
+              else
+                vim.cmd("silent !start explorer " .. path)
+              end
+            end,
+            nowait = true,
+            desc = "Open current buff directory"
+          },
           ["<leader>O"] = function()
             local path = oil.get_current_dir()
             vim.cmd("silent !start /I cmd /K \"cd /d " .. path .. "\"")
