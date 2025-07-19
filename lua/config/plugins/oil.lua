@@ -25,7 +25,7 @@ return {
         },
         win_options = {
           wrap = true,
-          signcolumn = "yes:2",
+          signcolumn = "yes:1",
         },
         keymaps = {
           ["g?"] = { "actions.show_help", mode = "n" },
