@@ -18,6 +18,7 @@ return {
       telescope.setup {
         extensions = {
           project = {
+            cd_scope = { "window" },
             on_project_selected = function(prompt_bufnr)
               project_actions.change_working_directory(prompt_bufnr, false)
               if harpoon:list():length() > 0 then
