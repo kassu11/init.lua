@@ -149,9 +149,9 @@ vim.api.nvim_set_hl(0, "MultiCursorDisabledVisual", { bg = "#0398fc", fg = "#000
 vim.api.nvim_set_hl(0, "MultiCursorSign", { link = "SignColumn" })
 vim.api.nvim_set_hl(0, "MultiCursorDisabledSign", { link = "SignColumn" })
 
-vim.api.nvim_set_hl(0, "IlluminatedWordText", { bg = "#15191d" })
-vim.api.nvim_set_hl(0, "IlluminatedWordRead", { bg = "#15191d" })
-vim.api.nvim_set_hl(0, "IlluminatedWordWrite", { bg = "#15191d" })
+vim.api.nvim_set_hl(0, "IlluminatedWordText", { bg = "#2e2e2e" })
+vim.api.nvim_set_hl(0, "IlluminatedWordRead", { bg = "#2e2e2e" })
+vim.api.nvim_set_hl(0, "IlluminatedWordWrite", { bg = "#2e2e2e" })
 
 vim.cmd [[hi @lsp.typemod.variable.readonly.javascript guifg=#abbeff]]
 vim.cmd [[hi @lsp.type.namespace.zig guifg=#ef5f6b]]
