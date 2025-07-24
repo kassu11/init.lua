@@ -66,6 +66,16 @@ return {
           ["gx"] = "actions.open_external",
           ["g."] = { "actions.toggle_hidden", mode = "n" },
           ["g\\"] = { "actions.toggle_trash", mode = "n" },
+          ["<leader>fd"] = {
+            function()
+              require("telescope.builtin").find_files({
+                cwd = oil.get_current_dir(),
+                find_command = { "fd", "-t=d" }
+              })
+            end,
+            nowait = true,
+            desc = "Find directory in the current location"
+          },
           ["<leader>sf"] = {
             function()
               require("telescope.builtin").find_files({
