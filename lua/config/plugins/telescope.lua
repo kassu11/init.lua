@@ -58,6 +58,18 @@ return {
         builtin.find_files { cwd = vim.fn.expand('%:p:h') }
       end, { desc = "Search Files (current buff path)" })
 
+      vim.keymap.set("n", "<leader>fd", function()
+        builtin.find_files {
+          find_command = { "fd", "-t=d" }
+        }
+      end, { desc = "Find directory" })
+      vim.keymap.set("n", "<leader>fD", function()
+        builtin.find_files {
+          cwd = vim.fn.expand('%:p:h'),
+          find_command = { "fd", "-t=d" }
+        }
+      end, { desc = "Find directory (current buff path)" })
+
       vim.keymap.set("n", "<leader>sA", function()
         builtin.find_files { cwd = vim.fn.expand('%:p:h'), no_ignore = true }
       end, { desc = "Search All Files (current buff path)" })
