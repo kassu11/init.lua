@@ -86,10 +86,19 @@ return {
       vim.keymap.set("n", "<leader>sy", builtin.lsp_document_symbols, { desc = "Search document symbols" })
       vim.keymap.set("n", "<leader>sY", builtin.lsp_workspace_symbols, { desc = "Search workspace symbols" })
       vim.keymap.set("n", "<leader>st", function() builtin.grep_string { glob_pattern = { "*.scss", "*.css" } } end, { desc = "Search grep inside css files" })
-      vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "Search current Word" })
-      vim.keymap.set("n", "<leader>sW", builtin.grep_string, { search_dirs = { vim.fn.expand("%:p") }, desc = "Search current Word" })
+
+      vim.keymap.set("n", "<leader>sw", function()
+        builtin.grep_string { search = vim.fn.input("Grep > ")}
+      end, { desc = "Search current Word" });
+      vim.keymap.set("n", "<leader>sW", function()
+        builtin.grep_string { search = vim.fn.input("Grep > "), search_dirs = { vim.fn.expand("%:p") } }
+      end, { desc = "Search current Word" });
+
       vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "Search by Grep" })
-      vim.keymap.set("n", "<leader>sG", function() builtin.live_grep { search_dirs = { vim.fn.expand("%:p") } } end, { desc = "Search by Grep" })
+      vim.keymap.set("n", "<leader>sG", function()
+        builtin.live_grep { search_dirs = { vim.fn.expand("%:p") } }
+      end, { desc = "Search by Grep" })
+
       vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "Search Diagnostics" })
       vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "Search Resume" })
       vim.keymap.set("n", "<leader>s.", builtin.oldfiles, { desc = "Search Recent Files (\".\" for repeat)" })
