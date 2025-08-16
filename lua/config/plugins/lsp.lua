@@ -81,7 +81,7 @@ return {
 
               vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "v", false)
             end, { desc = "Format selection" })
-            vim.keymap.set("n", "<leader>f", "V<leader>f", { remap = true, desc = "Format selection" })
+            vim.keymap.set("n", "<leader>ff", "V<leader>f", { remap = true, desc = "Format selection" })
 
             vim.keymap.set("n", "<leader><leader>f", function()
               vim.lsp.buf.format { bufnr = args.buf, id = client.id, }
