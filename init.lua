@@ -63,12 +63,6 @@ vim.keymap.set("n", "<leader><leader>q", ":set nowrap!<CR>", { desc = "Toggle wr
 vim.keymap.set("n", "<M-e>", vim.diagnostic.open_float, { desc = "Show diagnostic Error messages" })
 vim.keymap.set("n", "€", vim.diagnostic.open_float, { desc = "Show diagnostic Error messages" })
 -- vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic Quickfix list" })
-vim.keymap.set("v", "(", "S(", { remap = true, desc = "Surround selection ( text )" });
-vim.keymap.set("v", ")", "S)", { remap = true, desc = "Surround selection (text)" });
-vim.keymap.set("v", "[", "S[", { remap = true, desc = "Surround selection [ text ]" });
-vim.keymap.set("v", "]", "S]", { remap = true, desc = "Surround selection [text]" });
-vim.keymap.set("v", "{", "S{", { remap = true, desc = "Surround selection { text }" });
-vim.keymap.set("v", "}", "S}", { remap = true, desc = "Surround selection {text}" });
 
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
@@ -87,9 +81,8 @@ vim.keymap.set("n", "<leader>bo", ":%bd|e#<CR>")
 vim.keymap.set("n", "ö", ":cprev<CR>zz")
 vim.keymap.set("n", "ä", ":cnext<CR>zz")
 
-vim.keymap.set("i", "<C-v>", "<C-o>:set paste<CR><C-r>+<C-o>:set nopaste<CR>", { desc = "Windows clipboard paste" })
-vim.keymap.set("c", "<C-v>", "<C-r>+", { desc = "Windows clipboard paste" })
-vim.keymap.set("i", "<C-g>", "<C-o>:set paste<CR><C-r>\"<C-o>:set nopaste<CR>", { desc = "Paste yank" })
+vim.keymap.set({ "i", "c" }, "<C-v>", "<C-r>+", { desc = "Windows clipboard paste" })
+vim.keymap.set({ "i", "c" }, "<C-g>", "<C-r>\"", { desc = "Paste yank" })
 -- vim.keymap.set("i", "<C-b>", "<C-o>\"_de", { desc = "Delete word forward" })
 -- vim.keymap.set("i", "<C-l>", "<Del>", { desc = "Delete forward" })
 -- vim.keymap.set("i", "<M-l>", "<right>", { desc = "Move caret right" })
