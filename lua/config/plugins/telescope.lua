@@ -87,12 +87,12 @@ return {
       vim.keymap.set("n", "<leader>sY", builtin.lsp_workspace_symbols, { desc = "Search workspace symbols" })
       vim.keymap.set("n", "<leader>st", function() builtin.grep_string { glob_pattern = { "*.scss", "*.css" } } end, { desc = "Search grep inside css files" })
 
-      vim.keymap.set("n", "<leader>sw", function()
+      vim.keymap.set("n", "<leader>fw", function()
         builtin.grep_string { search = vim.fn.input("Grep > ")}
-      end, { desc = "Search current Word" });
-      vim.keymap.set("n", "<leader>sW", function()
+      end, { desc = "Find Word" });
+      vim.keymap.set("n", "<leader>fW", function()
         builtin.grep_string { search = vim.fn.input("Grep > "), search_dirs = { vim.fn.expand("%:p") } }
-      end, { desc = "Search current Word" });
+      end, { desc = "Find Word" });
 
       vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "Search by Grep" })
       vim.keymap.set("n", "<leader>sG", function()
