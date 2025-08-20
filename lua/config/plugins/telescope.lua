@@ -88,10 +88,16 @@ return {
       vim.keymap.set("n", "<leader>st", function() builtin.grep_string { glob_pattern = { "*.scss", "*.css" } } end, { desc = "Search grep inside css files" })
 
       vim.keymap.set("n", "<leader>fw", function()
-        builtin.grep_string { search = vim.fn.input("Grep > ")}
+        local input = vim.fn.input("Grep > ")
+        if #input > 0 then
+          builtin.grep_string { search = input }
+        end
       end, { desc = "Find Word" });
       vim.keymap.set("n", "<leader>fW", function()
-        builtin.grep_string { search = vim.fn.input("Grep > "), search_dirs = { vim.fn.expand("%:p") } }
+        local input = vim.fn.input("Grep > ")
+        if #input > 0 then
+          builtin.grep_string { search = input, search_dirs = { vim.fn.expand("%:p") } }
+        end
       end, { desc = "Find Word" });
 
       vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "Search by Grep" })
