@@ -75,11 +75,11 @@ vim.keymap.set("n", "n", "nzz")
 vim.keymap.set("n", "<S-n>", "Nzz")
 vim.keymap.set("n", "<C-e>", "7<C-e>")
 vim.keymap.set("n", "<C-y>", "7<C-y>")
-vim.keymap.set("n", "<leader>.", "`.")
-vim.keymap.set("n", "<leader>bo", ":%bd|e#<CR>")
+vim.keymap.set("n", "<leader>.", "`.", { desc = "Jump to where last edited" })
+vim.keymap.set("n", "<leader>bo", ":%bd|e#<CR>", { desc = "Close saved buffers" });
 
-vim.keymap.set("n", "ö", ":cprev<CR>zz")
-vim.keymap.set("n", "ä", ":cnext<CR>zz")
+vim.keymap.set("n", "ö", ":cprev<CR>zz", { desc = "Previous quick fix list" })
+vim.keymap.set("n", "ä", ":cnext<CR>zz", { desc = "Next quick fix list" })
 
 vim.keymap.set({ "i", "c" }, "<C-v>", "<C-r>+", { desc = "Windows clipboard paste" })
 vim.keymap.set({ "i", "c" }, "<C-g>", "<C-r>\"", { desc = "Paste yank" })
