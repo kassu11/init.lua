@@ -1,4 +1,4 @@
-local show_popup = false
+local show_popup = true
 
 vim.keymap.set("n", "<leader>å", function() show_popup = not show_popup end, { desc = "Disable auto autocomplete pupup" })
 
