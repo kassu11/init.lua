@@ -81,6 +81,9 @@ vim.keymap.set("n", "<leader>bo", ":%bd|e#<CR>", { desc = "Close saved buffers" 
 vim.keymap.set("n", "ö", ":cprev<CR>zz", { desc = "Previous quick fix list" })
 vim.keymap.set("n", "ä", ":cnext<CR>zz", { desc = "Next quick fix list" })
 
+vim.keymap.set({ "i", "c" }, "<C-d>", "<Del>", { desc = "Delete character under cursor" })
+vim.keymap.set("n", "c_", "c^", { desc = "Delete and insert to line start" })
+vim.keymap.set("n", "d_", "d^", { desc = "Delete to line start" })
 vim.keymap.set({ "i", "c" }, "<C-v>", "<C-r>+", { desc = "Windows clipboard paste" })
 vim.keymap.set({ "i", "c" }, "<C-g>", "<C-r>\"", { desc = "Paste yank" })
 -- vim.keymap.set("i", "<C-b>", "<C-o>\"_de", { desc = "Delete word forward" })
