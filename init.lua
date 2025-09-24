@@ -27,7 +27,7 @@ vim.opt.splitbelow = false
 -- vim.opt.timeoutlen = 400
 
 vim.opt.list = true
-vim.opt.listchars = { trail = "·" }
+vim.opt.listchars = { tab = "» ", trail = "·" }
 
 -- Preview substitutions live, as you type!
 vim.opt.inccommand = "split"
