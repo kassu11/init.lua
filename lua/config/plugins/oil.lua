@@ -76,6 +76,19 @@ return {
             nowait = true,
             desc = "Find directory in the current location"
           },
+          ["<leader>fw"] = {
+            function()
+              local input = vim.fn.input("Grep > ")
+              if #input > 0 then
+                require("telescope.builtin").grep_string {
+                  cwd = oil.get_current_dir(),
+                  search = input
+                }
+              end
+            end,
+            nowait = true,
+            desc = "Find directory in the current location"
+          },
           ["<leader>sf"] = {
             function()
               require("telescope.builtin").find_files({
