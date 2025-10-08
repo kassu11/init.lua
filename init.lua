@@ -81,6 +81,9 @@ vim.keymap.set("n", "<leader>bo", ":%bd|e#<CR>", { desc = "Close saved buffers" 
 vim.keymap.set("n", "ö", ":cprev<CR>zz", { desc = "Previous quick fix list" })
 vim.keymap.set("n", "ä", ":cnext<CR>zz", { desc = "Next quick fix list" })
 
+vim.keymap.set("n", "<S-C-D>", "]czz", { desc = "Jump to next diff" })
+vim.keymap.set("n", "<S-C-U>", "[czz", { desc = "Jump to previous diff" })
+
 vim.keymap.set({ "i", "c" }, "<C-d>", "<Del>", { desc = "Delete character under cursor" })
 vim.keymap.set("n", "c_", "c^", { desc = "Delete and insert to line start" })
 vim.keymap.set("n", "d_", "d^", { desc = "Delete to line start" })
