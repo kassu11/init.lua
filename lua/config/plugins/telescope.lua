@@ -12,12 +12,14 @@ return {
       { "nvim-tree/nvim-web-devicons",              enabled = vim.g.have_nerd_font },
     },
     config = function()
+      local actions = require('telescope.actions')
       require("telescope").setup({
         defaults = {
           mappings = {
             i = {
-              ["<C-j>"] = require('telescope.actions').cycle_history_next,
-              ["<C-k>"] = require('telescope.actions').cycle_history_prev,
+              ["<C-j>"] = actions.cycle_history_next,
+              ["<C-k>"] = actions.cycle_history_prev,
+              ["<CR>"] = actions.select_default + actions.center,
             },
           },
           -- prompt_prefix = " ",
