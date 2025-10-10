@@ -12,7 +12,7 @@ return {
         matchup = {
           enable = true, -- Enable Treesitter-based % functionality
         },
-        ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline", "zig", "jsdoc", "html" },
+        ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline", "zig", "jsdoc", "html", "css" },
         auto_install = false,
         indent = {
           enable = true,
