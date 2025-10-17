@@ -79,6 +79,7 @@ vim.keymap.set("n", "<C-e>", "7<C-e>")
 vim.keymap.set("n", "<C-y>", "7<C-y>")
 vim.keymap.set("n", "<leader>.", "`.", { desc = "Jump to where last edited" })
 vim.keymap.set("n", "<leader>bo", ":%bd|e#<CR>", { desc = "Close saved buffers" });
+vim.keymap.set("n", "<tab>", ":b#<CR>", { desc = "Jump to previous buffer" });
 
 vim.keymap.set("n", "ö", ":cprev<CR>zz", { desc = "Previous quick fix list" })
 vim.keymap.set("n", "ä", ":cnext<CR>zz", { desc = "Next quick fix list" })
