@@ -52,8 +52,10 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 -- vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "Clean search" })
 vim.keymap.set({ "n", "x" }, "<leader>w", "\"+", { desc = "Clipboard registry" })
 vim.keymap.set({ "n", "x" }, "<leader>d", "\"_d", { desc = "Delete to void registry" })
+vim.keymap.set({ "n", "x" }, "<leader>c", "\"_c", { desc = "Insert delete to void registry" })
 vim.keymap.set("n", "<leader>D", "\"_D", { desc = "Delete to void registry" })
 vim.keymap.set("x", "<leader>p", "\"_dP", { desc = "Paste and delete to void registry" });
+vim.keymap.set("x", "<leader>c", "\"_dc", { desc = "Insert delete to void registry" });
 
 vim.keymap.set("n", "<leader><leader>x", "<cmd>source %<CR>", { desc = "Source full file" });
 vim.keymap.set("n", "<leader>x", ":.lua<CR>", { desc = "Source current line" });
