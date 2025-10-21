@@ -20,6 +20,15 @@ return {
             return lang == "jsdoc"
           end,
         },
+        incremental_selection = {
+          enable = true,
+          keymaps = {
+            init_selection = "<M-l>",
+            node_incremental = "<M-l>",
+            scope_incremental = "<M-S-l>",
+            node_decremental = "<M-h>",
+          },
+        },
         highlight = {
           enable = true,
           disable = function(lang, buf)
