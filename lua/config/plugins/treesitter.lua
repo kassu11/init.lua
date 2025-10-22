@@ -25,7 +25,6 @@ return {
           keymaps = {
             init_selection = "<M-l>",
             node_incremental = "<M-l>",
-            scope_incremental = "<M-S-l>",
             node_decremental = "<M-h>",
           },
         },
