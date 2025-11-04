@@ -8,6 +8,8 @@ vim.g.have_nerd_font = true
 vim.opt.mouse = "a"
 vim.opt.expandtab = true
 vim.opt.shiftwidth = 2
+vim.opt.tabstop = 2
+vim.opt.showtabline = 0
 vim.opt.shadafile = "NONE"
 
 vim.opt.number = true
