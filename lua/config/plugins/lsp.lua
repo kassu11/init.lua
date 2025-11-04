@@ -21,11 +21,12 @@ return {
       require 'lspconfig'.ts_ls.setup { capabilities = capabilities }
       -- require 'lspconfig'.biome.setup { capabilities = capabilities }
       require 'lspconfig'.html.setup { capabilities = capabilities }
-      require 'lspconfig'.tailwindcss.setup { capabilities = capabilities }
+      -- require 'lspconfig'.tailwindcss.setup { capabilities = capabilities }
       require 'lspconfig'.css_variables.setup { capabilities = capabilities }
       require 'lspconfig'.jsonls.setup { capabilities = capabilities }
       require 'lspconfig'.cssls.setup { capabilities = capabilities }
-      require 'lspconfig'.cssmodules_ls.setup { capabilities = capabilities }
+      require 'lspconfig'.ruby_lsp.setup { capabilities = capabilities }
+      -- require 'lspconfig'.cssmodules_ls.setup { capabilities = capabilities }
       require 'lspconfig'.emmet_ls.setup { capabilities = capabilities }
       require 'lspconfig'.emmet_language_server.setup { capabilities = capabilities }
 
