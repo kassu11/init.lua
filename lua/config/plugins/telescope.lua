@@ -55,9 +55,14 @@ return {
       vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "Search Help" })
       vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "Search Keymaps" })
 
-      vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "Search Files" })
+      vim.keymap.set("n", "<leader>sf", function()
+        builtin.find_files { find_command = { "rg", "--files", "--sort", "path" }, }
+      end, { desc = "Search Files" })
       vim.keymap.set("n", "<leader>sF", function()
-        builtin.find_files { cwd = vim.fn.expand('%:p:h') }
+        builtin.find_files {
+          find_command = { "rg", "--files", "--sort", "path" },
+          cwd = vim.fn.expand('%:p:h'),
+        }
       end, { desc = "Search Files (current buff path)" })
 
       vim.keymap.set("n", "<leader>fd", function()
