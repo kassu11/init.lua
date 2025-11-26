@@ -12,6 +12,10 @@ return {
         columns = {
           "icon",
         },
+        lsp_file_methods = {
+          timeout_ms = 1000,
+          autosave_changes = "unmodified",
+        },
         view_options = {
           case_insensitive = true,
           show_hidden = true,
