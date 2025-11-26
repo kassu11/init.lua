@@ -48,6 +48,7 @@ return {
 
       set("v", "<leader>ms", mc.splitCursors, { desc = "Split multicursor" })
       set("v", "<leader>mm", mc.matchCursors, { desc = "Match multicursor" })
+      set("v", "<M-s>", function() mc.matchCursors("$") end, { desc = "Split selection into lines" })
 
       set("v", "<leader>mt", count(function() mc.transposeCursors(1) end), { desc = "Transpose multicursor forward" })
       set("v", "<leader>mT", count(function() mc.transposeCursors(-1) end), { desc = "Transpose multicursor backward" })
