@@ -1,6 +1,7 @@
 return {
   {
     "https://github.com/github/copilot.vim",
+    enabled = false,
     config = function()
       local toggle_copilot = function()
         if vim.g.copilot_enabled ~= 0 then
