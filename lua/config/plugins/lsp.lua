@@ -90,6 +90,13 @@ return {
               vim.lsp.buf.format { bufnr = args.buf, id = client.id, }
               print("File formated")
             end, { desc = "Format current buffer" })
+
+            vim.api.nvim_create_autocmd("BufWritePre", {
+              buffer = args.buf,
+              callback = function()
+                vim.lsp.buf.format { bufnr = args.buf, id = client.id, }
+              end,
+            });
           end
         end,
       })
