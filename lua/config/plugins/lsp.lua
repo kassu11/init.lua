@@ -14,6 +14,11 @@ return {
       },
     },
     config = function()
+      local format_on_save = {
+        lua_ls = true,
+        zls = true,
+      }
+
       local capabilities = require('blink.cmp').get_lsp_capabilities();
       require "lspconfig".lua_ls.setup { capabilities = capabilities }
       require "lspconfig".zls.setup { capabilities = capabilities }
@@ -91,12 +96,14 @@ return {
               print("File formated")
             end, { desc = "Format current buffer" })
 
-            vim.api.nvim_create_autocmd("BufWritePre", {
-              buffer = args.buf,
-              callback = function()
-                vim.lsp.buf.format { bufnr = args.buf, id = client.id, }
-              end,
-            });
+            if format_on_save[client.name] then
+              vim.api.nvim_create_autocmd("BufWritePre", {
+                buffer = args.buf,
+                callback = function()
+                  vim.lsp.buf.format { bufnr = args.buf, id = client.id }
+                end,
+              })
+            end
           end
         end,
       })
