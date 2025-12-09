@@ -151,6 +151,9 @@ vim.api.nvim_set_hl(0, "Search", { bg = "#86af61", fg = "#000000" })
 vim.api.nvim_set_hl(0, "CurSearch", { bg = "#fe5f60", fg = "#000000" })
 vim.api.nvim_set_hl(0, "IncSearch", { bg = "#fe5f60", fg = "#000000" })
 
+vim.api.nvim_set_hl(0, "FlashLabel", { fg = "#fe5f60" })
+vim.api.nvim_set_hl(0, "FlashMatch", { fg = "#fe5f60" })
+
 vim.api.nvim_set_hl(0, "MultiCursorCursor", { bg = "#97ca72", fg = "#000000" })
 vim.api.nvim_set_hl(0, "MultiCursorVisual", { bg = "#0398fc", fg = "#000000" })
 vim.api.nvim_set_hl(0, "MultiCursorDisabledCursor", { bg = "#97ca72", fg = "#000000" })
