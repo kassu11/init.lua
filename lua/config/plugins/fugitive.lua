@@ -2,6 +2,7 @@ return {
   {
     "tpope/vim-fugitive",
     config = function()
+      vim.keymap.set("n", "gb", ":Git blame -w --date=format:\"%Y-%m-%d %H:%M\" <CR>", { desc = ":Git diff" })
       vim.keymap.set("n", "<leader>gd", ":Gdiffsplit!<CR>", { desc = ":Git diff" })
       vim.keymap.set("n", "<leader>gl", ":0Gclog<CR>", { desc = ":0Gclog" })
       vim.keymap.set("n", "<leader>gL", ":Gclog<CR>", { desc = ":Gclog" })
@@ -49,7 +50,8 @@ return {
       end, { desc = "Git open pull request" })
 
       vim.keymap.set("n", "<leader>grr", function()
-        local branches = vim.api.nvim_exec2("!git -C \"%:h\" branch -r | grep -v 'HEAD' | grep -v 'main'", { output = true })
+        local branches = vim.api.nvim_exec2("!git -C \"%:h\" branch -r | grep -v 'HEAD' | grep -v 'main'",
+          { output = true })
         if branches.output == nil then
           return print("No remote branch detected")
         else
