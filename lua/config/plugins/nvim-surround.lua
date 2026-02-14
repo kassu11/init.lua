@@ -8,7 +8,7 @@ return {
         keymaps = {
           insert = false,
           insert_line = false,
-          visual = "s",
+          visual = "S",
           visual_line = "gs",
         },
       })
