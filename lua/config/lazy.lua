@@ -21,7 +21,8 @@ require("lazy").setup({
   spec = {
     { import = "config.plugins" },
 
-    { "https://github.com/vague-theme/vague.nvim", config = function() require "vague".setup { italic = false } end },
-    { "https://github.com/kylechui/nvim-surround" }
+    { "vague-theme/vague.nvim", config = function() require "vague".setup { italic = false } end },
+    { "kylechui/nvim-surround" },
+    { "mason-org/mason.nvim",   config = function() require "mason".setup {} end },
   },
 })
