@@ -1,5 +1,6 @@
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
+vim.opt.showtabline = 0
 vim.opt.expandtab = true
 vim.opt.signcolumn = "yes:1"
 vim.opt.winborder = "rounded"
