@@ -6,6 +6,13 @@ return {
     appearance = {
       nerd_font_variant = "mono"
     },
+    cmdline = {
+      completion = {
+        menu = {
+          auto_show = false
+        }
+      },
+    },
     completion = {
       documentation = {
         auto_show = false
