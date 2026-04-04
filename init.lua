@@ -66,8 +66,8 @@ vim.keymap.set("n", "<leader>E", function()
   vim.cmd("silent !start explorer /select," .. path)
 end, { desc = "Open current buff directory" })
 
-
-
+vim.keymap.set("n", "<leader><leader>n", ":set rnu!<CR>")
+vim.keymap.set("n", "<leader><leader>q", ":set wrap!<CR>")
 
 vim.keymap.set("n", "<left>", "<cmd>echo \"Use h to move!!\"<CR>")
 vim.keymap.set("n", "<right>", "<cmd>echo \"Use l to move!!\"<CR>")
