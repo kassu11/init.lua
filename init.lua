@@ -48,12 +48,12 @@ vim.keymap.set({ "n", "x" }, "<leader>c", "\"_c", { desc = "Insert delete to voi
 
 vim.keymap.set("n", "<leader>o", function()
   local path = vim.fn.getcwd();
-  vim.cmd("silent !start /I cmd /K \"cd /d " .. path .. "\"")
+  vim.cmd("silent !start wt -d " .. path .. "\"")
 end, { desc = "Open cmd to cwd" })
 
 vim.keymap.set("n", "<leader>O", function()
   local path = vim.fn.expand('%:p:h')
-  vim.cmd("silent !start /I cmd /K \"cd /d " .. path .. "\"")
+  vim.cmd("silent !start wt -d " .. path .. "\"")
 end, { desc = "Open cmd to buff path" })
 
 vim.keymap.set("n", "<leader>e", function()
