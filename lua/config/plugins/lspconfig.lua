@@ -1,7 +1,7 @@
 return {
   "neovim/nvim-lspconfig",
   config = function()
-    vim.lsp.enable { "lua_ls", "clangd", "ts_ls" }
+    vim.lsp.enable { "lua_ls", "clangd", "ts_ls", "cssls", "css_variables" }
 
     vim.lsp.config("lua_ls", {
       settings = {
