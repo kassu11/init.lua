@@ -86,4 +86,3 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 vim.cmd "language en_US"
 
 vim.cmd "colorscheme vague"
-vim.cmd ":hi statusline guibg=NONE"
