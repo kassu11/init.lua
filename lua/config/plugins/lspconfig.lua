@@ -1,7 +1,7 @@
 return {
   "neovim/nvim-lspconfig",
   config = function()
-    vim.lsp.enable { "lua_ls", "clangd", "ts_ls", "cssls", "css_variables" }
+    vim.lsp.enable { "lua_ls", "clangd", "ts_ls", "cssls", "css_variables", "emmet_ls" }
 
     vim.lsp.config("lua_ls", {
       settings = {
@@ -14,6 +14,10 @@ return {
     })
 
     vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format, { desc = "Format file" })
+    -- Format visual selection
+    vim.keymap.set("v", "<leader>lf", function()
+      vim.lsp.buf.format({ range = true })
+    end, { desc = "LSP format range" })
 
     vim.keymap.set("n", "grd", vim.lsp.buf.declaration, { desc = "Goto Declaration" })
 
