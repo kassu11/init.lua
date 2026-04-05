@@ -1,6 +1,6 @@
 {
   "blink.cmp": { "branch": "main", "commit": "451168851e8e2466bc97ee3e026c3dcb9141ce07" },
-  "harpoon": { "branch": "harpoon2", "commit": "87b1a3506211538f460786c23f98ec63ad9af4e5" },
+  "harpoon": { "branch": "harpoon2", "commit": "e76cb03c420bb74a5900a5b3e1dde776156af45f" },
   "lazy.nvim": { "branch": "main", "commit": "306a05526ada86a7b30af95c5cc81ffba93fef97" },
   "mason.nvim": { "branch": "main", "commit": "44d1e90e1f66e077268191e3ee9d2ac97cc18e65" },
   "mini.extra": { "branch": "main", "commit": "ca1932c95c6e757c06d2cc133b87835a01d909dd" },
