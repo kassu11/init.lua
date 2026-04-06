@@ -14,7 +14,12 @@ return {
         -- Enable treesitter highlighting and disable regex syntax
         pcall(vim.treesitter.start)
         -- Enable treesitter-based indentation
-        vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+        -- vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+
+        vim.opt.smartindent = false   -- Disable smartindent
+        vim.opt.cindent = false       -- Disable C-style indenting
+        vim.opt.indentexpr = ""       -- Disable filetype-specific indent scripts
+        vim.opt.autoindent = true     -- Enable basic auto-indent (copy previous line)
       end,
     })
   end,
