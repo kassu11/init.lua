@@ -83,6 +83,27 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   end,
 })
 
+if vim.g.neovide then
+  vim.g.neovide_hide_mouse_when_typing = true;
+  vim.g.neovide_scroll_animation_length = 0
+  vim.g.neovide_position_animation_length = 0
+
+  vim.g.neovide_touch_drag_timeout = 0
+  vim.g.neovide_cursor_animation_length = 0
+  vim.g.neovide_cursor_trail_size = 0
+  -- vim.g.neovide_title_background_color = "#0b0b0b"
+  -- vim.g.neovide_title_text_color = "#FFFFFF"
+
+  vim.keymap.set({ "n", "x", "i" }, "<F11>", function() vim.g.neovide_fullscreen = not vim.g.neovide_fullscreen end,
+    { desc = "Enter fullscreen" })
+  vim.keymap.set("n", "<C-0>",
+    ":lua vim.g.neovide_scale_factor = 1<CR>", { silent = true })
+  vim.keymap.set("n", "<C-->",
+    ":lua vim.g.neovide_scale_factor = math.max(vim.g.neovide_scale_factor - 0.1,  0.1)<CR>", { silent = true })
+  vim.keymap.set("n", "<C-+>",
+    ":lua vim.g.neovide_scale_factor = math.min(vim.g.neovide_scale_factor + 0.1,  5)<CR>", { silent = true })
+end
+
 vim.cmd "language en_US"
 
 vim.cmd "colorscheme vague"
