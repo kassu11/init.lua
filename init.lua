@@ -60,12 +60,12 @@ end, { desc = "Open cmd to buff path" })
 
 vim.keymap.set("n", "<leader>e", function()
   local path = vim.fn.getcwd();
-  vim.cmd("silent !start explorer " .. path)
+  vim.cmd("silent !start explorer \"" .. path .. "\"")
 end, { desc = "Open working directory" })
 
 vim.keymap.set("n", "<leader>E", function()
   local path = vim.fn.expand('%:p')
-  vim.cmd("silent !start explorer /select," .. path)
+  vim.cmd("silent !start explorer /select, \"" .. path .. "\"")
 end, { desc = "Open current buff directory" })
 
 vim.keymap.set("n", "<leader><leader>n", ":set rnu!<CR>")

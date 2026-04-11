@@ -33,9 +33,9 @@ return {
             local entry = oil.get_cursor_entry();
 
             if entry ~= nil and entry.name ~= nil then
-              vim.cmd("silent !start explorer /select," .. path .. "\"" .. entry.name)
+              vim.cmd("silent !start explorer /select, \"" .. path .. entry.name .. "\"")
             else
-              vim.cmd("silent !start explorer " .. path)
+              vim.cmd("silent !start explorer \"" .. path .. "\"")
             end
           end,
           desc = "Open current buff directory"
