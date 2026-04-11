@@ -15,6 +15,7 @@ vim.opt.smartcase = true
 vim.opt.hlsearch = true
 vim.opt.list = true
 vim.opt.splitright = true
+vim.opt.termguicolors = true
 vim.opt.listchars = { tab = "» ", trail = "·" }
 
 require("config.lazy")
