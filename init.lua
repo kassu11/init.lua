@@ -17,6 +17,8 @@ vim.opt.list = true
 vim.opt.splitright = true
 vim.opt.termguicolors = true
 vim.opt.listchars = { tab = "» ", trail = "·" }
+vim.opt.scrolloff = 3;
+vim.opt.sidescrolloff = 10;
 
 require("config.lazy")
 
