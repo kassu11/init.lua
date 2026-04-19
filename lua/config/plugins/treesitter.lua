@@ -1,45 +1,26 @@
 return {
-  {
-    "nvim-treesitter/nvim-treesitter",
-    build = ":TSUpdate",
-    config = function()
-      local install = require("nvim-treesitter.install");
-      install.prefer_git = false
-      install.compilers = { "zig", vim.fn.getenv('CC'), "cc", "gcc", "clang", "cl" }
+  "nvim-treesitter/nvim-treesitter",
+  lazy = false,
+  build = ":TSUpdate",
+  config = function()
+    require "nvim-treesitter".setup {
+      install_dir = vim.fn.stdpath("data") .. "/site"
+    }
 
-      ---@diagnostic disable-next-line: missing-fields
-      require 'nvim-treesitter.configs'.setup {
-        matchup = {
-          enable = true, -- Enable Treesitter-based % functionality
-        },
-        ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline", "zig", "jsdoc", "html", "css", "javascript", "typescript", "tsx" },
-        auto_install = false,
-        indent = {
-          enable = true,
-          disable = function(lang, buf)
-            return lang == "jsdoc"
-          end,
-        },
-        incremental_selection = {
-          enable = true,
-          keymaps = {
-            init_selection = "<M-l>",
-            node_incremental = "<M-l>",
-            node_decremental = "<M-h>",
-          },
-        },
-        highlight = {
-          enable = true,
-          disable = function(lang, buf)
-            local max_filesize = 101 * 1024 -- 100 KB
-            local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
-            if ok and stats and stats.size > max_filesize then
-              return true
-            end
-          end,
-          additional_vim_regex_highlighting = false,
-        },
-      }
-    end,
-  }
+    require "nvim-treesitter".install { "rust", "zig", "c", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline", "jsdoc", "html", "css", "javascript", "typescript", "tsx" }
+
+    vim.api.nvim_create_autocmd("FileType", {
+      callback = function()
+        -- Enable treesitter highlighting and disable regex syntax
+        pcall(vim.treesitter.start)
+        -- Enable treesitter-based indentation
+        -- vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+
+        vim.opt.smartindent = false   -- Disable smartindent
+        vim.opt.cindent = false       -- Disable C-style indenting
+        vim.opt.indentexpr = ""       -- Disable filetype-specific indent scripts
+        vim.opt.autoindent = true     -- Enable basic auto-indent (copy previous line)
+      end,
+    })
+  end,
 }
