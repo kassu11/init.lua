@@ -54,6 +54,7 @@ return {
 
       vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "Search Help" })
       vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "Search Keymaps" })
+      vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "Search Files" })
 
       vim.keymap.set("n", "gd", require("telescope.builtin").lsp_definitions, { desc = "Goto Definition" })
       vim.keymap.set("n", "grr", require("telescope.builtin").lsp_references, { desc = "Goto References" })
