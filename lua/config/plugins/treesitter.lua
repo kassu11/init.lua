@@ -18,7 +18,7 @@ return {
 
         vim.opt.smartindent = false   -- Disable smartindent
         vim.opt.cindent = false       -- Disable C-style indenting
-        vim.opt.indentexpr = ""       -- Disable filetype-specific indent scripts
+        -- vim.opt.indentexpr = ""       -- Disable filetype-specific indent scripts
         vim.opt.autoindent = true     -- Enable basic auto-indent (copy previous line)
       end,
     })
