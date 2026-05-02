@@ -19,6 +19,7 @@ vim.opt.termguicolors = true
 vim.opt.listchars = { tab = "» ", trail = "·" }
 vim.opt.scrolloff = 3;
 vim.opt.sidescrolloff = 10;
+-- vim.opt.shell = "bash"
 
 require("config.lazy")
 
@@ -27,8 +28,9 @@ vim.keymap.set({ "n", "x" }, "<leader>w", "\"+", { desc = "Global registry" })
 
 vim.keymap.set("n", "<C-L>", "_v$h", { desc = "Select line" });
 vim.keymap.set("v", "<C-L>", "o_oj$h", { desc = "Expand line selection" });
-vim.keymap.set("n", "<leader>r", ":%s/\\<<C-r><C-w>\\>//g<Left><Left>", { desc = "Search and replace" })
-vim.keymap.set("x", "<leader>r", "y:%s/\\V<C-r>\"//g<Left><Left>", { desc = "Search and replace" })
+
+vim.keymap.set("x", "grn", "\"ay:%s/\\V<C-r>a//g<Left><Left>", { desc = "Search and replace" })
+vim.keymap.set("x", ".", ":norm .<CR>", { desc = "Run repeat on selected lines" })
 
 vim.keymap.set("n", "gp", function() vim.cmd "normal! `[v`]" end, { silent = true, desc = "Select pasted" })
 
