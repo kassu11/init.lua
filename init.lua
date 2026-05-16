@@ -42,7 +42,8 @@ vim.keymap.set("n", "d_", "d^", { desc = "Delete to line start" })
 
 vim.keymap.set("n", "<leader>.", "`.", { desc = "Jump to where last edited" })
 vim.keymap.set("n", "<leader>bo", ":%bd|e#<CR>", { desc = "Close saved buffers" });
-vim.keymap.set("n", "<leader>t", function()
+vim.keymap.set("n", "<leader><Tab>", "<C-^>", { desc = "Jump to previous buffer" });
+vim.keymap.set("n", "<leader><S-Tab>", function()
   vim.cmd 'windo execute "normal! \\<C-^>"'
 end, { desc = "Jump to previous buffer on all windows" });
 
