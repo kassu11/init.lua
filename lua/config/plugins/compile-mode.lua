@@ -17,6 +17,7 @@ return {
       default_command = {
         c = "gcc main.c",
       },
+      focus_compilation_buffer = true,
     }
 
     vim.keymap.set("n", "<leader>r", ":below Compile<CR>", { desc = "Start compile mode" })
