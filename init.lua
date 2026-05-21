@@ -53,6 +53,11 @@ vim.keymap.set("n", "ä", ":cnext<CR>zz", { desc = "Next quick fix list" })
 vim.keymap.set({ "n", "x" }, "<leader>d", "\"_d", { desc = "Delete to void registry" })
 vim.keymap.set({ "n", "x" }, "<leader>c", "\"_c", { desc = "Insert delete to void registry" })
 
+vim.keymap.set("x", ">", function() vim.cmd("normal! >gv") end, { desc = "Indent and keep selection" })
+vim.keymap.set("x", "<", function() vim.cmd("normal! <gv") end, { desc = "Deindent and keep selection" })
+vim.keymap.set("x", "<C-a>", "<C-a>gv", { silent = true, desc = "Add and keep selection" })
+vim.keymap.set("x", "<C-x>", "<C-x>gv", { silent = true, desc = "Subtrack and keep selection" })
+
 vim.keymap.set("n", "<leader>o", function()
   local path = vim.fn.getcwd();
   vim.cmd("silent !start wt -d \"" .. path .. "\"")
