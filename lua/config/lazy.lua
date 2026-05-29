@@ -23,6 +23,7 @@ require("lazy").setup({
 
     { "vague-theme/vague.nvim", config = function() require "vague".setup { italic = false } end },
     { "kylechui/nvim-surround" },
+    { "tpope/vim-abolish" },
     { "mason-org/mason.nvim",   config = function() require "mason".setup {} end },
   },
 })
