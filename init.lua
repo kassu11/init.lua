@@ -19,7 +19,6 @@ vim.opt.termguicolors = true
 vim.opt.listchars = { tab = "» ", trail = "·" }
 vim.opt.scrolloff = 3;
 vim.opt.sidescrolloff = 10;
--- vim.opt.shell = "bash"
 
 require("config.lazy")
 
@@ -49,6 +48,12 @@ end, { desc = "Jump to previous buffer on all windows" });
 
 vim.keymap.set("n", "ö", ":cprev<CR>zz", { desc = "Previous quick fix list" })
 vim.keymap.set("n", "ä", ":cnext<CR>zz", { desc = "Next quick fix list" })
+
+vim.keymap.set("n", "*", "*zz", { desc = "Center after *" })
+vim.keymap.set("n", "#", "#zz", { desc = "Center after #" })
+
+vim.keymap.set("n", "n", "nzz", { desc = "Center after n" })
+vim.keymap.set("n", "N", "Nzz", { desc = "Center after N" })
 
 vim.keymap.set({ "n", "x" }, "<leader>d", "\"_d", { desc = "Delete to void registry" })
 vim.keymap.set({ "n", "x" }, "<leader>c", "\"_c", { desc = "Insert delete to void registry" })
