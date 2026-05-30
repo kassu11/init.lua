@@ -57,6 +57,8 @@ vim.keymap.set("n", "N", "Nzz", { desc = "Center after N" })
 
 vim.keymap.set({ "n", "x" }, "<leader>d", "\"_d", { desc = "Delete to void registry" })
 vim.keymap.set({ "n", "x" }, "<leader>c", "\"_c", { desc = "Insert delete to void registry" })
+vim.keymap.set("x", "D", "\"_d", { desc = "Delete to void registry" })
+vim.keymap.set("x", "C", "\"_c", { desc = "Insert delete to void registry" })
 
 vim.keymap.set("x", ">", function() vim.cmd("normal! >gv") end, { desc = "Indent and keep selection" })
 vim.keymap.set("x", "<", function() vim.cmd("normal! <gv") end, { desc = "Deindent and keep selection" })
