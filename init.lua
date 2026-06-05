@@ -109,8 +109,6 @@ if vim.g.neovide then
   vim.g.neovide_touch_drag_timeout = 0
   vim.g.neovide_cursor_animation_length = 0
   vim.g.neovide_cursor_trail_size = 0
-  -- vim.g.neovide_title_background_color = "#0b0b0b"
-  -- vim.g.neovide_title_text_color = "#FFFFFF"
 
   vim.keymap.set({ "n", "x", "i" }, "<F11>", function() vim.g.neovide_fullscreen = not vim.g.neovide_fullscreen end,
     { desc = "Enter fullscreen" })
@@ -125,3 +123,8 @@ end
 vim.cmd "language en_US"
 
 vim.cmd "colorscheme vague"
+
+vim.api.nvim_set_hl(0, "Search", { bg = "#86af61", fg = "#000000" })
+vim.api.nvim_set_hl(0, "CurSearch", { bg = "#fe5f60", fg = "#000000" })
+vim.api.nvim_set_hl(0, "IncSearch", { bg = "#fe5f60", fg = "#000000" })
+
