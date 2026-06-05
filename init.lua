@@ -82,6 +82,11 @@ end, { desc = "Open working directory" })
 
 vim.keymap.set("n", "<leader>E", function()
   local path = vim.fn.expand('%:p')
+  if vim.loop.os_uname().sysname == "Windows_NT" then
+    -- Normalize removes //
+    -- Change / to \
+    path = vim.fs.normalize(path):gsub("/", "\\");
+  end
   vim.cmd("silent !start explorer /select, \"" .. path .. "\"")
 end, { desc = "Open current buff directory" })
 
@@ -97,7 +102,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   desc = "Highlight when yanking text",
   group = vim.api.nvim_create_augroup("custom-highlight-yank", { clear = true }),
   callback = function()
-    vim.highlight.on_yank({ timeout = 50 })
+    vim.hl.hl_op({ timeout = 50 })
   end,
 })
 
@@ -125,3 +130,7 @@ end
 vim.cmd "language en_US"
 
 vim.cmd "colorscheme vague"
+
+vim.api.nvim_set_hl(0, "Search", { bg = "#86af61", fg = "#000000" })
+vim.api.nvim_set_hl(0, "CurSearch", { bg = "#fe5f60", fg = "#000000" })
+vim.api.nvim_set_hl(0, "IncSearch", { bg = "#fe5f60", fg = "#000000" })

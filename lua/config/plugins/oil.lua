@@ -1,9 +1,10 @@
 return {
   "stevearc/oil.nvim",
   dependencies = { "nvim-tree/nvim-web-devicons", "nvim-telescope/telescope.nvim" },
+  enabled = false,
   config = function()
     local oil = require "oil"
-    vim.keymap.set("n", "-", function() oil.open() end, { desc = "Open parent with oil directory" })
+    vim.keymap.set("n", "<leader>-", function() oil.open() end, { desc = "Open parent with oil directory" })
 
     local builtin = require "telescope.builtin"
 
