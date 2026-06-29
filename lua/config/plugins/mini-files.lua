@@ -100,14 +100,25 @@ return {
         vim.keymap.set("n", "g.", toggle_dotfiles, { buffer = buf_id, desc = "Toggle hidden files"})
 
         vim.keymap.set("n", "g~", set_cwd,   { buffer = buf_id, desc = "Set cwd" })
+        vim.keymap.set("n", "`", set_cwd,   { buffer = buf_id, desc = "Set cwd" })
         vim.keymap.set("n", "gX", ui_open,   { buffer = buf_id, desc = "OS open" })
         vim.keymap.set("n", "gX", ui_open,   { buffer = buf_id, desc = "OS open" })
         vim.keymap.set("n", "gy", yank_path, { buffer = buf_id, desc = "Yank path" })
         vim.keymap.set("n", "<leader>e", open_explorer, { buffer = buf_id, desc = "Open explorer" })
         vim.keymap.set("n", "<leader>o", open_terminal, { buffer = buf_id, desc = "Open terminal" })
-        vim.keymap.set("n", "_", open_cwd, { buffer = buf_id, desc = "Go to cwd" })
+
+        vim.keymap.set("n", "<C-w><C-w>", open_cwd, { buffer = buf_id, desc = "Go to cwd" })
+        vim.keymap.set("n", "<C-w>w", open_cwd, { buffer = buf_id, desc = "Go to cwd" })
+
         vim.keymap.set("n", "<C-w><C-q>", function() MiniFiles.close() end, { buffer = buf_id, desc = "Close mini files" })
         vim.keymap.set("n", "<C-w>q", function() MiniFiles.close() end, { buffer = buf_id, desc = "Close mini files" })
+        vim.keymap.set("n", "<C-o>", function() MiniFiles.close() end, { buffer = buf_id, desc = "Close mini files" })
+
+        vim.keymap.set("n", "<C-w><C-h>", function() MiniFiles.go_out() end, { buffer = buf_id, desc = "Mini files go out" })
+        vim.keymap.set("n", "<C-w>h", function() MiniFiles.go_out() end, { buffer = buf_id, desc = "Mini files go out" })
+
+        vim.keymap.set("n", "<C-w><C-l>", function() MiniFiles.go_in { close_on_file = true } end, { buffer = buf_id, desc = "Mini files go in plus" })
+        vim.keymap.set("n", "<C-w>l", function() MiniFiles.go_in { close_on_file = true } end, { buffer = buf_id, desc = "Mini files go in plus" })
 
         map_split(buf_id, "<C-s>", "belowright horizontal")
         map_split(buf_id, "<C-v>", "belowright vertical")
@@ -139,8 +150,8 @@ return {
       mappings = {
         close       = '<C-c>',
         go_in       = '',
-        go_in_plus  = 'l',
-        go_out      = 'h',
+        go_in_plus  = '<C-w>l',
+        go_out      = '<C-w>h',
         go_out_plus = '',
         mark_goto   = "'",
         mark_set    = 'm',
