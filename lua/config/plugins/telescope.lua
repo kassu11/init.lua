@@ -3,6 +3,7 @@ return {
 
     "nvim-telescope/telescope.nvim",
     event = "VimEnter",
+    -- enabled = false,
     branch = "0.1.x",
     dependencies = {
       "nvim-lua/plenary.nvim",
@@ -12,8 +13,8 @@ return {
       { "nvim-tree/nvim-web-devicons",              enabled = vim.g.have_nerd_font },
     },
     config = function()
-      local actions = require('telescope.actions')
-      require("telescope").setup({
+      local actions = require"telescope.actions"
+      require "telescope".setup({
         defaults = {
           mappings = {
             i = {
@@ -52,26 +53,26 @@ return {
 
       local builtin = require "telescope.builtin"
 
-      vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "Search Help" })
-      vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "Search Keymaps" })
-      vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "Search Files" })
+      -- vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "Search Help" })
+      -- vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "Search Keymaps" })
+      -- vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "Search Files" })
 
-      vim.keymap.set("n", "gd", require("telescope.builtin").lsp_definitions, { desc = "Goto Definition" })
-      vim.keymap.set("n", "grr", require("telescope.builtin").lsp_references, { desc = "Goto References" })
-      vim.keymap.set("n", "gri", require("telescope.builtin").lsp_implementations, { desc = "Goto Implementation" })
-      vim.keymap.set("n", "grt", require("telescope.builtin").lsp_type_definitions, { desc = "Type Definition" })
-      vim.keymap.set("n", "gO", require("telescope.builtin").lsp_document_symbols, { desc = "Document Symbols" })
-      vim.keymap.set("n", "grw", require("telescope.builtin").lsp_dynamic_workspace_symbols, { desc = "Workspace Symbols" })
+      -- vim.keymap.set("n", "gd", require("telescope.builtin").lsp_definitions, { desc = "Goto Definition" })
+      -- vim.keymap.set("n", "grr", require("telescope.builtin").lsp_references, { desc = "Goto References" })
+      -- vim.keymap.set("n", "gri", require("telescope.builtin").lsp_implementations, { desc = "Goto Implementation" })
+      -- vim.keymap.set("n", "grt", require("telescope.builtin").lsp_type_definitions, { desc = "Type Definition" })
+      -- vim.keymap.set("n", "gO", require("telescope.builtin").lsp_document_symbols, { desc = "Document Symbols" })
+      -- vim.keymap.set("n", "grw", require("telescope.builtin").lsp_dynamic_workspace_symbols, { desc = "Workspace Symbols" })
 
       -- vim.keymap.set("n", "<leader>sf", function()
       --   builtin.find_files { find_command = { "rg", "--files", "--sort", "path" }, }
       -- end, { desc = "Search Files" })
-      vim.keymap.set("n", "<leader>sF", function()
-        builtin.find_files {
-          find_command = { "rg", "--files", "--sort", "path" },
-          cwd = vim.fn.expand('%:p:h'),
-        }
-      end, { desc = "Search Files (current buff path)" })
+      -- vim.keymap.set("n", "<leader>sF", function()
+      --   builtin.find_files {
+      --     find_command = { "rg", "--files", "--sort", "path" },
+      --     cwd = vim.fn.expand('%:p:h'),
+      --   }
+      -- end, { desc = "Search Files (current buff path)" })
 
       vim.keymap.set("n", "<leader>fd", function()
         builtin.find_files {
@@ -85,49 +86,49 @@ return {
         }
       end, { desc = "Find directory (current buff path)" })
 
-      vim.keymap.set("n", "<leader>sA", function()
-        builtin.find_files { cwd = vim.fn.expand('%:p:h'), no_ignore = true }
-      end, { desc = "Search All Files (current buff path)" })
-      vim.keymap.set("n", "<leader>sa", function()
-        builtin.find_files { no_ignore = true }
-      end, { desc = "Search All Files" })
+      -- vim.keymap.set("n", "<leader>sA", function()
+      --   builtin.find_files { cwd = vim.fn.expand('%:p:h'), no_ignore = true }
+      -- end, { desc = "Search All Files (current buff path)" })
+      -- vim.keymap.set("n", "<leader>sa", function()
+      --   builtin.find_files { no_ignore = true }
+      -- end, { desc = "Search All Files" })
 
-      vim.keymap.set("n", "<leader>sE", function()
-        builtin.oldfiles { only_cwd = true }
-      end, { desc = "Search old files (current cwd)" })
+      -- vim.keymap.set("n", "<leader>sE", function()
+      --   builtin.oldfiles { only_cwd = true }
+      -- end, { desc = "Search old files (current cwd)" })
       -- vim.keymap.set("n", "<leader>se", builtin.oldfiles, { desc = "Search old files" })
 
-      vim.keymap.set("n", "<leader>ss", builtin.builtin, { desc = "Search Select Telescope" })
-      vim.keymap.set("n", "<leader>sy", builtin.lsp_document_symbols, { desc = "Search document symbols" })
-      vim.keymap.set("n", "<leader>sY", builtin.lsp_workspace_symbols, { desc = "Search workspace symbols" })
-      vim.keymap.set("n", "<leader>st", function() builtin.grep_string { glob_pattern = { "*.scss", "*.css" } } end, { desc = "Search grep inside css files" })
+      -- vim.keymap.set("n", "<leader>ss", builtin.builtin, { desc = "Search Select Telescope" })
+      -- vim.keymap.set("n", "<leader>sy", builtin.lsp_document_symbols, { desc = "Search document symbols" })
+      -- vim.keymap.set("n", "<leader>sY", builtin.lsp_workspace_symbols, { desc = "Search workspace symbols" })
+      -- vim.keymap.set("n", "<leader>st", function() builtin.grep_string { glob_pattern = { "*.scss", "*.css" } } end, { desc = "Search grep inside css files" })
 
-      vim.keymap.set("n", "<leader>fw", function()
-        local input = vim.fn.input("Grep > ")
-        if #input > 0 then
-          builtin.grep_string { search = input }
-        end
-      end, { desc = "Find Word" });
-      vim.keymap.set("n", "<leader>fW", function()
-        local input = vim.fn.input("Grep > ")
-        if #input > 0 then
-          builtin.grep_string { search = input, search_dirs = { vim.fn.expand("%:p") } }
-        end
-      end, { desc = "Find Word" });
+      -- vim.keymap.set("n", "<leader>fw", function()
+      --   local input = vim.fn.input("Grep > ")
+      --   if #input > 0 then
+      --     builtin.grep_string { search = input }
+      --   end
+      -- end, { desc = "Find Word" });
+      -- vim.keymap.set("n", "<leader>fW", function()
+      --   local input = vim.fn.input("Grep > ")
+      --   if #input > 0 then
+      --     builtin.grep_string { search = input, search_dirs = { vim.fn.expand("%:p") } }
+      --   end
+      -- end, { desc = "Find Word" });
 
       -- vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "Search by Grep" })
-      vim.keymap.set("n", "<leader>sG", function()
-        builtin.live_grep { search_dirs = { vim.fn.expand("%:p") } }
-      end, { desc = "Search by Grep" })
+      -- vim.keymap.set("n", "<leader>sG", function()
+      --   builtin.live_grep { search_dirs = { vim.fn.expand("%:p") } }
+      -- end, { desc = "Search by Grep" })
 
-      vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "Search Diagnostics" })
-      vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "Search Resume" })
-      vim.keymap.set("n", "<leader>s.", builtin.oldfiles, { desc = "Search Recent Files (\".\" for repeat)" })
-      vim.keymap.set("n", "<leader>sb", builtin.buffers, { desc = "Find existing buffers" })
+      -- vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "Search Diagnostics" })
+      -- vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "Search Resume" })
+      -- vim.keymap.set("n", "<leader>s.", builtin.oldfiles, { desc = "Search Recent Files (\".\" for repeat)" })
+      -- vim.keymap.set("n", "<leader>sb", builtin.buffers, { desc = "Find existing buffers" })
 
-      vim.keymap.set("n", "<leader>sn", function()
-        builtin.find_files { cwd = vim.fn.stdpath "config" }
-      end, { desc = "Search Neovim files" })
+      -- vim.keymap.set("n", "<leader>sn", function()
+      --   builtin.find_files { cwd = vim.fn.stdpath "config" }
+      -- end, { desc = "Search Neovim files" })
 
 
       vim.keymap.set("n", "<leader>gb", function()
