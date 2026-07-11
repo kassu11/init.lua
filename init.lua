@@ -114,8 +114,6 @@ if vim.g.neovide then
   vim.g.neovide_touch_drag_timeout = 0
   vim.g.neovide_cursor_animation_length = 0
   vim.g.neovide_cursor_trail_size = 0
-  -- vim.g.neovide_title_background_color = "#0b0b0b"
-  -- vim.g.neovide_title_text_color = "#FFFFFF"
 
   vim.keymap.set({ "n", "x", "i" }, "<F11>", function() vim.g.neovide_fullscreen = not vim.g.neovide_fullscreen end,
     { desc = "Enter fullscreen" })

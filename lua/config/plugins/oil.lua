@@ -7,6 +7,24 @@ return {
     vim.keymap.set("n", "<leader>-", function() oil.open() end, { desc = "Open parent with oil directory" })
 
     local builtin = require "telescope.builtin"
+    local snacks = require "snacks"
+
+    local function oil_to_path(path)
+      return path
+          :gsub("^oil:///", "") -- remove oil:/// prefix
+          :gsub("^([^/]+)/", "%1://") -- A/ -> A://
+    end
+
+    vim.api.nvim_create_autocmd("User", {
+      pattern = "OilActionsPost",
+      callback = function(event)
+        if event.data.actions[1].type == "move" then
+          local from = oil_to_path(event.data.actions[1].src_url);
+          local to = oil_to_path(event.data.actions[1].dest_url);
+          snacks.rename.on_rename_file(from, to) -- Snacks rename updated css imports when renaming
+        end
+      end,
+    })
 
     oil.setup {
       default_file_explorer = true,
@@ -16,7 +34,7 @@ return {
       },
       lsp_file_methods = {
         timeout_ms = 1000,
-        autosave_changes = "unmodified",
+        autosave_changes = true
       },
       view_options = {
         case_insensitive = true,
