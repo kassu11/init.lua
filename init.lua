@@ -39,7 +39,7 @@ vim.keymap.set("n", "y_", "y^", { desc = "Yank to line start" })
 vim.keymap.set("n", "c_", "c^", { desc = "Delete and insert to line start" })
 vim.keymap.set("n", "d_", "d^", { desc = "Delete to line start" })
 
-vim.keymap.set("n", "<leader>.", "`.", { desc = "Jump to where last edited" })
+-- vim.keymap.set("n", "<leader>.", "`.", { desc = "Jump to where last edited" })
 vim.keymap.set("n", "<leader>bo", ":%bd|e#<CR>", { desc = "Close saved buffers" });
 vim.keymap.set("n", "<leader><Tab>", "<C-^>", { desc = "Jump to previous buffer" });
 vim.keymap.set("n", "<leader><S-Tab>", function()
