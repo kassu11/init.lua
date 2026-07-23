@@ -125,7 +125,9 @@ if vim.g.neovide then
     ":lua vim.g.neovide_scale_factor = math.min(vim.g.neovide_scale_factor + 0.1,  5)<CR>", { silent = true })
 end
 
-vim.cmd "language en_US"
+if vim.loop.os_uname().sysname == "Windows_NT" then
+  vim.cmd "language en_US"
+end
 
 vim.cmd "colorscheme vague"
 
