@@ -22,7 +22,18 @@ vim.opt.sidescrolloff = 10;
 
 require("config.lazy")
 
+-- Terminal keybinds
 vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
+vim.api.nvim_create_autocmd("TermOpen", {
+  callback = function()
+    -- Send command with enter inside normal mode
+    vim.keymap.set("n", "<CR>", function()
+      vim.api.nvim_feedkeys("i", "n", false)
+      vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<CR>", true, false, true), "t", false)
+    end, { buffer = true })
+  end,
+})
+
 vim.keymap.set({ "n", "x" }, "<leader>w", "\"+", { desc = "Global registry" })
 
 vim.keymap.set("n", "<C-L>", "_v$h", { desc = "Select line" });
