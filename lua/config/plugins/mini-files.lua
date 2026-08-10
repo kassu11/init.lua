@@ -99,15 +99,14 @@ return {
       pattern = "MiniFilesBufferCreate",
       callback = function(args)
         local buf_id = args.data.buf_id
-        vim.keymap.set("n", "g.", toggle_dotfiles, { buffer = buf_id, desc = "Toggle hidden files"})
+        vim.keymap.set("n", "g."        , toggle_dotfiles, { buffer = buf_id, desc = "Toggle hidden files" })
 
-        vim.keymap.set("n", "g~", set_cwd,   { buffer = buf_id, desc = "Set cwd" })
-        vim.keymap.set("n", "`", set_cwd,   { buffer = buf_id, desc = "Set cwd" })
-        vim.keymap.set("n", "gX", ui_open,   { buffer = buf_id, desc = "OS open" })
-        vim.keymap.set("n", "gX", ui_open,   { buffer = buf_id, desc = "OS open" })
-        vim.keymap.set("n", "gy", yank_path, { buffer = buf_id, desc = "Yank path" })
-        vim.keymap.set("n", "<leader>e", open_explorer, { buffer = buf_id, desc = "Open explorer" })
-        vim.keymap.set("n", "<leader>o", open_terminal, { buffer = buf_id, desc = "Open terminal" })
+        vim.keymap.set("n", "<leader>cc", set_cwd,         { buffer = buf_id, desc = "Set cwd"             })
+        vim.keymap.set("n", "gX"        , ui_open,         { buffer = buf_id, desc = "OS open"             })
+        vim.keymap.set("n", "gX"        , ui_open,         { buffer = buf_id, desc = "OS open"             })
+        vim.keymap.set("n", "gy"        , yank_path,       { buffer = buf_id, desc = "Yank path"           })
+        vim.keymap.set("n", "<leader>e" , open_explorer,   { buffer = buf_id, desc = "Open explorer"       })
+        vim.keymap.set("n", "<leader>o" , open_terminal,   { buffer = buf_id, desc = "Open terminal"       })
 
         vim.keymap.set("n", "<C-w><C-w>", open_cwd, { buffer = buf_id, desc = "Go to cwd" })
         vim.keymap.set("n", "<C-w>w", open_cwd, { buffer = buf_id, desc = "Go to cwd" })
