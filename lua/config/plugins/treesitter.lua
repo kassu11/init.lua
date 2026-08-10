@@ -7,7 +7,7 @@ return {
       install_dir = vim.fn.stdpath("data") .. "/site"
     }
 
-    require "nvim-treesitter".install { "rust", "zig", "c", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline", "jsdoc", "html", "css", "javascript", "typescript", "tsx" }
+    require "nvim-treesitter".install { "rust", "zig", "c", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline", "jsdoc", "html", "css", "javascript", "typescript", "tsx", "odin" }
 
     vim.api.nvim_create_autocmd("FileType", {
       callback = function()

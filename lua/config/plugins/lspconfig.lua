@@ -1,7 +1,7 @@
 return {
   "neovim/nvim-lspconfig",
   config = function()
-    vim.lsp.enable { "lua_ls", "clangd", "ts_ls", "cssls", "css_variables", "emmet_ls", "eslint", "zls"}
+    vim.lsp.enable { "lua_ls", "clangd", "ts_ls", "cssls", "css_variables", "emmet_ls", "eslint", "zls", "ols" }
 
     vim.lsp.config("lua_ls", {
       settings = {
@@ -11,6 +11,13 @@ return {
           }
         }
       }
+    })
+
+    vim.lsp.config("ols", {
+      init_options = {
+        checker_args = "-vet",
+        enable_semantic_tokens = true
+      },
     })
 
     vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format, { desc = "Format file" })
