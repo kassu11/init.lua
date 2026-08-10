@@ -33,6 +33,7 @@ return {
       local path = (MiniFiles.get_fs_entry() or {}).path
       if path == nil then return vim.notify('Cursor is not on valid entry') end
       vim.fn.chdir(vim.fs.dirname(path))
+      print("CWD: \"" .. vim.fs.dirname(path) .. "\"")
     end
 
     -- Yank in register full path of entry under cursor
@@ -74,7 +75,8 @@ return {
         path = vim.fs.normalize(path):gsub("/", "\\");
       end
 
-      vim.cmd("silent !start explorer /select, \"" .. path .. "\"")
+      print("Opening explorer to: \"" .. path .. "\"")
+      vim.cmd("silent !start explorer /select,\"" .. path .. "\"")
     end
 
     local open_terminal = function()
