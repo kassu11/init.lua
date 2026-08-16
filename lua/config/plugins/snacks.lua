@@ -22,6 +22,26 @@ return {
       end
     end
 
+    local prompt_grep_word = function()
+      local input = vim.fn.input("Grep > ")
+      if input ~= "" then
+        Snacks.picker.grep_word { search = input }
+      end
+    end
+
+    local visual_select_grep = function()
+      Snacks.picker.grep {
+        finder = "grep",
+        regex = false,
+        format = "file",
+        search = function(picker)
+          return picker:word()
+        end,
+        live = false,
+        supports_live = true,
+      }
+    end
+
     -- Top Pickers & Explorer
     vim.keymap.set("n", "<leader>sb", function() Snacks.picker.buffers() end, { desc = "Buffers" })
     vim.keymap.set("n", "<leader>s:", function() Snacks.picker.command_history() end, { desc = "Command History" })
@@ -49,18 +69,9 @@ return {
     vim.keymap.set("n", "<leader>sB", function() Snacks.picker.grep_buffers() end, { desc = "Grep Open Buffers" })
     vim.keymap.set("n", "<leader>sg", function() Snacks.picker.grep() end, { desc = "Grep" })
     vim.keymap.set("n", "<leader>fw", prompt_grep, { desc = "grep prompt" })
-    vim.keymap.set("x", "<leader>fw", function()
-      Snacks.picker.grep {
-        finder = "grep",
-        regex = false,
-        format = "file",
-        search = function(picker)
-          return picker:word()
-        end,
-        live = false,
-        supports_live = true,
-      }
-    end, { desc = "Visual selection grep" })
+    vim.keymap.set("x", "<leader>fw", visual_select_grep, { desc = "Visual selection grep" })
+    vim.keymap.set("n", "<leader>fW", prompt_grep_word, { desc = "grep word prompt" })
+    vim.keymap.set("x", "<leader>fW", function() Snacks.picker.grep_word() end, { desc = "Visual selection grep word" })
 
     -- search
     vim.keymap.set("n", '<leader>s"', function() Snacks.picker.registers() end, { desc = "Registers" })
