@@ -11,7 +11,14 @@ return {
     local prompt_grep = function()
       local input = vim.fn.input("Grep > ")
       if input ~= "" then
-        Snacks.picker.grep_word { search = input }
+        Snacks.picker.grep {
+          finder = "grep",
+          regex = false,
+          format = "file",
+          search = input,
+          live = false,
+          supports_live = true,
+        }
       end
     end
 
@@ -42,7 +49,19 @@ return {
     vim.keymap.set("n", "<leader>sB", function() Snacks.picker.grep_buffers() end, { desc = "Grep Open Buffers" })
     vim.keymap.set("n", "<leader>sg", function() Snacks.picker.grep() end, { desc = "Grep" })
     vim.keymap.set("n", "<leader>fw", prompt_grep, { desc = "grep prompt" })
-    vim.keymap.set("x", "<leader>fw", function() Snacks.picker.grep_word() end, { desc = "Visual selection grep" })
+    vim.keymap.set("x", "<leader>fw", function()
+      Snacks.picker.grep {
+        finder = "grep",
+        regex = false,
+        format = "file",
+        search = function(picker)
+          return picker:word()
+        end,
+        live = false,
+        supports_live = true,
+      }
+    end, { desc = "Visual selection grep" })
+
     -- search
     vim.keymap.set("n", '<leader>s"', function() Snacks.picker.registers() end, { desc = "Registers" })
     vim.keymap.set("n", '<leader>s/', function() Snacks.picker.search_history() end, { desc = "Search History" })
