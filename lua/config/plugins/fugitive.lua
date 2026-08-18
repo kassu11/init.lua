@@ -48,6 +48,33 @@ return {
       end
     end, { desc = "Git open pull request" })
 
+    -- In a fugitive status buffer, open the fugitive status of the
+    -- submodule under cursor. Reuses fugitive's own cursor-file resolution
+    -- (the same one <CR> uses) to get the submodule's absolute path, then
+    -- edits its "<submodule>/.git" gitlink file instead of the submodule
+    -- directory itself -- that's a regular file that always exists, so it
+    -- never triggers mini.files (works even for submodules with no files
+    -- at top level) and it replaces the status buffer in place, so <C-o>
+    -- jumps back to it.
+    vim.api.nvim_create_autocmd("FileType", {
+      pattern = "fugitive",
+      callback = function(args)
+        vim.keymap.set("n", "gs", function()
+          local ok, escaped = pcall(vim.fn["fugitive#PorcelainCfile"])
+          if not ok or escaped == "" then
+            return vim.notify("gs: nothing under cursor", vim.log.levels.WARN)
+          end
+
+          if vim.fn.isdirectory(vim.fn.expand(escaped)) == 0 then
+            return vim.notify("gs: not a submodule", vim.log.levels.WARN)
+          end
+
+          vim.cmd("edit " .. escaped .. "/.git")
+          vim.cmd("G")
+        end, { buffer = args.buf, desc = "Open git submodule status" })
+      end,
+    })
+
     vim.keymap.set("n", "<leader>grr", function()
       local branches = vim.api.nvim_exec2("!git -C \"%:h\" branch -r | grep -v 'HEAD' | grep -v 'main'",
       { output = true })
