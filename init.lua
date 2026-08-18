@@ -88,6 +88,12 @@ end, { desc = "Open cmd to buff path" })
 
 vim.keymap.set("n", "<leader>e", function()
   local path = vim.fn.getcwd();
+  if vim.loop.os_uname().sysname == "Windows_NT" then
+    -- Normalize removes //
+    -- Change / to \
+    path = vim.fs.normalize(path):gsub("/", "\\");
+  end
+  print("Opening explorer to: \"" .. path .. "\"")
   vim.cmd("silent !start explorer \"" .. path .. "\"")
 end, { desc = "Open working directory" })
 
@@ -98,7 +104,9 @@ vim.keymap.set("n", "<leader>E", function()
     -- Change / to \
     path = vim.fs.normalize(path):gsub("/", "\\");
   end
-  vim.cmd("silent !start explorer /select, \"" .. path .. "\"")
+
+  print("Opening explorer to: \"" .. path .. "\"")
+  vim.cmd("silent !start explorer /select,\"" .. path .. "\"")
 end, { desc = "Open current buff directory" })
 
 vim.keymap.set("n", "<leader><leader>n", ":set rnu!<CR>")
