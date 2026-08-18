@@ -95,31 +95,86 @@ return {
       MiniFiles.open(vim.fn.getcwd())
     end
 
+    -- Scope a picker to the folder currently being browsed (and its child
+    -- folders). Closes mini.files itself first (instead of letting its
+    -- lost-focus timer do it later) so it doesn't steal focus back from the
+    -- picker window and cause it to dismiss itself.
+    local with_cwd = function(action)
+      return function()
+        local state = MiniFiles.get_explorer_state()
+        local dir = state and state.branch[state.depth_focus]
+        MiniFiles.close()
+        action(dir)
+      end
+    end
+
+    local grep_cwd = with_cwd(function(dir)
+      require("snacks").picker.grep { cwd = dir }
+    end)
+
+    local find_files_cwd = with_cwd(function(dir)
+      require("snacks").picker.files { cwd = dir }
+    end)
+
+    local prompt_grep_cwd = with_cwd(function(dir)
+      local input = vim.fn.input("Grep > ")
+      if input ~= "" then
+        require("snacks").picker.grep {
+          finder = "grep",
+          regex = false,
+          format = "file",
+          search = input,
+          live = false,
+          supports_live = true,
+          cwd = dir,
+        }
+      end
+    end)
+
+    local prompt_grep_word_cwd = with_cwd(function(dir)
+      local input = vim.fn.input("Grep > ")
+      if input ~= "" then
+        require("snacks").picker.grep_word { search = input, cwd = dir }
+      end
+    end)
+
+    local find_dir_cwd = with_cwd(function(dir)
+      require("telescope.builtin").find_files {
+        cwd = dir,
+        find_command = { "fd", "-t=d" },
+      }
+    end)
+
     vim.api.nvim_create_autocmd("User", {
       pattern = "MiniFilesBufferCreate",
       callback = function(args)
         local buf_id = args.data.buf_id
-        vim.keymap.set("n", "g."        , toggle_dotfiles, { buffer = buf_id, desc = "Toggle hidden files" })
+        vim.keymap.set("n", "g."        , toggle_dotfiles,      { buffer = buf_id, desc = "Toggle hidden files"                })
 
-        vim.keymap.set("n", "<leader>cc", set_cwd,         { buffer = buf_id, desc = "Set cwd"             })
-        vim.keymap.set("n", "gX"        , ui_open,         { buffer = buf_id, desc = "OS open"             })
-        vim.keymap.set("n", "gX"        , ui_open,         { buffer = buf_id, desc = "OS open"             })
-        vim.keymap.set("n", "gy"        , yank_path,       { buffer = buf_id, desc = "Yank path"           })
-        vim.keymap.set("n", "<leader>e" , open_explorer,   { buffer = buf_id, desc = "Open explorer"       })
-        vim.keymap.set("n", "<leader>o" , open_terminal,   { buffer = buf_id, desc = "Open terminal"       })
+        vim.keymap.set("n", "<leader>cc", set_cwd,              { buffer = buf_id, desc = "Set cwd"                            })
+        vim.keymap.set("n", "gX"        , ui_open,              { buffer = buf_id, desc = "OS open"                            })
+        vim.keymap.set("n", "gX"        , ui_open,              { buffer = buf_id, desc = "OS open"                            })
+        vim.keymap.set("n", "gy"        , yank_path,            { buffer = buf_id, desc = "Yank path"                          })
+        vim.keymap.set("n", "<leader>e" , open_explorer,        { buffer = buf_id, desc = "Open explorer"                      })
+        vim.keymap.set("n", "<leader>o" , open_terminal,        { buffer = buf_id, desc = "Open terminal"                      })
+        vim.keymap.set("n", "<leader>sg", grep_cwd,             { buffer = buf_id, desc = "Grep current folder"                })
+        vim.keymap.set("n", "<leader>sf", find_files_cwd,       { buffer = buf_id, desc = "Find files in current folder"       })
+        vim.keymap.set("n", "<leader>fw", prompt_grep_cwd,      { buffer = buf_id, desc = "Grep prompt in current folder"      })
+        vim.keymap.set("n", "<leader>fW", prompt_grep_word_cwd, { buffer = buf_id, desc = "Grep word prompt in current folder" })
+        vim.keymap.set("n", "<leader>fd", find_dir_cwd,         { buffer = buf_id, desc = "Find directory in current folder"   })
 
-        vim.keymap.set("n", "<C-w><C-w>", open_cwd, { buffer = buf_id, desc = "Go to cwd" })
-        vim.keymap.set("n", "<C-w>w", open_cwd, { buffer = buf_id, desc = "Go to cwd" })
+        vim.keymap.set("n", "<C-w><C-w>", open_cwd,             { buffer = buf_id, desc = "Go to cwd"                          })
+        vim.keymap.set("n", "<C-w>w"    , open_cwd,             { buffer = buf_id, desc = "Go to cwd"                          })
 
-        vim.keymap.set("n", "<C-w><C-q>", function() MiniFiles.close() end, { buffer = buf_id, desc = "Close mini files" })
-        vim.keymap.set("n", "<C-w>q", function() MiniFiles.close() end, { buffer = buf_id, desc = "Close mini files" })
-        vim.keymap.set("n", "<C-o>", function() MiniFiles.close() end, { buffer = buf_id, desc = "Close mini files" })
+        vim.keymap.set("n", "<C-w><C-q>", function() MiniFiles.close() end,      { buffer = buf_id, desc = "Close mini files"  })
+        vim.keymap.set("n", "<C-w>q"    , function() MiniFiles.close() end,      { buffer = buf_id, desc = "Close mini files"  })
+        vim.keymap.set("n", "<C-o>"     , function() MiniFiles.close() end,      { buffer = buf_id, desc = "Close mini files"  })
 
-        vim.keymap.set("n", "<C-w><C-h>", function() MiniFiles.go_out() end, { buffer = buf_id, desc = "Mini files go out" })
-        vim.keymap.set("n", "<C-w>h", function() MiniFiles.go_out() end, { buffer = buf_id, desc = "Mini files go out" })
+        vim.keymap.set("n", "<C-w><C-h>", function() MiniFiles.go_out() end,     { buffer = buf_id, desc = "Mini files go out" })
+        vim.keymap.set("n", "<C-w>h"    , function() MiniFiles.go_out() end,     { buffer = buf_id, desc = "Mini files go out" })
 
         vim.keymap.set("n", "<C-w><C-l>", function() MiniFiles.go_in { close_on_file = true } end, { buffer = buf_id, desc = "Mini files go in plus" })
-        vim.keymap.set("n", "<C-w>l", function() MiniFiles.go_in { close_on_file = true } end, { buffer = buf_id, desc = "Mini files go in plus" })
+        vim.keymap.set("n", "<C-w>l"    , function() MiniFiles.go_in { close_on_file = true } end, { buffer = buf_id, desc = "Mini files go in plus" })
 
         map_split(buf_id, "<C-s>", "belowright horizontal")
         map_split(buf_id, "<C-v>", "belowright vertical")
