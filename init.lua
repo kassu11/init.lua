@@ -36,8 +36,8 @@ vim.api.nvim_create_autocmd("TermOpen", {
 
 vim.keymap.set({ "n", "x" }, "<leader>w", "\"+", { desc = "Global registry" })
 
-vim.keymap.set("n", "<C-L>", "_v$h", { desc = "Select line" });
-vim.keymap.set("v", "<C-L>", "o_oj$h", { desc = "Expand line selection" });
+vim.keymap.set("n", "<C-l>", "_vg_", { desc = "Select line" });
+vim.keymap.set("v", "<C-l>", "o_o<space><space>g_", { desc = "Expand line selection" });
 
 vim.keymap.set("x", "grn", "\"ay:%s/\\V<C-r>a//g<Left><Left>", { desc = "Search and replace" })
 vim.keymap.set("x", ".", ":norm .<CR>", { desc = "Run repeat on selected lines" })
