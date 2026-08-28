@@ -1,7 +1,7 @@
 return {
   "tpope/vim-fugitive",
   config = function()
-    vim.keymap.set("n", "gb", ":Git blame -w --date=format:\"%Y-%m-%d %H:%M\" <CR>", { desc = ":Git diff" })
+    vim.keymap.set({"n", "v"}, "gb", ":Git blame -w --date=format:\"%Y-%m-%d %H:%M\" <CR>", { desc = ":Git diff" })
     vim.keymap.set("n", "<leader>gd", ":Gdiffsplit!<CR>", { desc = ":Git diff" })
     vim.keymap.set("n", "<leader>gl", ":0Gclog<CR>", { desc = "Open current file git history to quickfix list" })
     vim.keymap.set("n", "<leader>gL", ":Gclog<CR>", { desc = "Open git log history to quickfix list" })
