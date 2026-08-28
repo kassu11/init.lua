@@ -81,17 +81,34 @@ return {
         return math.floor(a + (b - a) * t + 0.5)
       end
 
+      -- Current 'Normal' background as {r,g,b}, so the extreme highlight's
+      -- background tint blends with whatever colorscheme is active instead
+      -- of a hardcoded color.
+      local function normal_bg()
+        local ok, hl = pcall(vim.api.nvim_get_hl, 0, { name = "Normal", link = false })
+        if ok and hl.bg then
+          return { math.floor(hl.bg / 0x10000) % 0x100, math.floor(hl.bg / 0x100) % 0x100, hl.bg % 0x100 }
+        end
+        return { 0, 0, 0 }
+      end
+
       local function define_blame_age_highlights()
+        local bg = normal_bg()
         for i = 0, STEPS do
           local t = i / STEPS
-          vim.api.nvim_set_hl(0, "FugitiveBlameAge" .. i, {
-            fg = string.format(
+          local r, g, b = mix(COLD[1], HOT[1], t), mix(COLD[2], HOT[2], t), mix(COLD[3], HOT[3], t)
+          local hl = { fg = string.format("#%02x%02x%02x", r, g, b) }
+
+          -- Add bg to extremes
+          if i == 0 or i == STEPS then
+            hl.bg = string.format(
               "#%02x%02x%02x",
-              mix(COLD[1], HOT[1], t),
-              mix(COLD[2], HOT[2], t),
-              mix(COLD[3], HOT[3], t)
-            ),
-          })
+              mix(bg[1], r, 0.28),
+              mix(bg[2], g, 0.28),
+              mix(bg[3], b, 0.28)
+            )
+          end
+          vim.api.nvim_set_hl(0, "FugitiveBlameAge" .. i, hl)
         end
       end
 
@@ -136,10 +153,20 @@ return {
         end
         local span = max_t - min_t
         for i, info in pairs(infos) do
-          local t = span > 0 and (info.epoch - min_t) / span or 1
+          local step
+          if info.epoch == max_t then
+            -- Only the single newest commit gets the pure hot color.
+            step = STEPS
+          elseif info.epoch == min_t then
+            -- Only the single oldest commit gets the pure cold color.
+            step = 0
+          else
+            local t = span > 0 and (info.epoch - min_t) / span or 1
+            step = math.max(1, math.min(STEPS - 1, math.floor(t * STEPS + 0.5)))
+          end
           vim.api.nvim_buf_set_extmark(bufnr, ns, i - 1, info.col_start, {
             end_col = info.col_end,
-            hl_group = "FugitiveBlameAge" .. math.floor(t * STEPS + 0.5),
+            hl_group = "FugitiveBlameAge" .. step,
             priority = 200,
           })
         end
