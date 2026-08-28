@@ -68,6 +68,93 @@ return {
       end,
     })
 
+    -- Color blame timestamps by recency (cold = oldest commit shown, hot = newest),
+    -- so the newest commit in the buffer jumps out visually instead of being just
+    -- another string. Relies on `gb` above always including at least "HH:MM".
+    do
+      local ns = vim.api.nvim_create_namespace("fugitive_blame_age")
+      local STEPS = 40
+      local COLD = { 0x56, 0x5f, 0x89 } -- oldest commit in the buffer
+      local HOT = { 0xe0, 0x6c, 0x75 }  -- newest commit in the buffer
+
+      local function mix(a, b, t)
+        return math.floor(a + (b - a) * t + 0.5)
+      end
+
+      local function define_blame_age_highlights()
+        for i = 0, STEPS do
+          local t = i / STEPS
+          vim.api.nvim_set_hl(0, "FugitiveBlameAge" .. i, {
+            fg = string.format(
+              "#%02x%02x%02x",
+              mix(COLD[1], HOT[1], t),
+              mix(COLD[2], HOT[2], t),
+              mix(COLD[3], HOT[3], t)
+            ),
+          })
+        end
+      end
+
+      -- Returns epoch, 0-indexed start col, end col (exclusive) for the date/time
+      -- inside the first "(...)" annotation on the line, or nil if it can't parse.
+      local function parse_epoch(line)
+        local paren_s, paren_e = line:find("%b()")
+        if not paren_s then
+          return nil
+        end
+        local annotation = line:sub(paren_s, paren_e)
+        local rel_s, rel_e, y, mo, d, h, mi, sec =
+          annotation:find("(%d%d%d%d)%-(%d%d)%-(%d%d)%s+(%d%d):(%d%d):?(%d*)")
+        if not rel_s then
+          return nil
+        end
+        local epoch = os.time({
+          year = tonumber(y),
+          month = tonumber(mo),
+          day = tonumber(d),
+          hour = tonumber(h),
+          min = tonumber(mi),
+          sec = sec ~= "" and tonumber(sec) or 0,
+        })
+        return epoch, paren_s + rel_s - 2, paren_s + rel_e - 1
+      end
+
+      local function apply_blame_age(bufnr)
+        vim.api.nvim_buf_clear_namespace(bufnr, ns, 0, -1)
+        local lines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
+        local infos, min_t, max_t = {}, nil, nil
+        for i, line in ipairs(lines) do
+          local epoch, col_start, col_end = parse_epoch(line)
+          if epoch then
+            infos[i] = { epoch = epoch, col_start = col_start, col_end = col_end }
+            min_t = (not min_t or epoch < min_t) and epoch or min_t
+            max_t = (not max_t or epoch > max_t) and epoch or max_t
+          end
+        end
+        if not min_t then
+          return
+        end
+        local span = max_t - min_t
+        for i, info in pairs(infos) do
+          local t = span > 0 and (info.epoch - min_t) / span or 1
+          vim.api.nvim_buf_set_extmark(bufnr, ns, i - 1, info.col_start, {
+            end_col = info.col_end,
+            hl_group = "FugitiveBlameAge" .. math.floor(t * STEPS + 0.5),
+            priority = 200,
+          })
+        end
+      end
+
+      define_blame_age_highlights()
+      vim.api.nvim_create_autocmd("ColorScheme", { callback = define_blame_age_highlights })
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = "fugitiveblame",
+        callback = function(args)
+          apply_blame_age(args.buf)
+        end,
+      })
+    end
+
     -- Improve select line inside fugitive
     vim.api.nvim_create_autocmd("FileType", {
       pattern = { "fugitive", "git" },
