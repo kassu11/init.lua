@@ -151,6 +151,7 @@ return {
         pattern = "fugitiveblame",
         callback = function(args)
           apply_blame_age(args.buf)
+          vim.keymap.set("n", "_", "~", { buffer = args.buf, remap = true, desc = "Reblame at previous revision" })
         end,
       })
     end
