@@ -34,6 +34,8 @@ vim.api.nvim_create_autocmd("TermOpen", {
   end,
 })
 
+require("internal.file-drag-and-drop")
+
 vim.keymap.set({ "n", "x" }, "<leader>w", "\"+", { desc = "Global registry" })
 
 vim.keymap.set("n", "<C-l>", "_vg_", { desc = "Select line" });
