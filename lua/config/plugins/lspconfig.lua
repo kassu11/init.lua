@@ -3,6 +3,12 @@ return {
   config = function()
     vim.lsp.enable { "lua_ls", "clangd", "ts_ls", "cssls", "css_variables", "emmet_ls", "eslint", "zls", "ols" }
 
+    if vim.fn.has("win32") == 1 then
+      vim.lsp.config("ts_ls", {
+        cmd = { "typescript-language-server.cmd", "--stdio" },
+      })
+    end
+
     vim.lsp.config("lua_ls", {
       settings = {
         Lua = {
