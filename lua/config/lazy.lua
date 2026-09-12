@@ -25,6 +25,5 @@ require("lazy").setup({
     { "kylechui/nvim-surround" },
     { "tpope/vim-abolish" },
     { "tpope/vim-sleuth" },
-    { "mason-org/mason.nvim",   config = function() require "mason".setup {} end },
   },
 })
