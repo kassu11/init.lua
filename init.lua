@@ -11,6 +11,7 @@ vim.opt.wrap = false
 vim.opt.swapfile = false
 vim.opt.undofile = true
 vim.opt.ignorecase = true
+vim.opt.smoothscroll = true
 vim.opt.smartcase = true
 vim.opt.hlsearch = true
 vim.opt.list = true
@@ -35,6 +36,12 @@ vim.api.nvim_create_autocmd("TermOpen", {
 })
 
 require("internal.file-drag-and-drop")
+
+vim.keymap.set({ "n", "x" }, "j", "gj", { noremap = true })
+vim.keymap.set({ "n", "x" }, "k", "gk", { noremap = true })
+
+vim.keymap.set({ "n", "x" }, "gj", "j", { noremap = true })
+vim.keymap.set({ "n", "x" }, "gk", "k", { noremap = true })
 
 vim.keymap.set({ "n", "x" }, "<leader>w", "\"+", { desc = "Global registry" })
 
