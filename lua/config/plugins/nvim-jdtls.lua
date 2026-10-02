@@ -37,6 +37,14 @@ return {
         },
         root_dir = root_dir,
         capabilities = vim.lsp.protocol.make_client_capabilities(),
+        -- IntelliJ does the building; jdtls is only used for navigation/rename/etc. (without this, IntelliJ breaks, because these LSPs share the same cache location)
+        -- Keep it from touching target/ and from dropping Eclipse files into the repo.
+        settings = {
+          java = {
+            autobuild = { enabled = false },
+            import = { generatesMetadataFilesAtProjectRoot = false },
+          },
+        },
       })
     end
 
