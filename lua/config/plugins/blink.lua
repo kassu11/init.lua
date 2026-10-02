@@ -7,6 +7,7 @@ return {
       nerd_font_variant = "mono"
     },
     cmdline = {
+      -- enabled = false,
       completion = {
         menu = {
           auto_show = false
