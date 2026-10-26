@@ -3,10 +3,17 @@ return {
   priority = 1000,
   opts = {
     bigfile = { enabled = true },
-    picker = { enabled = true },
+    picker = {
+      enabled = true,
+      -- layout = { preset = "vertical" }, -- preview below the list
+      formatters = {
+        file = { filename_first = true }, -- "file.lua  path/to/dir" instead of the full path
+      },
+    },
   },
-  config = function()
+  config = function(_, opts)
     local Snacks = require "snacks"
+    Snacks.setup(opts)
 
     local prompt_grep = function()
       local input = vim.fn.input("Grep > ")

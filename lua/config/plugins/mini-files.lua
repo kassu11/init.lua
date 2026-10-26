@@ -90,6 +90,42 @@ return {
       vim.cmd("silent !start wt -d \"" .. path .. "\"")
     end
 
+    -- Files bigger than this get a placeholder instead of a preview, because
+    -- rendering huge files (e.g. minified json) can freeze the editor.
+    -- K toggles the real preview for the big file under cursor.
+    local max_preview_size = 50 * 1024
+    local forced_previews = {}
+
+    local buf_path = function(buf_id)
+      return (vim.api.nvim_buf_get_name(buf_id):gsub("^minifiles://%d+/", ""))
+    end
+
+    -- Runs after mini.files fills a buffer but before its window is shown
+    local guard_big_preview = function(args)
+      local buf_id = args.data.buf_id
+      local path = buf_path(buf_id)
+      local stat = vim.loop.fs_stat(path)
+      if stat == nil or stat.type ~= "file" or stat.size <= max_preview_size then return end
+      if forced_previews[path] then return end
+
+      pcall(vim.treesitter.stop, buf_id)
+      vim.bo[buf_id].syntax = ""
+      local size = string.format("%.1f KB", stat.size / 1024)
+      vim.api.nvim_buf_set_lines(buf_id, 0, -1, false, { "-File too big (" .. size .. "), press K to preview-" })
+    end
+
+    local toggle_preview = function()
+      local entry = MiniFiles.get_fs_entry()
+      if entry == nil or entry.fs_type ~= "file" then return end
+      local stat = vim.loop.fs_stat(entry.path)
+      if stat == nil or stat.size <= max_preview_size then return end
+
+      forced_previews[entry.path] = not forced_previews[entry.path] or nil
+
+      -- Passing content options makes mini.files re-read every shown buffer
+      MiniFiles.refresh({ content = { filter = show_dotfiles and filter_show or filter_hide } })
+    end
+
     local open_cwd = function()
       print(vim.fn.getcwd());
       MiniFiles.open(vim.fn.getcwd())
@@ -150,6 +186,7 @@ return {
       callback = function(args)
         local buf_id = args.data.buf_id
         vim.keymap.set("n", "g."        , toggle_dotfiles,      { buffer = buf_id, desc = "Toggle hidden files"                })
+        vim.keymap.set("n", "K"         , toggle_preview,       { buffer = buf_id, desc = "Toggle big file preview"            })
 
         vim.keymap.set("n", "<leader>cc", set_cwd,              { buffer = buf_id, desc = "Set cwd"                            })
         vim.keymap.set("n", "gX"        , ui_open,              { buffer = buf_id, desc = "OS open"                            })
@@ -193,6 +230,16 @@ return {
         set_mark("w", vim.fn.getcwd, "Working directory")
         set_mark("~", "~", "Home directory")
       end,
+    })
+
+    vim.api.nvim_create_autocmd("User", {
+      pattern = "MiniFilesExplorerClose",
+      callback = function() forced_previews = {} end,
+    })
+
+    vim.api.nvim_create_autocmd("User", {
+      pattern = "MiniFilesBufferUpdate",
+      callback = guard_big_preview,
     })
 
     MiniFiles.setup {
