@@ -1,6 +1,21 @@
 return {
   "neovim/nvim-lspconfig",
   config = function()
+    vim.diagnostic.config({ virtual_text = true })
+    -- Work around stale build-server diagnostics with the Windows Zig 0.17 toolchain.
+    if vim.fn.has("win32") == 1 then
+      vim.lsp.config("zls", { settings = { enable_build_on_save = false } })
+      require("config.zig-diagnostics").setup()
+    end
+
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      group = vim.api.nvim_create_augroup("ZigFormatOnSave", { clear = true }),
+      pattern = "*.zig",
+      callback = function(args)
+        vim.lsp.buf.format({ bufnr = args.buf, name = "zls", timeout_ms = 3000 })
+      end,
+    })
+
     vim.lsp.enable { "lua_ls", "clangd", "cssls", "css_variables", "emmet_ls", "eslint", "zls", "ols", "vtsls", "vue_ls" }
 
     if vim.fn.has("win32") == 1 then
